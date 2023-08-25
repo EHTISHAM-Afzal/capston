@@ -3,7 +3,7 @@
 
 const Footer = () => {
   return (
-    <footer className="w-full h-auto py-4 flex items-center justify-center flex-row bg-indigo-400 gap-[5vw] overflow-hidden">
+    <footer className=" grids-section-width row-satart-3  bg-slate-800 py-4  flex items-center justify-center flex-row gap-[5vw] overflow-hidden">
       <img className="h-full w-24 ring-2 rounded-md" src="../../profile.jpg" alt="logo" />
       <div className="  flex flex-row justify-center gap-[5vw]">
         <ul>

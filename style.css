@@ -1,0 +1,7 @@
+body{
+    padding: 0;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(12, auto);
+}
