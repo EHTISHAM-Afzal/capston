@@ -1,18 +1,20 @@
-
-
-
 const Footer = () => {
   return (
-    <footer className=" grids-section-width row-satart-3  bg-slate-800 py-4  flex items-center justify-center flex-row gap-[5vw] overflow-hidden">
-      <img className="h-full w-24 ring-2 rounded-md" src="../../profile.jpg" alt="logo" />
-      <div className="  flex flex-row justify-center gap-[5vw]">
+    <div className="grids col-span-full bg-slate-800 py-4">
+    <footer className=" grids-section-width row-satart-3  h-40 bg-slate-800 py-4 px-4  flex items-center justify-between flex-row ">
+      <img
+        className=" h-full   object-cover  border-2 border-white  rounded-md"
+        src="../../profile.jpg"
+        alt="logo"
+      />
+      <div className="  h-full flex flex-row justify-center gap-[12vw] lg:pr-12">
         <ul>
           <li> <a href="">link 1</a></li>
           <li> <a href="">link 1</a></li>
           <li> <a href="">link 1</a></li>
           <li> <a href="">link 1</a></li>
           <li> <a href="">link 1</a></li>
-        </ul>
+          </ul>
         <ul>
           <li>link 2</li>
           <li>link 2</li>
@@ -25,6 +27,7 @@ const Footer = () => {
         </ul>
       </div>
     </footer>
+    </div>
   );
 };
 
