@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // sans: ['Markazi Text', "Open Sans" ,'sans-serif'],
+        'markazi-text': ['Markazi Text'],
+        'karla': ['karla'],
+        'roboto':['Roboto']
+      },
+    }
   },
   plugins: [],
 }
