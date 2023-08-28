@@ -1,15 +1,19 @@
-import Header from "./components/Header.jsx";
-import Main from "./components/Main.jsx";
-import Footer from "./components/Footer.jsx";
+import Main from "./components/Main"
+import Layout from "../Layout"
+import { createBrowserRouter , createRoutesFromElements , RouterProvider , Route } from "react-router-dom"
+import NotFound from "./components/NotFound"
+
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path="/" element={<Layout />}>
+    <Route index element={<Main/>} />
+    <Route path="*" element={<NotFound />} />
+  </Route>
+))
 
 function App() {
   return (
-    <div className="grids">
-      <Header   />
-      <Main  />
-      <Footer  />
-    </div>
-  );
+    <RouterProvider router={router} />
+  )
 }
 
-export default App;
+export default App
