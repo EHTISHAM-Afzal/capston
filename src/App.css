@@ -10,4 +10,7 @@
     .grids-section-width {
         @apply col-span-full sm:col-start-2 sm:col-end-8 md:col-start-3 md:col-end-11
     }
+    .text-primary {
+        color:#F4CE14
+    }
 }

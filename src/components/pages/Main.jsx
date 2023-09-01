@@ -1,5 +1,5 @@
-import MenuCard from "./cards/Menu";
-import ReviewCard from "./cards/ReviewCard";
+import MenuCard from "../cards/Menu";
+import ReviewCard from "../cards/ReviewCard";
 
 const DishData = {
   name: "Salad",
@@ -13,7 +13,7 @@ const Main = () => {
       <section className=" col-span-full grids h-[360px]  bg-[#607b72]">
         <div className=" grids-section-width row-satart-2 row-end-4  pt-4 px-4 items-start flex flex-row justify-start">
           <div className=" col-span-full w-full lg:w-1/2 ">
-            <h1 className=" text-[#F4CE14] text-6xl font-markazi-text tracking-wide">Little Lemon</h1>
+            <h1 className=" text-primary text-6xl font-markazi-text tracking-wide h-12">Little Lemon</h1>
             <h2 className="text-white text-[40px]  font-markazi-text tracking-wider">Chicago</h2>
             <div className=" h-32 flex flex-row items-center w-full py-1 lg:max-w-xs">
               <p className="w-[70%] lg:w-full  h-full text-black flex items-start  overflow-hidden font-medium text-lg">
