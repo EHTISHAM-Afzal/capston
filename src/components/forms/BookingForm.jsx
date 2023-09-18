@@ -8,16 +8,17 @@ const BookingForm = (props) => {
   /// make new array with only date times that they have booked
   /// then remove the times that they have booked from the available times array
 
+  const initialTimes = [ "", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
   const setBookedTables = (state, Data) => {
     state[0] = Data;
   };
-  const initializeTimes = (state, Times) => {
-    state[1] = Times;
+  const initializeTimes = (state) => {
+    state[1] = initialTimes
   };
 
   const reducer = (state, action) => {
     setBookedTables(state, ReservationData);
-    initializeTimes(state, props.Times);
+    initializeTimes(state);
     // Step 1: Create a Map to store the Date and Time
     // const initialArray = props.times;
     const dateToTimeMap = new Map();
@@ -37,7 +38,7 @@ const BookingForm = (props) => {
     return state;
   };
 
-  const [state, dispatch] = useReducer(reducer, [ReservationData, props.Times]);
+  const [state, dispatch] = useReducer(reducer, [ReservationData,  initialTimes]);
   const [Data, setData] = useState({
     Date: "",
     Time: "",
@@ -87,11 +88,13 @@ const BookingForm = (props) => {
               All Tables Are Reserved
             </option>
           ) : (
-            state[1].map((time, idx) => (
+            <optgroup label="Choose Time">
+            {state[1].map((time, idx) => (
               <option disabled={idx === 0} key={idx} value={time}>
                 {time}
               </option>
-            ))
+            ))}
+            </optgroup>
           )}
         </select>
       </label>
