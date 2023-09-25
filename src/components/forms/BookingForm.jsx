@@ -1,138 +1,263 @@
-import React, { useContext, useEffect, useReducer } from "react";
-import { useState } from "react";
-import { ReservationContext } from "../../ReservatoinContext";
+/* eslint-disable react/prop-types */
+import  { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
-const BookingForm = (props) => {
-  const [ReservationData, setReservationData] = useContext(ReservationContext);
-  /// Search for date they have booked table
-  /// make new array with only date times that they have booked
-  /// then remove the times that they have booked from the available times array
-
-  const initialTimes = [ "", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
-  const setBookedTables = (state, Data) => {
-    state[0] = Data;
-  };
-  const initializeTimes = (state) => {
-    state[1] = initialTimes
-  };
-
-  const reducer = (state, action) => {
-    setBookedTables(state, ReservationData);
-    initializeTimes(state);
-    // Step 1: Create a Map to store the Date and Time
-    // const initialArray = props.times;
-    const dateToTimeMap = new Map();
-    state[0].forEach((item) => {
-      dateToTimeMap.set(item.Date, item.Time);
-    });
-    // Step 2: Iterate over the action array and remove the Time
-    // from the initialArray if the Date exists in the map
-    for (const indx of action) {
-      if (dateToTimeMap.has(indx.Date)) {
-        const index = state[1].indexOf(dateToTimeMap.get(indx.Date));
-        if (index !== -1) {
-          state[1].splice(index, 1);
-        }
-      }
-    }
-    return state;
-  };
-
-  const [state, dispatch] = useReducer(reducer, [ReservationData,  initialTimes]);
-  const [Data, setData] = useState({
-    Date: "",
-    Time: "",
-    Guests: 0,
-    Occasion: "",
+const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
+  const {
+    register,
+    watch,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      Date: "",
+      Time: "",
+      Guests: 0,
+      Occasion: "",
+    },
   });
+
+  const onSubmit = (data) => {
+    formSubmitHandler(data);
+    reset();
+  };
+
+  const watchDate = watch("Date");
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      dispatch({
+        type: "INITIAL_TIMES",
+        Date: watchDate ,
+      });
+    }, 200);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [watchDate]);
 
   return (
     <form
-      className=" w-4/5 md:w-3/5 p-6 text-start rounded-lg space-y-4 flex flex-col justify-start items-center my-4 shadow-md border border-black"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setReservationData((prevReservationData) => [
-          ...prevReservationData,
-          Data,
-        ]);
-        setData({ Date: "", Time: "", Guests: 0, Occasion: "" });
-      }}
+      className=" w-4/5 md:w-3/5 lg:w-1/2 p-6 text-start rounded-lg space-y-4 flex flex-col justify-start items-center my-4 shadow-md border border-black"
+      onSubmit={handleSubmit(onSubmit)}
     >
       <label className="w-full" htmlFor="res-date">
         Choose date
         <input
-          required
+          {...register("Date", {
+            required: "Date is required",
+            validate: {
+              todayFutureDate: (value) =>
+                new Date(value) >= new Date().setHours(0, 0, 0, 0) ||
+                "The date must be today or in the future",
+            },
+          })}
           className="w-full border border-gray-300 rounded-md p-1"
           type="date"
+          value={watch("Date")}
           id="res-date"
-          value={Data.Date}
-          onChange={(e) =>
-            dispatch([{ Date: e.target.value }]) ||
-            setData({ ...Data, Date: e.target.value })
-          }
         />
+        {errors.Date && (
+          <p className="text-red-500 italic font-medium text-sm">
+            {errors.Date.message}
+          </p>
+        )}
       </label>
       <label className="w-full" htmlFor="res-time">
         Choose time
         <select
-          required
-          min="1"
+          {...register("Time", { required: "Time is required" })}
           placeholder="Select Time"
           className="w-full border border-gray-300 rounded-md p-1"
-          id="res-time "
-          value={Data.Time}
-          onChange={(e) => setData({ ...Data, Time: e.target.value })}
+          value={watch("Time")}
+          id="res-time"
         >
-          {state[1].length === 1 ? (
-            <option value={""} disabled>
-              All Tables Are Reserved
-            </option>
-          ) : (
+          {AvailibleTimes ? (
             <optgroup label="Choose Time">
-            {state[1].map((time, idx) => (
-              <option disabled={idx === 0} key={idx} value={time}>
-                {time}
-              </option>
-            ))}
+              {AvailibleTimes.map((time, idx) => (
+                <option
+                  selected={idx === 0}
+                  key={time}
+                  value={idx === 0 ? "" : time}
+                  disabled={AvailibleTimes.length === 1}
+                >
+                  {AvailibleTimes.length === 1
+                    ? "All Tables Are Reserved"
+                    : time}
+                </option>
+              ))}
             </optgroup>
+          ) : (
+            <option value=" ">Please Select Date</option>
           )}
         </select>
+        {errors.Time && (
+          <p className="text-red-500 italic font-medium text-sm">
+            {errors.Time.message}
+          </p>
+        )}
       </label>
       <label className="w-full" type="number" htmlFor="guests">
         Number of guests
         <input
-          value={Data.Guests}
+          {...register("Guests", {
+            required: "Number of guests is required",
+            min: { value: 1, message: "Minimum number of guests is 1" },
+            max: { value: 10, message: "Maximum number of guests is 10" },
+          })}
           className="w-full border border-gray-300 rounded-md p-1"
           type="number"
-          placeholder="1"
-          min="1"
-          max="10"
+          value={watch("Guests")}
           id="guests"
-          onChange={(e) => setData({ ...Data, Guests: e.target.value })}
         />
+        {errors.Guests && (
+          <p className="text-red-500 italic font-medium text-sm">
+            {errors.Guests.message}
+          </p>
+        )}
       </label>
       <label className="w-full" htmlFor="occasion">
         Occasion
         <select
-          required
-          min="5"
+          {...register("Occasion", { required: "Occasion is required" })}
           className="w-full border border-gray-300 rounded-md p-1"
+          value={watch("Occasion")}
           id="occasion"
-          value={Data.Occasion}
-          onChange={(e) => setData({ ...Data, Occasion: e.target.value })}
         >
           <option value="">Select Occasion</option>
           <option>Birthday</option>
           <option>Anniversary</option>
         </select>
+        {errors.Occasion && (
+          <p className="text-red-500 italic font-medium text-sm">
+            {errors.Occasion.message}
+          </p>
+        )}
       </label>
-      <input
-        className="w-full p-1 text-right cursor-pointer"
-        type="submit"
-        value="Make Your reservation"
-      />
+      <div className="w-full p-1 cursor-pointer">
+        <button
+          className=" p-1 rounded-md border float-right hover:border-gray-600 "
+          type="submit"
+        >
+          Make Your reservation
+        </button>
+      </div>
     </form>
   );
 };
 
 export default BookingForm;
+
+// import React from "react";
+// import { useForm } from "react-hook-form";
+
+// const BookingForm = ({
+//   AvailibleTimes,
+//   formData,
+//   setFormData,
+//   dispatch,
+//   formSubmitHandler,
+// }) => {
+//   const handleDateChange = (e) => {
+//     const { register, handleSubmit, formState: { errors } } = useForm();
+//     const date = e.target.value;
+//     dispatch({type: "INITIAL_TIMES", Date: date}); ;
+//     setFormData({ ...formData, Date: date });
+//   };
+
+//   const handleTimeChange = (e) => {
+//     setFormData({ ...formData, Time: e.target.value });
+//   };
+
+//   const handleGuestsChange = (e) => {
+//     setFormData({ ...formData, Guests: e.target.value });
+//   };
+
+//   const handleOccasionChange = (e) => {
+//     setFormData({ ...formData, Occasion: e.target.value });
+//   };
+
+//   return (
+//     <form
+//       className=" w-4/5 md:w-3/5 p-6 text-start rounded-lg space-y-4 flex flex-col justify-start items-center my-4 shadow-md border border-black"
+//       onSubmit={formSubmitHandler}
+//     >
+//       <label className="w-full" htmlFor="res-date">
+//         Choose date
+//         <input
+//           required
+//           className="w-full border border-gray-300 rounded-md p-1"
+//           type="date"
+//           id="res-date"
+//           value={formData.Date}
+//           onChange={handleDateChange}
+//         />
+//       </label>
+//       <label className="w-full" htmlFor="res-time">
+//         Choose time
+//         <select
+//           required
+//           min = '4'
+//           placeholder="Select Time"
+//           className="w-full border border-gray-300 rounded-md p-1"
+//           id="res-time "
+//           value={formData.Time}
+//           onChange={handleTimeChange}
+//         >
+//           {AvailibleTimes ? (
+//             <optgroup label="Choose Time">
+//               {AvailibleTimes.map((time, idx) =>
+//                 AvailibleTimes.length === 1 ? (
+//                   <option key={idx} disabled>
+//                     All Tables Are Reserved
+//                   </option>
+//                 ) : (
+//                   <option selected={idx === 0} key={time} value={idx === 0 ? "" :time}>
+//                     {time}
+//                   </option>
+//                 )
+//               )}
+//             </optgroup>
+//           ) : (
+//             <option value={""}>Please Select Date</option>
+//           )}
+//         </select>
+//       </label>
+//       <label className="w-full" type="number" htmlFor="guests">
+//         Number of guests
+//         <input
+//           value={formData.Guests}
+//           className="w-full border border-gray-300 rounded-md p-1"
+//           type="number"
+//           placeholder="1"
+//           min="1"
+//           max="10"
+//           id="guests"
+//           onChange={handleGuestsChange}
+//         />
+//       </label>
+//       <label className="w-full" htmlFor="occasion">
+//         Occasion
+//         <select
+//           required
+//           min="5"
+//           className="w-full border border-gray-300 rounded-md p-1"
+//           id="occasion"
+//           value={formData.Occasion}
+//           onChange={handleOccasionChange}
+//         >
+//           <option value="">Select Occasion</option>
+//           <option>Birthday</option>
+//           <option>Anniversary</option>
+//         </select>
+//       </label>
+//       <input
+//         className="w-full p-1 text-right cursor-pointer"
+//         type="submit"
+//         value="Make Your reservation"
+//       />
+//     </form>
+//   );
+// };
+
+// export default BookingForm;

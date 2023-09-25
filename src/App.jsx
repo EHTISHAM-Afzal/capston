@@ -13,6 +13,9 @@ import Resevations from "./components/pages/Resevations";
 import {RCProvider} from "./ReservatoinContext.jsx";
 import { Suspense } from "react";
 import BookingPage from "./components/pages/BookingPage";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +23,7 @@ const router = createBrowserRouter(
       <Route index element={<Main />} />
       <Route path="aboute" element={<About />} />
       <Route path="booking-page" element={<BookingPage />} />
-      <Route path="reservations" element={<Resevations />} />
+      <Route path="reservations" element={<Resevations />} errorElement={<h2>Ther is an error</h2>} />
       <Route path="order-online" element={<OrderOnline />} />
       <Route path="*" element={<NotFound />} />
     </Route>
@@ -32,6 +35,7 @@ function App() {
     <Suspense fallback={<h1>Loading</h1>}>
       <RCProvider>
         <RouterProvider router={router} />
+        <ToastContainer/>
       </RCProvider>
     </Suspense>
   );

@@ -1,12 +1,91 @@
-import React, { useContext } from "react";
+import { useContext, useReducer,  useEffect } from "react";
 import BookingForm from "../forms/BookingForm";
 import { ReservationContext } from "../../ReservatoinContext";
+import { toast } from "react-toastify";
 
 const BookingPage = () => {
-  // const [ReservationData, setReservationData] = useContext(ReservationContext);
+  const [reservations, setReservations] = useContext(ReservationContext);
+
+  const updateTimes = (state, action) => {
+    /// initiallize times for selected date
+    state.initialTimes = initializeTime();
+    /// make a new array of booked times on selected times
+    /// check  if the selected date has booked times return that times if not return null
+    /// then filter the initial times and remove the reserved table times on selecrted date
+
+    const { Date } = action;
+    // const bookedTimes = state.reservations.map((element) =>
+    //   element.Date === Date ? element.Time : null
+    // );
+    const bookedTimes = state.reservations
+      .filter((element) => element.Date === Date)
+      .map((element) => element.Time);
+
+    /// make a array that do not contains reserved times
+    const reservedTimes =
+      bookedTimes.length === 0
+        ? state.initialTimes
+        : state.initialTimes.filter(
+            (element) => !bookedTimes.includes(element)
+          );
+
+    return {
+      ...state,
+      initialTimes: reservedTimes,
+    };
+  };
+
+  useEffect(() => {
+    dispatch({ type: "RESERVATIONS_CHANGED", payload: reservations });
+    return () => {
+      dispatch({ type: "RESERVATIONS_CHANGED", payload: null });
+    };
+  }, [reservations]);
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "INITIAL_TIMES":
+        return updateTimes(state, action);
+      case "RESERVATIONS_CHANGED":
+        return { ...state, reservations: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  const initializeTime = () => [
+    "Select times",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+  ];
+
+  const [state, dispatch] = useReducer(reducer, {
+    initialTimes: initializeTime(),
+    reservations,
+  });
+
+  const formSubmitHandler = async (formData) => {
+    try {
+      // Submit data to the server
+      setReservations((prevReservations) => [...prevReservations, formData]);
+      toast.success("Reservation made successfully");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("An error occurred while making the reservation");
+    }
+  };
+
   return (
     <section className="grids-section-width flex flex-col justify-center items-center h-[34rem] ">
-      <BookingForm  />
+      <BookingForm
+        AvailibleTimes={state.initialTimes}
+        dispatch={dispatch}
+        formSubmitHandler={formSubmitHandler}
+      />
     </section>
   );
 };
