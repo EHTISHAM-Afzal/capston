@@ -1,25 +1,20 @@
 import { describe , expect, it , vi } from "vitest";
 import BookingPage from "../components/pages/BookingPage";
 import { render, screen, waitFor,  } from "@testing-library/react";
-import { RCProvider,  } from "../ReservatoinContext";
 import userEvent from "@testing-library/user-event";
 
 
 describe("Check the form component it should render with updated times", () => {
-  it.skip("should render the bboking page component ", () => {
+  it("should render the bboking page component ", () => {
     render(
-      <RCProvider>
         <BookingPage />
-      </RCProvider>
     );
     // screen.debug()
   });
 
   it("should show helper text when user does not fill the form and submits the form", async () => {
     render(
-      <RCProvider>
         <BookingPage />
-      </RCProvider>
     );
 
     const submitButton = screen.getByRole("button", {
@@ -37,14 +32,12 @@ describe("Check the form component it should render with updated times", () => {
 
   it("should render initial times when user fills the date", async () => {
     render(
-      <RCProvider>
         <BookingPage />
-      </RCProvider>
     );
     const dateInput = screen.getByLabelText(/Choose date/);
-    userEvent.type(dateInput, "2023-09-26");
+    userEvent.type(dateInput, "2023-09-30");
     /// wait for the availible times to be updated
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     expect(screen.getByText(/17:00/i)).toBeInTheDocument();
     expect(screen.getByText(/18:00/i)).toBeInTheDocument();
     expect(screen.getByText(/19:00/i)).toBeInTheDocument();
@@ -55,9 +48,7 @@ describe("Check the form component it should render with updated times", () => {
 
   it("should render updated times when user fills the date ", async () => {
     render(
-      <RCProvider>
         <BookingPage />
-      </RCProvider>
     );
     const dateInput = screen.getByLabelText(/Choose date/);
     /// in the date 09/25/2023 there is one table reserved at Time 19:00 initialy
@@ -75,9 +66,7 @@ describe("Check the form component it should render with updated times", () => {
   it('should submit data correctly when user fills the form and submits the form', async () => {
     const formSubmitHandler = vi.fn();
     render(
-      <RCProvider>
         <BookingPage />
-      </RCProvider>
     );
     const dateInput = screen.getByLabelText(/Choose date/);
     const timeInput = screen.getByLabelText(/Choose time/);
@@ -86,7 +75,7 @@ describe("Check the form component it should render with updated times", () => {
     const submitButton = screen.getByRole("button", {
       name: /Make Your reservation/i,
     });
-    userEvent.type(dateInput, "09/25/2023");
+    userEvent.type(dateInput, `09/25/2023`);
     userEvent.type(timeInput, "20:00");
     userEvent.type(guestsInput, "2");
     userEvent.type(occasionInput, "Anniversary");

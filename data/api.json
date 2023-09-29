@@ -1,0 +1,39 @@
+{
+  "Reservations": [
+    {
+      "Date": "2023-09-25",
+      "Time": "19:00",
+      "Guests": "05",
+      "Occasion": "Birthday",
+      "id": 1
+    },
+    {
+      "Date": "2023-09-26",
+      "Time": "19:00",
+      "Guests": "05",
+      "Occasion": "Birthday",
+      "id": 4
+    },
+    {
+      "Date": "2023-09-29",
+      "Time": "17:00",
+      "Guests": "09",
+      "Occasion": "Anniversary",
+      "id": 5
+    },
+    {
+      "Date": "2023-09-29",
+      "Time": "18:00",
+      "Guests": "07",
+      "Occasion": "Anniversary",
+      "id": 6
+    },
+    {
+      "Date": "2023-09-29",
+      "Time": "19:00",
+      "Guests": "08",
+      "Occasion": "Birthday",
+      "id": 7
+    }
+  ]
+}
