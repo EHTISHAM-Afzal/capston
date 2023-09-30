@@ -3,6 +3,32 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
+const Input = ({
+  register,
+  watch,
+  errors,
+  name,
+  validation,
+  type = "text",
+}) => {
+  return (
+    <>
+      <input
+        {...register(name, validation)}
+        className={`w-full mt-1 p-2 border ${
+          errors[name] ? "border-red-500" : "border-gray-300"
+        } rounded-md focus:border-blue-500`}
+        type={type}
+        value={watch(name)}
+        id={name}
+      />
+      {errors[name] && (
+        <p className="mt-1 text-sm text-red-500">{errors[name].message}</p>
+      )}
+    </>
+  );
+};
+
 const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
   const {
     register,
@@ -39,7 +65,16 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
         })
         .catch((err) => {
           toast.error(
-            "Something went wrong it looks like server is not responeding"
+            "Something went wrong it looks like server is not responeding",
+            {
+              position: "top-right",
+              autoClose: false,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "light",
+            }
           );
           console.log(err);
         });
@@ -55,35 +90,35 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
         Reserve your table
       </h2>
       <form
-        className="flex flex-col items-center justify-center w-4/5 md:w-3/5 lg:w-1/2 p-6 my-4 space-y-4 bg-white rounded-lg shadow-md border border-black border-dashed"
+        className="flex flex-col items-center justify-center sm:w-96 p-6 my-4 space-y-5 bg-white rounded-lg shadow-md border"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <label className="w-full" htmlFor="res-date">
+        <label className="w-full" htmlFor="Date">
           <span className="text-gray-700">Choose date</span>
-          <input
-            {...register("Date", {
+          <Input
+            register={register}
+            watch={watch}
+            errors={errors}
+            name="Date"
+            validation={{
               required: "Date is required",
               validate: {
                 todayFutureDate: (value) =>
                   new Date(value) >= new Date().setHours(0, 0, 0, 0) ||
                   "The date must be today or in the future",
               },
-            })}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            }}
             type="date"
-            value={watch("Date")}
-            id="res-date"
           />
-          {errors.Date && (
-            <p className="mt-1 text-sm text-red-500">{errors.Date.message}</p>
-          )}
         </label>
 
         <label className="w-full" htmlFor="res-time">
-          <span className="text-gray-700">Choose time</span>
+          <span className="text-gray-700">Select time</span>
           <select
             {...register("Time", { required: "Time is required" })}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className={`w-full mt-1 p-2 border border-gray-300 rounded-md ${
+              errors.Time ? "border-red-500 " : "border-gray-300"
+            } `}
             value={watch("Time")}
             id="res-time"
           >
@@ -110,29 +145,29 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
           )}
         </label>
 
-        <label className="w-full" htmlFor="guests">
+        <label className="w-full" htmlFor="Guests">
           <span className="text-gray-700">Number of guests</span>
-          <input
-            {...register("Guests", {
+          <Input
+            register={register}
+            watch={watch}
+            errors={errors}
+            name="Guests"
+            validation={{
               required: "Number of guests is required",
               min: { value: 1, message: "Minimum number of guests is 1" },
               max: { value: 10, message: "Maximum number of guests is 10" },
-            })}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            }}
             type="number"
-            value={watch("Guests")}
-            id="guests"
           />
-          {errors.Guests && (
-            <p className="mt-1 text-sm text-red-500">{errors.Guests.message}</p>
-          )}
         </label>
 
         <label className="w-full" htmlFor="occasion">
           <span className="text-gray-700">Occasion</span>
           <select
             {...register("Occasion", { required: "Occasion is required" })}
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className={`w-full mt-1 p-2 border border-gray-300 rounded-md  ${
+              errors.Occasion ? "border-red-500 " : "border-gray-300"
+            } `}
             value={watch("Occasion")}
             id="occasion"
           >

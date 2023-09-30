@@ -11,10 +11,18 @@ import BookingPage from "./components/pages/BookingPage";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ReservationSuccess from "./components/pages/ReservatioSucces";
+import Spinner from "./components/Spinner";
+import LoginPage from "./components/pages/LoginPage";
 
 function App() {
+
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
   return (
-    <Suspense fallback={<h1>Loading</h1>}>
+    <Suspense fallback={<Spinner/>}>
       <RCProvider>
         <Router>
           <Routes>
@@ -24,7 +32,9 @@ function App() {
               <Route path="booking-page" element={<BookingPage />} />
               <Route path="reservations" element={<Resevations />} />
               <Route path="order-online" element={<OrderOnline />} />
+              <Route path="order-online" element={<OrderOnline />} />
               <Route path="reservation-success" element={<ReservationSuccess />} />
+              <Route path="login" element={<LoginPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

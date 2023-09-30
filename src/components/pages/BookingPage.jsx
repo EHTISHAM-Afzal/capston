@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const BookingPage = () => {
-const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  
   const updateTimes = (state, action) => {
     /// initiallize times for selected date
     state.initialTimes = initializeTime();

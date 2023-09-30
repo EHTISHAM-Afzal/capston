@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const ReservedTablesData = () => {
-  const [reservations, setReservations] = useState();
 
   useEffect(() => {
     fetch("http://localhost:3500/Reservations")
       .then((res) => res.json())
-      .then((reservations) =>
-        setReservations(reservations.sort((a, b) => b.id - a.id))
-      )
+      .then((reservations) => {
+        localStorage.setItem(
+          "reservations",
+          JSON.stringify(reservations.sort((a, b) => b.id - a.id))
+        );
+      })
       .catch((err) => console.log(err));
+    return localStorage.removeItem("reservations");
   }, []);
 
+  const reservations = JSON.parse(localStorage.getItem("reservations"));
   return (
     <div className="w-full min-h-[50vh]">
       <h2 className="px-1 text-4xl font-semibold my-2 font-markazi-text">

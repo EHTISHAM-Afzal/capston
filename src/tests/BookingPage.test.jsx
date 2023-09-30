@@ -1,20 +1,24 @@
-import { describe , expect, it , vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import BookingPage from "../components/pages/BookingPage";
-import { render, screen, waitFor,  } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
+import { BrowserRouter } from "react-router-dom";
 
 describe("Check the form component it should render with updated times", () => {
   it("should render the bboking page component ", () => {
     render(
+      <BrowserRouter>
         <BookingPage />
+      </BrowserRouter>
     );
     // screen.debug()
   });
 
   it("should show helper text when user does not fill the form and submits the form", async () => {
     render(
+      <BrowserRouter>
         <BookingPage />
+      </BrowserRouter>
     );
 
     const submitButton = screen.getByRole("button", {
@@ -32,7 +36,9 @@ describe("Check the form component it should render with updated times", () => {
 
   it("should render initial times when user fills the date", async () => {
     render(
+      <BrowserRouter>
         <BookingPage />
+      </BrowserRouter>
     );
     const dateInput = screen.getByLabelText(/Choose date/);
     userEvent.type(dateInput, "2023-09-30");
@@ -48,7 +54,9 @@ describe("Check the form component it should render with updated times", () => {
 
   it("should render updated times when user fills the date ", async () => {
     render(
+      <BrowserRouter>
         <BookingPage />
+      </BrowserRouter>
     );
     const dateInput = screen.getByLabelText(/Choose date/);
     /// in the date 09/25/2023 there is one table reserved at Time 19:00 initialy
@@ -63,13 +71,15 @@ describe("Check the form component it should render with updated times", () => {
     expect(screen.getByText(/22:00/i)).toBeInTheDocument();
   });
 
-  it('should submit data correctly when user fills the form and submits the form', async () => {
+  it("should submit data correctly when user fills the form and submits the form", async () => {
     const formSubmitHandler = vi.fn();
     render(
+      <BrowserRouter>
         <BookingPage />
+      </BrowserRouter>
     );
     const dateInput = screen.getByLabelText(/Choose date/);
-    const timeInput = screen.getByLabelText(/Choose time/);
+    const timeInput = screen.getByLabelText(/Select time/);
     const guestsInput = screen.getByLabelText(/Number of guests/);
     const occasionInput = screen.getByLabelText(/Occasion/);
     const submitButton = screen.getByRole("button", {
@@ -80,7 +90,7 @@ describe("Check the form component it should render with updated times", () => {
     userEvent.type(guestsInput, "2");
     userEvent.type(occasionInput, "Anniversary");
     userEvent.click(submitButton);
-    waitFor(()=>{
+    waitFor(() => {
       expect(formSubmitHandler).toHaveBeenCalledWith({
         Date: "09/25/2023",
         Time: "20:00",
@@ -90,5 +100,5 @@ describe("Check the form component it should render with updated times", () => {
     });
 
     userEvent.type(dateInput, "09/25/2023");
-  })
+  });
 });

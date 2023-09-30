@@ -31,6 +31,8 @@ const About = () => {
           <option value="">select city</option>
           {countriese.find(({country}) => country === selectedCountry).cities.map(city => <option key={city} value={city}>{city}</option>)}
         </select>}
+
+      
       </div>
     </>
   );
