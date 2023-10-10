@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 
 const NavItem = ({ to, children }) => {
@@ -22,9 +23,9 @@ const Nav = () => {
     { to: '/', name: 'Home' },
     { to: 'about', name: 'About' },
     { to: 'menu', name: 'Menu' },
-    { to: 'booking-page', name: 'Booking Page' },
+    { to: 'booking-page', name: 'Booking' },
     { to: 'reservations', name: 'Reservations' },
-    { to: 'order-online', name: 'Order Online' },
+    { to: 'order-online', name: 'Order' },
     { to: 'login', name: 'Login' },
   ];
 

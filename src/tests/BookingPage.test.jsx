@@ -21,11 +21,19 @@ describe("Check the form component it should render with updated times", () => {
       </BrowserRouter>
     );
 
+    const dateInput = screen.getByLabelText(/Choose date/);
+    const timeInput = screen.getByLabelText(/Select time/);
+    const guestsInput = screen.getByLabelText(/Number of guests/);
+    const occasionInput = screen.getByLabelText(/Occasion/);
     const submitButton = screen.getByRole("button", {
       name: /Make Your reservation/i,
     });
     userEvent.click(submitButton);
-
+    dateInput.focus();
+    timeInput.focus();
+    guestsInput.focus();
+    occasionInput.focus(); 
+    dateInput.focus(); 
     expect(await screen.findByText("Date is required")).toBeInTheDocument();
     expect(await screen.findByText("Time is required")).toBeInTheDocument();
     expect(

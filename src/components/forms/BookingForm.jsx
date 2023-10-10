@@ -1,33 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-
-const Input = ({
-  register,
-  watch,
-  errors,
-  name,
-  validation,
-  type = "text",
-}) => {
-  return (
-    <>
-      <input
-        {...register(name, validation)}
-        className={`w-full mt-1 p-2 border ${
-          errors[name] ? "border-red-500" : "border-gray-300"
-        } rounded-md focus:border-blue-500`}
-        type={type}
-        value={watch(name)}
-        id={name}
-      />
-      {errors[name] && (
-        <p className="mt-1 text-sm text-red-500">{errors[name].message}</p>
-      )}
-    </>
-  );
-};
+import { Input } from "../components/Input";
+import useResetAvailibleTimes from "../../utils/useResetAvailibleTimes";
 
 const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
   const {
@@ -35,7 +9,7 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
     watch,
     reset,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
   } = useForm({
     defaultValues: {
       Date: "",
@@ -43,6 +17,7 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
       Guests: 0,
       Occasion: "",
     },
+    mode: "onChange"
   });
 
   const onSubmit = (data) => {
@@ -51,38 +26,8 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
   };
 
   const watchDate = watch("Date");
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      fetch(`http://localhost:3500/Reservations?q=${watchDate}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const Time = data.length > 0 ? data.map((ele) => ele.Time) : data;
-          return dispatch({
-            type: "INITIAL_TIMES",
-            Date: watchDate,
-            Times: Time,
-          });
-        })
-        .catch((err) => {
-          toast.error(
-            "Something went wrong it looks like server is not responeding",
-            {
-              position: "top-right",
-              autoClose: false,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              theme: "light",
-            }
-          );
-          console.log(err);
-        });
-    }, 200);
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [watchDate]);
+  // the useResetAvailibleTimes hook is used to reset the availible times and they take in props "Date" and dispatch 
+  useResetAvailibleTimes(watchDate, dispatch);
 
   return (
     <>
@@ -90,14 +35,14 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
         Reserve your table
       </h2>
       <form
-        className="flex flex-col items-center justify-center sm:w-96 p-6 my-4 space-y-5 bg-white rounded-lg shadow-md border"
+        className="flex flex-col items-center justify-center sm:w-96 p-6 my-4 space-y-2 bg-white rounded-lg shadow-md border"
         onSubmit={handleSubmit(onSubmit)}
       >
         <label className="w-full" htmlFor="Date">
           <span className="text-gray-700">Choose date</span>
           <Input
             register={register}
-            watch={watch}
+            touchedFields={touchedFields}
             errors={errors}
             name="Date"
             validation={{
@@ -112,15 +57,14 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
           />
         </label>
 
-        <label className="w-full" htmlFor="res-time">
+        <label className="w-full" htmlFor="time">
           <span className="text-gray-700">Select time</span>
           <select
             {...register("Time", { required: "Time is required" })}
             className={`w-full mt-1 p-2 border border-gray-300 rounded-md ${
-              errors.Time ? "border-red-500 " : "border-gray-300"
+              errors.Time ? "border-red-500 outline-red-500 " : "border-gray-300"
             } `}
-            value={watch("Time")}
-            id="res-time"
+            id="time"
           >
             {AvailibleTimes ? (
               <optgroup label="Choose Time">
@@ -140,17 +84,18 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
               <option value=" ">Please Select Date</option>
             )}
           </select>
-          {errors.Time && (
-            <p className="mt-1 text-sm text-red-500">{errors.Time.message}</p>
-          )}
+          <div className="mt-1 h-4">
+          {touchedFields.Time && errors.Time && (
+            <p className="text-sm text-red-500">{errors.Time.message}</p>
+          )}</div>
         </label>
 
         <label className="w-full" htmlFor="Guests">
           <span className="text-gray-700">Number of guests</span>
           <Input
             register={register}
-            watch={watch}
             errors={errors}
+            touchedFields={touchedFields}
             name="Guests"
             validation={{
               required: "Number of guests is required",
@@ -166,20 +111,20 @@ const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
           <select
             {...register("Occasion", { required: "Occasion is required" })}
             className={`w-full mt-1 p-2 border border-gray-300 rounded-md  ${
-              errors.Occasion ? "border-red-500 " : "border-gray-300"
+              errors.Occasion ? "border-red-500 outline-red-500 " : "border-gray-300"
             } `}
-            value={watch("Occasion")}
             id="occasion"
           >
             <option value="">Select Occasion</option>
             <option>Birthday</option>
             <option>Anniversary</option>
           </select>
-          {errors.Occasion && (
-            <p className="mt-1 text-sm text-red-500">
+          <div className="mt-1 h-4">
+          {touchedFields.Occasion && errors.Occasion && (
+            <p className=" text-sm text-red-500">
               {errors.Occasion.message}
             </p>
-          )}
+          )}</div>
         </label>
 
         <div className="w-full mt-4">

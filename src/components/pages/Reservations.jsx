@@ -1,6 +1,6 @@
 import ReservedTablesData from "../tables/ReservedTablesData";
 
-const Resevations = () => {
+const Reservations = () => {
   return (
     <section className="grids-section-width flex flex-col justify-center items-center my-16 ">
       <ReservedTablesData/>
@@ -8,4 +8,4 @@ const Resevations = () => {
   );
 };
 
-export default Resevations;
+export default Reservations;

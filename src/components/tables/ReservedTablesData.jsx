@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 const ReservedTablesData = () => {
-
   useEffect(() => {
     fetch("http://localhost:3500/Reservations")
       .then((res) => res.json())

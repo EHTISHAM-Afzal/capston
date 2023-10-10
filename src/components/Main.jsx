@@ -1,12 +1,32 @@
-import MenuCard from "../cards/Menu";
-import ReviewCard from "../cards/ReviewCard";
+import MenuCard from "./cards/Menu";
+import ReviewCard from "./cards/ReviewCard";
 
-const DishData = {
-  name: "Salad",
-  price: 12,
-  description:
-    "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style  feta cheese,  garnished with crunchy garlic and rosemary croutons.",
-};
+const DishData = [
+  {
+    id : 1,
+    img: "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
+    name: "Salad",
+    price: 12,
+    description:
+      "The famous greek salad of crispy lettuce, peppers, olives and our Chicago style  feta cheese,  garnished with crunchy garlic and rosemary croutons.",
+  },
+  {
+    id : 2,
+    img:"https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1910&q=80",
+    name: "Eggs",
+    price: 9,
+    description:
+      "The famous pasta of crispy lettuce, peppers, olives and our Chicago style  feta cheese,  garnished with crunchy garlic and rosemary croutons.",
+  },
+  {
+    id : 3,
+    name: "Pasta",
+    img: "https://images.unsplash.com/photo-1542528180-a1208c5169a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1777&q=80",
+    price: 14,
+    description:
+      "The famous Mac'n chees crispy lettuce, peppers, olives and our Chicago style  feta cheese,  garnished with crunchy garlic and rosemary croutons.",
+  }
+]
 const Main = () => {
   return (
     <main className=" col-span-full grids">
@@ -30,7 +50,7 @@ const Main = () => {
             </div>
 
             <div>
-              <button className=" bg-[#F4CE14] text-lg lg:text-xl font-medium rounded-md p-1 h-12 w-36 lg:h-16 lg:w-48 font-roboto">
+              <button className=" bg-[#F4CE14] text-lg lg:text-xl font-medium rounded-xl p-1 h-12 w-36 lg:h-16 lg:w-48 font-roboto">
                 Order Now
               </button>
             </div>
@@ -49,16 +69,17 @@ const Main = () => {
         <div className=" grids-section-width py-4 lg:mt-28">
           <div className="w-full flex items-center justify-between px-4 xl:px-8">
             <h2 className=" text-center text-4xl font-karla font-semibold">Specials</h2>
-            <button className=" bg-[#F4CE14] text-lg lg:text-xl font-medium rounded-md p-1 h-12 w-36 lg:h-16 lg:w-48 font-roboto">
+            <button className=" bg-[#F4CE14] text-lg lg:text-xl font-medium rounded-xl p-1 h-12 w-36 lg:h-16 lg:w-48 font-roboto">
                 Online Menu
               </button>
           </div>
 
           <div className="flex justify-around items-center flex-wrap  py-8">
             {/* Menu cards */}
-            <MenuCard dish={DishData} />
-            <MenuCard dish={DishData} />
-            <MenuCard dish={DishData} />
+            {DishData.map((dish) => (
+              <MenuCard dish={dish} key={dish.id} />
+            ))}
+            
           </div>
         </div>
       </section>
