@@ -1,137 +1,142 @@
-import React, { useContext, useEffect, useReducer } from "react";
-import { useState } from "react";
-import { ReservationContext } from "../../ReservatoinContext";
+/* eslint-disable react/prop-types */
+import { useForm } from "react-hook-form";
+import { Input } from "../smallComp/Input";
+import useResetAvailibleTimes from "../../utils/useResetAvailibleTimes";
 
-const BookingForm = (props) => {
-  const [ReservationData, setReservationData] = useContext(ReservationContext);
-  /// Search for date they have booked table
-  /// make new array with only date times that they have booked
-  /// then remove the times that they have booked from the available times array
-
-  const initialTimes = [ "", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00"]
-  const setBookedTables = (state, Data) => {
-    state[0] = Data;
-  };
-  const initializeTimes = (state) => {
-    state[1] = initialTimes
-  };
-
-  const reducer = (state, action) => {
-    setBookedTables(state, ReservationData);
-    initializeTimes(state);
-    // Step 1: Create a Map to store the Date and Time
-    // const initialArray = props.times;
-    const dateToTimeMap = new Map();
-    state[0].forEach((item) => {
-      dateToTimeMap.set(item.Date, item.Time);
-    });
-    // Step 2: Iterate over the action array and remove the Time
-    // from the initialArray if the Date exists in the map
-    for (const indx of action) {
-      if (dateToTimeMap.has(indx.Date)) {
-        const index = state[1].indexOf(dateToTimeMap.get(indx.Date));
-        if (index !== -1) {
-          state[1].splice(index, 1);
-        }
-      }
-    }
-    return state;
-  };
-
-  const [state, dispatch] = useReducer(reducer, [ReservationData,  initialTimes]);
-  const [Data, setData] = useState({
-    Date: "",
-    Time: "",
-    Guests: 0,
-    Occasion: "",
+const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
+  const {
+    register,
+    watch,
+    reset,
+    handleSubmit,
+    formState: { errors, touchedFields },
+  } = useForm({
+    defaultValues: {
+      Date: "",
+      Time: "",
+      Guests: 0,
+      Occasion: "",
+    },
+    mode: "onChange"
   });
 
+  const onSubmit = (data) => {
+    formSubmitHandler(data);
+    reset();
+  };
+
+  const watchDate = watch("Date");
+  // the useResetAvailibleTimes hook is used to reset the availible times and they take in props "Date" and dispatch 
+  useResetAvailibleTimes(watchDate, dispatch);
+
   return (
-    <form
-      className=" w-4/5 md:w-3/5 p-6 text-start rounded-lg space-y-4 flex flex-col justify-start items-center my-4 shadow-md border border-black"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setReservationData((prevReservationData) => [
-          ...prevReservationData,
-          Data,
-        ]);
-        setData({ Date: "", Time: "", Guests: 0, Occasion: "" });
-      }}
-    >
-      <label className="w-full" htmlFor="res-date">
-        Choose date
-        <input
-          required
-          className="w-full border border-gray-300 rounded-md p-1"
-          type="date"
-          id="res-date"
-          value={Data.Date}
-          onChange={(e) =>
-            dispatch([{ Date: e.target.value }]) ||
-            setData({ ...Data, Date: e.target.value })
-          }
-        />
-      </label>
-      <label className="w-full" htmlFor="res-time">
-        Choose time
-        <select
-          required
-          min="1"
-          placeholder="Select Time"
-          className="w-full border border-gray-300 rounded-md p-1"
-          id="res-time "
-          value={Data.Time}
-          onChange={(e) => setData({ ...Data, Time: e.target.value })}
-        >
-          {state[1].length === 1 ? (
-            <option value={""} disabled>
-              All Tables Are Reserved
-            </option>
-          ) : (
-            <optgroup label="Choose Time">
-            {state[1].map((time, idx) => (
-              <option disabled={idx === 0} key={idx} value={time}>
-                {time}
-              </option>
-            ))}
-            </optgroup>
-          )}
-        </select>
-      </label>
-      <label className="w-full" type="number" htmlFor="guests">
-        Number of guests
-        <input
-          value={Data.Guests}
-          className="w-full border border-gray-300 rounded-md p-1"
-          type="number"
-          placeholder="1"
-          min="1"
-          max="10"
-          id="guests"
-          onChange={(e) => setData({ ...Data, Guests: e.target.value })}
-        />
-      </label>
-      <label className="w-full" htmlFor="occasion">
-        Occasion
-        <select
-          required
-          min="5"
-          className="w-full border border-gray-300 rounded-md p-1"
-          id="occasion"
-          value={Data.Occasion}
-          onChange={(e) => setData({ ...Data, Occasion: e.target.value })}
-        >
-          <option value="">Select Occasion</option>
-          <option>Birthday</option>
-          <option>Anniversary</option>
-        </select>
-      </label>
-      <input
-        className="w-full p-1 text-right cursor-pointer"
-        type="submit"
-        value="Make Your reservation"
-      />
-    </form>
+    <>
+      <h2 className=" text-center text-4xl font-markazi-text font-semibold">
+        Reserve your table
+      </h2>
+      <form
+        className="flex flex-col items-center justify-center sm:w-96 p-6 my-4 space-y-2 bg-white rounded-lg shadow-md border"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <label className="w-full" htmlFor="Date">
+          <span className="text-gray-700">Choose date</span>
+          <Input
+            register={register}
+            touchedFields={touchedFields}
+            errors={errors}
+            name="Date"
+            validation={{
+              required: "Date is required",
+              validate: {
+                todayFutureDate: (value) =>
+                  new Date(value) >= new Date().setHours(0, 0, 0, 0) ||
+                  "The date must be today or in the future",
+              },
+            }}
+            type="date"
+          />
+        </label>
+
+        <label className="w-full" htmlFor="time">
+          <span className="text-gray-700">Select time</span>
+          <select
+            {...register("Time", { required: "Time is required" })}
+            className={`w-full mt-1 p-2 border border-gray-300 rounded-md ${
+              errors.Time ? "border-red-500 outline-red-500 " : "border-gray-300"
+            } `}
+            id="time"
+          >
+            {AvailibleTimes ? (
+              <optgroup label="Choose Time">
+                {AvailibleTimes.map((time, idx) => (
+                  <option
+                    key={time}
+                    value={idx === 0 ? "" : time}
+                    disabled={AvailibleTimes.length === 1}
+                  >
+                    {AvailibleTimes.length === 1
+                      ? "All Tables Are Reserved"
+                      : time}
+                  </option>
+                ))}
+              </optgroup>
+            ) : (
+              <option value=" ">Please Select Date</option>
+            )}
+          </select>
+          <div className="mt-1 h-4">
+          {touchedFields.Time && errors.Time && (
+            <p className="text-sm text-red-500">{errors.Time.message}</p>
+          )}</div>
+        </label>
+
+        <label className="w-full" htmlFor="Guests">
+          <span className="text-gray-700">Number of guests</span>
+          <Input
+            register={register}
+            errors={errors}
+            touchedFields={touchedFields}
+            name="Guests"
+            validation={{
+              required: "Number of guests is required",
+              min: { value: 1, message: "Minimum number of guests is 1" },
+              max: { value: 10, message: "Maximum number of guests is 10" },
+            }}
+            type="number"
+          />
+        </label>
+
+        <label className="w-full" htmlFor="occasion">
+          <span className="text-gray-700">Occasion</span>
+          <select
+            {...register("Occasion", { required: "Occasion is required" })}
+            className={`w-full mt-1 p-2 border border-gray-300 rounded-md  ${
+              errors.Occasion ? "border-red-500 outline-red-500 " : "border-gray-300"
+            } `}
+            id="occasion"
+          >
+            <option value="">Select Occasion</option>
+            <option>Birthday</option>
+            <option>Anniversary</option>
+          </select>
+          <div className="mt-1 h-4">
+          {touchedFields.Occasion && errors.Occasion && (
+            <p className=" text-sm text-red-500">
+              {errors.Occasion.message}
+            </p>
+          )}</div>
+        </label>
+
+        <div className="w-full mt-4">
+          <button
+            className="w-full px-4 py-2 text-black bg-[#F4CE14] rounded-md border hover:border-black"
+            type="submit"
+          >
+            Make Your reservation
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

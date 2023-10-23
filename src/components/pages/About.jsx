@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import { useState } from "react";
 
 const countriese = [
   {
@@ -11,63 +11,30 @@ const countriese = [
   },
   {
     country: "pakistan",
-    cities: ["islamAbad ", "karachi", "lahore", "quetta"],
+    cities: ["islamAbad ", "karachi", "lahor", "quetta"],
   },
 ];
 
-const reducer = (state, action) => {
-  if (action.type === "salad") {
-    return { ...state, money: state.money + 10 };
-  } else if (action.type === "juice") {
-    return { ...state, money: state.money + 20 };
-  } else if (action.type === "buy") {
-    return { ...state, money: state.money - 30 };
-  }
-};
-
 const About = () => {
   const [selectedCountry, setSelectedCountry] = useState();
-  const [selectedCity, setSelectedCity] = useState();
-  const initialState = { money: 100 };
-  const [state, Dispatch] = useReducer(reducer, initialState);
+  const [setSelectedCity] = useState();
   return (
     <>
-      <div className="grids-section-width flex flex-col justify-center items-center h-96 ">
-        <p>Total Wallet Amount {state.money}</p>
-        <button onClick={() => Dispatch({ type: "salad" })}>sell Salad</button>
-        <button onClick={() => Dispatch({ type: "salad" })}>sell Juice</button>
-        <button onClick={() => Dispatch({ type: "buy" })}>
-          Buy ingredients
-        </button>
-      </div>
-      <div className="grids-section-width flex flex-col justify-center items-center h-96">
+      <div className="grids-section-width flex flex-col justify-center items-center min-h-[63vh]">
         <select
-          className="border "
-          placeholder="select"
+          name="country"
+          id="country"
           onChange={(e) => setSelectedCountry(e.target.value)}
         >
-          <option value="" selected hidden>
-            select
-          </option>
-          {countriese.map(({ country }) => {
-            return <option value={country}>{country}</option>;
-          })}
+          <option value="">select Country</option>
+          {countriese.map(({ country }) => (
+            <option key={country}>{country}</option>
+          ))}
         </select>
-
         {selectedCountry && (
-          <select
-            className="border "
-            placeholder="select"
-            onChange={(e) => setSelectedCity(e.target.value)}
-          >
-            <option value="" selected hidden>
-              select
-            </option>
-            {countriese
-              .find(({ country }) => country === selectedCountry)
-              .cities.map((city) => {
-                return <option value={city}>{city}</option>;
-              })}
+          <select name="city" id="city">
+            <option value=""> select city</option>
+            {countriese.find(({country})=> country === selectedCountry).cities.map(city => <option key={city} value={city} >{city}</option>)}
           </select>
         )}
       </div>

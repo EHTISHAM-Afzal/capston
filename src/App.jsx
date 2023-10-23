@@ -1,4 +1,3 @@
-import Main from "./components/pages/Main";
 import Layout from "../Layout";
 import {
   createBrowserRouter,
@@ -6,22 +5,17 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-import NotFound from "./components/pages/NotFound";
-import About from "./components/pages/About";
-import OrderOnline from "./components/pages/OrderOnline";
-import Resevations from "./components/pages/Resevations";
-import {RCProvider} from "./ReservatoinContext.jsx";
 import { Suspense } from "react";
-import BookingPage from "./components/pages/BookingPage";
+import Main from "./components/Main/Main";
+import NotFound from "./components/pages/NotFound";
+import { ThemeProvider } from "./components/Theme/ThemeProvider";
+import About from "./components/pages/About";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Main />} />
-      <Route path="aboute" element={<About />} />
-      <Route path="booking-page" element={<BookingPage />} />
-      <Route path="reservations" element={<Resevations />} />
-      <Route path="order-online" element={<OrderOnline />} />
+      <Route path="about" element={<About />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )
@@ -30,9 +24,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <Suspense fallback={<h1>Loading</h1>}>
-      <RCProvider>
-        <RouterProvider router={router} />
-      </RCProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="littlelemon-theme">
+          <RouterProvider router={router} />
+        </ThemeProvider>
     </Suspense>
   );
 }
