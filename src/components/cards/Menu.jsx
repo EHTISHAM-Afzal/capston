@@ -8,10 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { CarIcon } from "lucide-react";
+
 
 const MenuCard = ({ dish }) => {
   return (
-    <Card className="w-[16rem] h-[25rem] border hover:shadow-md mx-1 my-2 dark:hover:shadow-slate-50 overflow-hidden">
+    <Card className="w-[16rem] h-[25rem] border hover:shadow-lg mx-1 my-2 dark:hover:shadow-secondary overflow-hidden">
       <img
         className=" w-full h-40 object-cover rounded-t-lg"
         src={dish.img}
@@ -27,8 +29,8 @@ const MenuCard = ({ dish }) => {
         <CardDescription>{dish.description}</CardDescription>
       </CardContent>
       <CardFooter>
-        <Button className="w-full" variant="ghost">
-          Order a delivery 🚲
+        <Button className="w-full self-center" variant="ghost">
+          Order a delivery  <CarIcon className="ml-2"/>
         </Button>
       </CardFooter>
     </Card>

@@ -2,25 +2,35 @@ import AboutSection from "./AboutSection";
 import MainSection from "./MainSection";
 import SpecialsSection from "./SpecialsSection";
 import TestimonialsSection from "./TestimonialsSection";
+import { Separator } from "@/components/ui/separator"
+
 
 const Main = () => {
   return (
     <main className="col-span-full grids">
-      <section className=" col-span-full grids h-[360px]  bg-[#495E57]">
+      <section className=" col-span-full h-[20rem] grids sm:h-[23rem]  bg-[#495E57] dark:bg-secondary">
         <MainSection />
       </section>
 
-      <section className="col-span-full grids ">
+
+      <section className="col-span-full grids">
         <SpecialsSection />
       </section>
 
-      <section className="col-span-full grids bg-gray-200 min-h-[400px]">
+     <Separator className=" grids-separator-width px-2 "/>
+
+      <section className="col-span-full grids min-h-[400px] ">
         <TestimonialsSection />
       </section>
 
+      <Separator className=" grids-separator-width px-2 "/>
+      
       <section className="col-span-full grids py-8 ">
         <AboutSection />
       </section>
+
+      <Separator className=" grids-separator-width px-2 "/>
+
     </main>
   );
 };

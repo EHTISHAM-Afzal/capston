@@ -8,13 +8,15 @@ import {
 import { Suspense } from "react";
 import Main from "./components/Main/Main";
 import NotFound from "./components/pages/NotFound";
-NotFound
+import { ThemeProvider } from "./components/Theme/ThemeProvider";
+import About from "./components/pages/About";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route index element={<Main/>} />
-      <Route path="*" element={<NotFound/>} />
+      <Route index element={<Main />} />
+      <Route path="about" element={<About />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
@@ -22,7 +24,9 @@ const router = createBrowserRouter(
 function App() {
   return (
     <Suspense fallback={<h1>Loading</h1>}>
-        <RouterProvider router={router} />
+        <ThemeProvider defaultTheme="dark" storageKey="littlelemon-theme">
+          <RouterProvider router={router} />
+        </ThemeProvider>
     </Suspense>
   );
 }

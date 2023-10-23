@@ -5,17 +5,17 @@ const MainSection = () => {
         <h1 className=" text-primary col-span-full lg:col-span-4 col-start-1 lg:col-end-4 row-start-1 row-end-2 text-6xl font-markazi-text tracking-wide h-12">
           Little Lemon
         </h1>
-        <div className="col-start-1 row-start-2 col-span-4 lg:col-end-4 max-h-full  row-span-5 flex flex-col">
-          <h2 className=" text-secondary text-[40px] font-markazi-text tracking-wider">
+        <div className="col-start-1 row-start-2 col-span-4 lg:col-end-4 max-h-full min-h-fit  row-span-5 flex flex-col">
+          <h2 className=" text-secondary dark:text text-[40px] font-markazi-text tracking-wider">
             Chicago
           </h2>
 
-          <p className=" text-secondary-foreground max-h-40 max-w-full overflow-hidden font-medium text-lg">
+          <p className=" text-secondary-foreground max-h-40 max-w-full overflow-hidden font-medium text-base sm:text-lg mr-3">
             Chicago best restaurant offers delicious food with flair. Our menu
             has dishes from America and abroad, made with fresh ingredients.
           </p>
 
-          <button className=" bg-primary text-lg lg:text-2xl font-medium border rounded-lg my-3 h-12 w-36 lg:h-16 lg:w-48 font-roboto">
+          <button className=" bg-primary text-lg lg:text-2xl font-medium border rounded-lg my-3 h-10 w-28  md:h-12 md:w-36 lg:h-16 lg:w-48 font-roboto">
             Order Now
           </button>
         </div>

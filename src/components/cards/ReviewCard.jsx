@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ReviewCard = () => {
   return (
-    <Card className="w-48 h-48 py-1 space-y-4 hover:shadow-lg m-2">
+    <Card className="w-48 h-48 py-1 space-y-4 hover:shadow-lg m-2 dark:hover:shadow-secondary">
       <CardContent className="space-y-5">
         <p className="w-full py-1 px-3 ">⭐⭐⭐⭐⭐</p>
         <div className="w-full flex flex-row justify-start space-x-2 items-center">
@@ -17,7 +17,7 @@ const ReviewCard = () => {
             <AvatarFallback>IA</AvatarFallback>
           </Avatar>
           <div className="flex flex-col justify-center text-start">
-            <CardTitle className="font-karla">John Doe</CardTitle>
+            <CardTitle className="font-karla tracking-wide">Ihtisham</CardTitle>
             <CardDescription className="font-karla">
               Little Lemon
             </CardDescription>
