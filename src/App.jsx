@@ -24,7 +24,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <Suspense fallback={<h1>Loading</h1>}>
-        <ThemeProvider defaultTheme="dark" storageKey="littlelemon-theme">
+        <ThemeProvider defaultTheme="system" storageKey="littlelemon-theme">
           <RouterProvider router={router} />
         </ThemeProvider>
     </Suspense>
