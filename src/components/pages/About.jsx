@@ -1,42 +1,10 @@
-import { useState } from "react";
 
-const countriese = [
-  {
-    country: "india",
-    cities: ["mumbai", "delhi", "chennai", "bangalore"],
-  },
-  {
-    country: "usa",
-    cities: ["new york", "los angeles", "san fransisco", "chicago"],
-  },
-  {
-    country: "pakistan",
-    cities: ["islamAbad ", "karachi", "lahor", "quetta"],
-  },
-];
 
 const About = () => {
-  const [selectedCountry, setSelectedCountry] = useState();
-  const [setSelectedCity] = useState();
   return (
     <>
       <div className="grids-section-width flex flex-col justify-center items-center min-h-[63vh]">
-        <select
-          name="country"
-          id="country"
-          onChange={(e) => setSelectedCountry(e.target.value)}
-        >
-          <option value="">select Country</option>
-          {countriese.map(({ country }) => (
-            <option key={country}>{country}</option>
-          ))}
-        </select>
-        {selectedCountry && (
-          <select name="city" id="city">
-            <option value=""> select city</option>
-            {countriese.find(({country})=> country === selectedCountry).cities.map(city => <option key={city} value={city} >{city}</option>)}
-          </select>
-        )}
+        <p>Little Lemon is a cozy and modern restaurant in downtown Chicago. We offer a variety of artisanal dishes, from bruschettas and burgers to Greek salads, made with fresh and local ingredients. Our food is not only delicious but also artistic, reflecting our passion for culinary excellence. Whether you want a romantic, family, or casual dining experience, Little Lemon can cater to your needs. Come and visit us in the heart of Chicago for a memorable meal.</p>
       </div>
     </>
   );

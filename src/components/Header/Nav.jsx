@@ -6,20 +6,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const NavItem = ({ to, children }) => {
   return (
-    <NavLink
-      className={({ isActive, isPending }) =>
-        isPending
-          ? "text-red-400"
-          : isActive
-          ? "border-b-4 border-yellow-300"
-          : ""
-      }
-      to={to}
-    >
-      <li>
-      {children}
-      </li>
-    </NavLink>
+    <li>
+      <NavLink
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "text-red-400"
+            : isActive
+            ? "border-b-4 border-yellow-300"
+            : ""
+        }
+        to={to}
+      >
+        {children}
+      </NavLink>
+    </li>
   );
 };
 
@@ -35,7 +35,7 @@ const ProfileItem = () => {
       }
       to="/profile"
     >
-      <Avatar >
+      <Avatar>
         <AvatarImage
           alt="avatar Image"
           src="https://avatars.githubusercontent.com/u/106005092?s=96&v=4"
@@ -63,8 +63,8 @@ const Nav = () => {
         className="h-full rounded-full flex justify-center items-center overflow-hidden"
       >
         <img
-          className="w-full h-full object-cover"
-          src="../../LittleLemon.png"
+          className="  object-cover"
+          src="../../Logo .svg"
           alt="Little Lemon logo"
         />
       </Link>
@@ -83,7 +83,8 @@ const Nav = () => {
           <NaveSheet />
         </li>
         <li>
-          <ProfileItem /></li>
+          <ProfileItem />
+        </li>
       </ul>
     </nav>
   );
