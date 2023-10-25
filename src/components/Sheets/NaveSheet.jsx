@@ -25,7 +25,7 @@ const NaveSheet = () => {
     <div className="sm:hidden">
       <Sheet>
         <SheetTrigger  className="border-2 h-9 w-9 flex justify-center items-center rounded-md">
-          <Menu />
+          <Menu name="menu's" />
         </SheetTrigger>
         <SheetContent side="top">
           <SheetHeader>

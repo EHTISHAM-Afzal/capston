@@ -23,7 +23,7 @@ const Stars = ({ count }) => {
 
 const ReviewCard = () => {
   return (
-    <Card className="w-48 h-48 py-1 space-y-4 hover:shadow-lg m-2 dark:hover:shadow-secondary ">
+    <Card className="w-48 h-48 py-1 space-y-4 hover:border-primary m-2 dark:hover:shadow-secondary ">
       <CardContent className="space-y-5">
         <span className="w-full pt-2 px-3 space-x-2 flex flex-row justify-center items-center ">
           <Stars count={5} />

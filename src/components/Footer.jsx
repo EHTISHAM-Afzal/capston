@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const navItems = [
+  const Links = [
     { to: "/", name: "Home" },
     { to: "about", name: "About" },
     { to: "menu", name: "Menu" },
@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="  h-full flex flex-row justify-center gap-[12vw] lg:pr-12 items-start font-karla ">
           <ul>
             <li className=" flex flex-col text-[16px] md:text-[16.5px]">
-              {navItems.map((item) => (
+              {Links.map((item) => (
                 <Link to={item.to} key={item.to}>
                   {item.name}
                 </Link>

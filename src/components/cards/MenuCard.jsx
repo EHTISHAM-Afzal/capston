@@ -13,7 +13,7 @@ import { CarIcon } from "lucide-react";
 
 const MenuCard = ({ dish }) => {
   return (
-    <Card className="w-[16rem] h-[24rem] border hover:shadow-lg mx-1 my-2 dark:hover:shadow-secondary overflow-hidden">
+    <Card className="w-[16rem] h-[24rem] border hover:shadow-lg mx-1 my-2 dark:hover:shadow-secondary overflow-hidden hover:border-primary">
       <img
         className=" w-full h-40 object-cover rounded-t-lg"
         src={dish.img}
