@@ -15,7 +15,6 @@ import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
-
 import {
   Popover,
   PopoverContent,
@@ -25,13 +24,18 @@ import { RadioGroupItem } from "@/components/ui/radio-group";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
+import { toast } from "@/components/ui/use-toast";
 
-function onSubmit(values) {
-  // Do something with the form values.
-  // ✅ This will be type-safe and validated.
-  values.guests = Number(values.guests);
-  console.log(values);
-}
+function onSubmit(data) {
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    })
+  }
 
 const AvilibleTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:000"];
 const formSchema = z.object({
