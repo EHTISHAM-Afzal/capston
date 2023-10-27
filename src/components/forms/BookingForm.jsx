@@ -63,7 +63,7 @@ const BookingForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-2 px-4 w-full md:w-[80%] lg:w-[60%]"
+          className="space-y-4 px-8 w-full md:w-[80%] lg:w-[60%]"
         >
           <FormField
             control={form.control}
