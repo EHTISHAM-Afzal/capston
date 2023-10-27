@@ -1,142 +1,218 @@
-/* eslint-disable react/prop-types */
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { Input } from "../smallComp/Input";
-import useResetAvailibleTimes from "../../utils/useResetAvailibleTimes";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
 
-const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {
-  const {
-    register,
-    watch,
-    reset,
-    handleSubmit,
-    formState: { errors, touchedFields },
-  } = useForm({
-    defaultValues: {
-      Date: "",
-      Time: "",
-      Guests: 0,
-      Occasion: "",
-    },
-    mode: "onChange"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup } from "@radix-ui/react-radio-group";
+import { Input } from "@/components/ui/input";
+import { useEffect } from "react";
+
+function onSubmit(values) {
+  // Do something with the form values.
+  // ✅ This will be type-safe and validated.
+  values.guests = Number(values.guests);
+  console.log(values);
+}
+
+const AvilibleTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:000"];
+const formSchema = z.object({
+  date: z.date(),
+  time: z.enum(AvilibleTimes),
+  guests: z
+    .string()
+    .min(1, { message: "The number of guests must be 1 to 10" })
+    .max(2),
+  occasion: z.enum(["birthday", "anniversary"]),
+});
+
+const BookingForm = () => {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data) => {
-    formSubmitHandler(data);
-    reset();
-  };
-
-  const watchDate = watch("Date");
-  // the useResetAvailibleTimes hook is used to reset the availible times and they take in props "Date" and dispatch 
-  useResetAvailibleTimes(watchDate, dispatch);
+  const val = form.watch("date");
+  useEffect(() => {
+    console.log(val);
+  }, [val]);
 
   return (
-    <>
-      <h2 className=" text-center text-4xl font-markazi-text font-semibold">
-        Reserve your table
-      </h2>
-      <form
-        className="flex flex-col items-center justify-center sm:w-96 p-6 my-4 space-y-2 bg-white rounded-lg shadow-md border"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <label className="w-full" htmlFor="Date">
-          <span className="text-gray-700">Choose date</span>
-          <Input
-            register={register}
-            touchedFields={touchedFields}
-            errors={errors}
-            name="Date"
-            validation={{
-              required: "Date is required",
-              validate: {
-                todayFutureDate: (value) =>
-                  new Date(value) >= new Date().setHours(0, 0, 0, 0) ||
-                  "The date must be today or in the future",
-              },
-            }}
-            type="date"
-          />
-        </label>
-
-        <label className="w-full" htmlFor="time">
-          <span className="text-gray-700">Select time</span>
-          <select
-            {...register("Time", { required: "Time is required" })}
-            className={`w-full mt-1 p-2 border border-gray-300 rounded-md ${
-              errors.Time ? "border-red-500 outline-red-500 " : "border-gray-300"
-            } `}
-            id="time"
-          >
-            {AvailibleTimes ? (
-              <optgroup label="Choose Time">
-                {AvailibleTimes.map((time, idx) => (
-                  <option
-                    key={time}
-                    value={idx === 0 ? "" : time}
-                    disabled={AvailibleTimes.length === 1}
-                  >
-                    {AvailibleTimes.length === 1
-                      ? "All Tables Are Reserved"
-                      : time}
-                  </option>
-                ))}
-              </optgroup>
-            ) : (
-              <option value=" ">Please Select Date</option>
+    <section className="grids-section-width flex flex-col justify-center items-center">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-2 px-4 w-full md:w-[80%] lg:w-[60%]"
+        >
+          <FormField
+            control={form.control}
+            name="date"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={[date => date < new Date().setDate(new Date().getDate()-1)]}
+                      initialFocus
+                      footer={<span>The date must be in future</span>}
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormDescription>Please select the date .</FormDescription>
+                <FormMessage />
+              </FormItem>
             )}
-          </select>
-          <div className="mt-1 h-4">
-          {touchedFields.Time && errors.Time && (
-            <p className="text-sm text-red-500">{errors.Time.message}</p>
-          )}</div>
-        </label>
-
-        <label className="w-full" htmlFor="Guests">
-          <span className="text-gray-700">Number of guests</span>
-          <Input
-            register={register}
-            errors={errors}
-            touchedFields={touchedFields}
-            name="Guests"
-            validation={{
-              required: "Number of guests is required",
-              min: { value: 1, message: "Minimum number of guests is 1" },
-              max: { value: 10, message: "Maximum number of guests is 10" },
-            }}
-            type="number"
           />
-        </label>
+          <FormField
+            control={form.control}
+            name="time"
+            render={({ field }) => (
+              <FormItem className="space-y-3 w-full">
+                <FormLabel>Select Time</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="grid grid-cols-3 grid-flow-dense gap-4 "
+                  >
+                    {AvilibleTimes &&
+                      AvilibleTimes.map((time, idx) => (
+                        <FormItem key={idx} className="flex items-center">
+                          <FormLabel className=" flex items-center justify-center rounded-md w-full h-16 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary ">
+                            <FormControl>
+                              <RadioGroupItem
+                                value={time}
+                                className="sr-only"
+                              />
+                            </FormControl>
+                            <span>{time}</span>
+                          </FormLabel>
+                        </FormItem>
+                      ))}
+                    <FormDescription className="col-span-full">
+                      The disabled times are already booked
+                    </FormDescription>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="guests"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Guests</FormLabel>
+                <FormControl>
+                  <Input
+                    onChange={field.onChange}
+                    value={field.value}
+                    className="w-full"
+                    type="number"
+                    min={1}
+                    max={10}
+                    placeholder="No of guests"
+                    {...field}
+                  />
+                </FormControl>
 
-        <label className="w-full" htmlFor="occasion">
-          <span className="text-gray-700">Occasion</span>
-          <select
-            {...register("Occasion", { required: "Occasion is required" })}
-            className={`w-full mt-1 p-2 border border-gray-300 rounded-md  ${
-              errors.Occasion ? "border-red-500 outline-red-500 " : "border-gray-300"
-            } `}
-            id="occasion"
-          >
-            <option value="">Select Occasion</option>
-            <option>Birthday</option>
-            <option>Anniversary</option>
-          </select>
-          <div className="mt-1 h-4">
-          {touchedFields.Occasion && errors.Occasion && (
-            <p className=" text-sm text-red-500">
-              {errors.Occasion.message}
-            </p>
-          )}</div>
-        </label>
+                <FormDescription>
+                  The number of guests are from 1 to 10
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="occasion"
+            render={({ field }) => (
+              <FormItem className="space-y-3 w-full">
+                <FormLabel>Select Time</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="grid grid-cols-2 grid-flow-dense gap-4 w-full"
+                  >
+                    <FormItem className="flex items-center">
+                      <FormLabel className=" flex items-center justify-center rounded-md w-full h-20 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary ">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="birthday"
+                            className="sr-only"
+                          />
+                        </FormControl>
+                        <span>Birthday</span>
+                      </FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center">
+                      <FormLabel className=" flex items-center justify-center rounded-md w-full h-20 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary [&:has([data-state=disabled])]:bg-red-500 ">
+                        <FormControl>
+                          <RadioGroupItem
+                            value="anniversary"
+                            className="sr-only "
+                          />
+                        </FormControl>
+                        <span>Anniversary</span>
+                      </FormLabel>
+                    </FormItem>
+                    <FormDescription className="col-span-full">
+                      The disabled times are already booked
+                    </FormDescription>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <div className="w-full mt-4">
-          <button
-            className="w-full px-4 py-2 text-black bg-[#F4CE14] rounded-md border hover:border-black"
-            type="submit"
-          >
-            Make Your reservation
-          </button>
-        </div>
-      </form>
-    </>
+          <Button className="float-right" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
+    </section>
   );
 };
 

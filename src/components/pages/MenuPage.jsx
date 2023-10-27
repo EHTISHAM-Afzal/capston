@@ -69,6 +69,7 @@ const DishData = [
 
 const MenuPage = () => {
   return (
+    <section className="grids">
     <div className="grids-section-width flex flex-col justify-center items-center min-h-[63vh]">
       <div className="flex justify-around items-center flex-wrap  py-8">
         {DishData.map((dish) => (
@@ -76,6 +77,7 @@ const MenuPage = () => {
         ))}
       </div>
     </div>
+    </section>
   );
 };
 
