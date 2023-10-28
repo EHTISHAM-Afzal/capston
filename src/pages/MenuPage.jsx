@@ -1,4 +1,4 @@
-import MenuCard from "../cards/MenuCard";
+import MenuCard from "../components/cards/MenuCard";
 
 const DishData = [
   {

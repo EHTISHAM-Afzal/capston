@@ -1,5 +1,5 @@
 import { Separator } from "@radix-ui/react-separator";
-import BookingForm from "../forms/BookingForm";
+import BookingForm from "../components/forms/BookingForm";
 
 const BookingPage = () => {
   return (
