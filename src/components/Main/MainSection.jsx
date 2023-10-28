@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const MainSection = () => {
   return (
     <div className="grids-section-width pt-4 px-6 items-start lg:flex flex-row justify-start ">
@@ -6,18 +8,18 @@ const MainSection = () => {
           Little Lemon
         </h1>
         <div className="col-start-1 row-start-2 col-span-4 lg:col-end-4 max-h-full min-h-fit  row-span-5 flex flex-col">
-          <h2 className=" text-secondary dark:text text-[40px] font-markazi-text tracking-wider">
+          <h2 className=" text-white text-[40px] font-markazi-text tracking-wider">
             Chicago
           </h2>
 
-          <p className=" text-secondary-foreground max-h-40 max-w-full overflow-hidden font-medium text-base sm:text-lg mr-3">
+          <p className=" text-secondary-foreground max-h-[9rem] max-w-full overflow-hidden font-medium text-base sm:text-lg mr-3">
             Chicago best restaurant offers delicious food with flair. Our menu
             has dishes from America and abroad, made with fresh ingredients.
           </p>
 
-          <button className=" bg-primary text-lg lg:text-2xl font-medium border rounded-lg my-3 h-10 w-28  md:h-12 md:w-36 lg:h-16 lg:w-48 font-roboto">
-            Order Now
-          </button>
+          <Button className=" text-xl lg:text-3xl tracking-wide my-3 h-10 w-28 font-markazi-text  md:h-12 md:w-36 lg:h-16 lg:w-48">
+            Reserve Table
+          </Button>
         </div>
         <div className="w-full  col-start-5 lg:col-start-4 col-end-7 col-span-1 lg:col-span-3 row-start-2 lg:row-start-1 lg:row-span-full row-span-5 flex justify-end items-center">
           <img

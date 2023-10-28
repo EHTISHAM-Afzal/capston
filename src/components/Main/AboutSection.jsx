@@ -9,7 +9,7 @@ const AboutSection = () => {
           <h1 className=" hidden lg:block text-primary text-6xl font-markazi-text ">
             Little Lemon
           </h1>
-          <h2 className="dark:text-secondary text-4xl font-markazi-text ">
+          <h2 className=" text-4xl font-markazi-text ">
             Chicago
           </h2>
           <div className=" h-32 hidden lg:flex flex-row items-center w-full py-1 lg:max-w-xs">

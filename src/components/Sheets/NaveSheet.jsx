@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
 import { Home, Info, LayoutList, MapPin, Menu, ShoppingBasket, ShoppingCart, } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -25,8 +24,8 @@ const NaveSheet = () => {
   return (
     <div className="sm:hidden">
       <Sheet>
-        <SheetTrigger className="border-2 h-9 w-9 flex justify-center items-center rounded-md">
-          <Menu />
+        <SheetTrigger  className="border-2 h-9 w-9 flex justify-center items-center rounded-md">
+          <Menu name="menu's" />
         </SheetTrigger>
         <SheetContent side="top">
           <SheetHeader>
@@ -35,15 +34,14 @@ const NaveSheet = () => {
           {navItems.map((item , indx) => (
             <div key={indx}>
             <SheetClose asChild>
-            <Link className="w-full my-1      " to={item.to}>
-              <Button
+            <NavLink className="w-full my-1" to={item.to}>
+              <Button 
                 variant="outline"
-                size="sm"
-                className="w-full justify-between"
+                className="w-full justify-between h-12 hover:bg-primary text-lg"
               >
                 {item.name} {item.icon} 
               </Button>
-            </Link>
+            </NavLink>
           </SheetClose>
           </div>
           ))}

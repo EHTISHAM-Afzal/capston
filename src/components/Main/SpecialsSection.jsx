@@ -1,4 +1,5 @@
-import MenuCard from "../cards/Menu"
+import { Button } from "@/components/ui/button"
+import MenuCard from "../cards/MenuCard"
 import { DishData } from "./DishesData"
 
 const SpecialsSection = () => {
@@ -6,9 +7,9 @@ const SpecialsSection = () => {
     <div className=" grids-section-width py-4 lg:mt-28">
           <div className="w-full flex items-center justify-between px-4 xl:px-8">
             <h2 className=" text-center text-4xl font-karla font-semibold">Specials</h2>
-            <button className=" bg-primary text-lg lg:text-2xl font-medium border rounded-lg p-1 h-10 w-28  md:h-12 md:w-36 lg:h-16 lg:w-48 font-roboto">
-            Order Now
-          </button>
+            <Button className=" text-xl lg:text-3xl tracking-wide my-3 h-10 w-28 font-markazi-text  md:h-12 md:w-36 lg:h-16 lg:w-48">
+            Online Menu
+          </Button>
           </div>
 
           <div className="flex justify-around items-center flex-wrap  py-8">

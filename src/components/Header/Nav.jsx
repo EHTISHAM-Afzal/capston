@@ -2,23 +2,24 @@
 import { NavLink, Link } from "react-router-dom";
 import { ModeToggle } from "../Theme/ThemeToggle";
 import NaveSheet from "../Sheets/NaveSheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const NavItem = ({ to, children }) => {
   return (
-    <NavLink
-      className={({ isActive, isPending }) =>
-        isPending
-          ? "text-red-400"
-          : isActive
-          ? "border-b-4 border-yellow-300"
-          : ""
-      }
-      to={to}
-    >
-      {children}
-    </NavLink>
+    <li>
+      <NavLink
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "text-red-400"
+            : isActive
+            ? "border-b-4 border-primary"
+            : ""
+        }
+        to={to}
+      >
+        {children}
+      </NavLink>
+    </li>
   );
 };
 
@@ -29,18 +30,21 @@ const ProfileItem = () => {
         isPending
           ? "text-red-400"
           : isActive
-          ? "border-4 rounded-full border-primary"
-          : "border-2 rounded-full"
+          ? " rounded-full border-primary flex items-center border-4"
+          : " flex items-center border-2 rounded-full"
       }
       to="/profile"
     >
-    <Avatar>
-          <AvatarImage src="https://avatars.githubusercontent.com/u/106005092?s=96&v=4" />
-          <AvatarFallback>IA</AvatarFallback>
-        </Avatar>
+      <Avatar>
+        <AvatarImage
+          alt="avatar Image"
+          src="https://avatars.githubusercontent.com/u/106005092?s=96&v=4"
+        />
+        <AvatarFallback>IA</AvatarFallback>
+      </Avatar>
     </NavLink>
-  )
-}
+  );
+};
 
 const Nav = () => {
   const navItems = [
@@ -59,8 +63,8 @@ const Nav = () => {
         className="h-full rounded-full flex justify-center items-center overflow-hidden"
       >
         <img
-          className="w-full h-full object-cover"
-          src="../../LittleLemon.png"
+          className="  object-cover"
+          src="../../Logo .svg"
           alt="Little Lemon logo"
         />
       </Link>
@@ -71,10 +75,16 @@ const Nav = () => {
           </NavItem>
         ))}
       </ul>
-      <ul className="flex items-center space-x-2">
-        <ModeToggle />
-        <NaveSheet />
-        <ProfileItem/>
+      <ul className="flex items-center space-x-2 h-full">
+        <li>
+          <ModeToggle />
+        </li>
+        <li>
+          <NaveSheet />
+        </li>
+        <li>
+          <ProfileItem />
+        </li>
       </ul>
     </nav>
   );

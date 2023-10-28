@@ -1,6 +1,6 @@
 import { useReducer  } from "react";
-import BookingForm from "../forms/BookingForm";
-import { toast } from "react-toastify";
+import BookingForm from "../forms/BookingFormDeprecated";
+// import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const BookingPage = () => {
@@ -68,7 +68,7 @@ const BookingPage = () => {
       .then(()=>navigate('/reservation-success'))
       .catch((error) => {
         console.error("Error submitting form:", error);
-        toast.error("An error occurred while making the reservation");
+        // toast.error("An error occurred while making the reservation");
     });
   };
 
