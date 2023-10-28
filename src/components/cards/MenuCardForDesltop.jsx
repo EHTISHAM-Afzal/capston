@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -23,16 +22,16 @@ const MenuCard = ({ dish }) => {
         <CardTitle className=" font-markazi-text  flex flex-row justify-between items-center tracking-wider ">
           <p className=" text-[20pt]">{dish.name}</p>
           {
-            <p className=" font-karla text-[16pt]  text-red-500 font-bold">
+            <span className=" font-karla text-[16pt]  text-red-500 font-bold">
               $ {dish.price}
-            </p>
+            </span>
           }
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription >
+        <div className="text-sm text-muted-foreground" >
           <ScrollArea className="h-[6rem]" >{dish.description}</ScrollArea>
-        </CardDescription>
+        </div>
       </CardContent>
       <CardFooter>
         <Button className="w-full self-center" variant="ghost">

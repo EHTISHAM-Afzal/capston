@@ -31,11 +31,11 @@ const Footer = () => {
             <li>123 PTCL</li>
             <li>123-456-789</li>
             <li>littlemon@gmail.com</li>
-            <li className="sm:hidden pt-2">
+            <ul className="sm:hidden pt-2">
             <li>X.com</li>
             <li>Facbook</li>
             <li>Instagram</li>
-            </li>
+            </ul>
           </ul>
           <ul className="hidden sm:block">
             <li>X.com</li>
