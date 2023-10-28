@@ -1,16 +1,19 @@
-import Footer from './src/components/Footer'
-import Header from './src/components/Header/Header'
-import { Outlet } from 'react-router-dom'
-
+import { Suspense } from "react";
+import Footer from "./src/components/Footer";
+import Header from "./src/components/Header/Header";
+import { Outlet } from "react-router-dom";
+import Spinner from "./src/components/smallComp/Spinner";
 
 const Layout = () => {
   return (
     <>
       <Header />
-      <Outlet />
-      <Footer/>
+      <Suspense fallback={<Spinner />}>
+        <Outlet />
+      </Suspense>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
