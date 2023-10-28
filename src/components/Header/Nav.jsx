@@ -12,7 +12,7 @@ const NavItem = ({ to, children }) => {
           isPending
             ? "text-red-400"
             : isActive
-            ? "border-b-4 border-yellow-300"
+            ? "border-b-4 border-primary"
             : ""
         }
         to={to}
