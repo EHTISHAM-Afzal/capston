@@ -23,19 +23,19 @@ import {
 import { RadioGroupItem } from "@/components/ui/radio-group";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Input } from "@/components/ui/input";
-import { useEffect } from "react";
 import { toast } from "@/components/ui/use-toast";
 
 function onSubmit(data) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
-  }
+  // trigger alert dialog
+  toast({
+    title: "You submitted the following values:",
+    description: (
+      <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+      </pre>
+    ),
+  });
+}
 
 const AvilibleTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:000"];
 const formSchema = z.object({
@@ -53,10 +53,6 @@ const BookingForm = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const val = form.watch("date");
-  useEffect(() => {
-    console.log(val);
-  }, [val]);
 
   return (
     <section className="grids-section-width flex flex-col justify-center items-center">
@@ -95,7 +91,10 @@ const BookingForm = () => {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={[date => date < new Date().setDate(new Date().getDate()-1)]}
+                      disabled={[
+                        (date) =>
+                          date < new Date().setDate(new Date().getDate() - 1),
+                      ]}
                       initialFocus
                       footer={<span>The date must be in future</span>}
                     />
@@ -211,7 +210,7 @@ const BookingForm = () => {
             )}
           />
 
-          <Button className="float-right" type="submit">
+          <Button className="w-full" type="submit">
             Submit
           </Button>
         </form>

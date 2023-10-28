@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import MenuCard from "../cards/MenuCard"
+import MenuCard from "../cards/MenuCardForDesltop"
 import { DishData } from "./DishesData"
 
 const SpecialsSection = () => {

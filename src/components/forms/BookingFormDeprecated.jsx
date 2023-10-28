@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
-import { Input } from "../smallComp/Input";
+import { Input } from "../smallComp/InputDeprecated";
 import useResetAvailibleTimes from "../../utils/useResetAvailibleTimes";
 
 const BookingForm = ({ AvailibleTimes, dispatch, formSubmitHandler }) => {

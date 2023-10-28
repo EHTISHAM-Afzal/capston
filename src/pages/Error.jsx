@@ -1,11 +1,9 @@
-import React from "react";
 import { useRouteError } from "react-router-dom";
-
-const NotFound = () => {
+const Error = () => {
   const error = useRouteError();
   return (
-    <div className=" grids-section-width flex justify-center items-center h-96">
-      <h1>Error: {error?.message}</h1>
+    <div className="w-full flex justify-center flex-wrap items-center min-h-[7rem] h-full p-6 ">
+      <h1> 🤦‍♀️ Error: {error?.message}</h1>
       <pre>
         {error.status} - {error.statusText}
       </pre>
@@ -13,4 +11,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Error;

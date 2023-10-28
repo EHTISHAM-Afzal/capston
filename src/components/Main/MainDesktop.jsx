@@ -1,7 +1,7 @@
-import AboutSection from "./AboutSection";
+import AboutSection from "./AboutSectionForDesktop";
 import MainSection from "./MainSection";
 import SpecialsSection from "./SpecialsSection";
-import TestimonialsSection from "./TestimonialsSection";
+import TestimonialsSection from "./TestimonialsSectionForDesktop";
 import { Separator } from "@/components/ui/separator"
 
 
