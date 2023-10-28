@@ -1,38 +1,39 @@
-import Layout from "../Layout";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
   Route,
 } from "react-router-dom";
-import { Suspense } from "react";
-import Main from "./components/Main/Main";
-import NotFound from "./components/pages/NotFound";
+import { Suspense, lazy } from "react";
 import { ThemeProvider } from "./components/Theme/ThemeProvider";
-import About from "./components/pages/About";
-import MenuPage from "./components/pages/MenuPage";
-import BookingPage from "./components/pages/BookingPage";
 import { Toaster } from "@/components/ui/toaster"
+import Spinner from "./components/smallComp/Spinner";
+import Layout from "@/Layout";
 
-
+// Use React.lazy to load the components
+const NotFound = lazy(() => import("./pages/NotFound"));
+const About = lazy(() => import("./pages/About"));
+const MenuPage = lazy(() => import("./pages/MenuPage"));
+const BookingPage = lazy(() => import("./pages/BookingPage"));
+const Main = lazy(() => import('./components/Main/Main'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route index element={<Main />} />
-      <Route path="about" element={<About />} />
-      <Route path="menu" element={<MenuPage />} />
-      <Route path="booking-page" element={<BookingPage />} />
-      <Route path="*" element={<NotFound />} />
+      <Route index fallbackElement={<Spinner/>} element={<Main />} />
+      <Route path="about" fallbackElement={<Spinner/>} element={<About />} />
+      <Route path="menu" fallbackElement={<Spinner/>} element={<MenuPage />} />
+      <Route path="booking-page" fallbackElement={<Spinner/>} element={<BookingPage />} />
+      <Route path="*" fallbackElement={<Spinner/>} element={<NotFound />} />
     </Route>
   )
 );
 
 function App() {
   return (
-    <Suspense fallback={<h1>Loading</h1>}>
+    <Suspense fallback={<Spinner />}>
         <ThemeProvider defaultTheme="system" storageKey="littlelemon-theme">
-          <RouterProvider router={router} />
+          <RouterProvider  router={router}  />
           <Toaster />
         </ThemeProvider>
     </Suspense>
