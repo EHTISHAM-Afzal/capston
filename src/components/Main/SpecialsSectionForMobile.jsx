@@ -16,7 +16,7 @@ const SpecialsSectionForMobile = () => {
       </div>
 
       {/* <ScrollArea className=" h-fit w-full overflow-hidden "> */}
-        <div className=" overflow-x-scroll flex p-4 space-x-1 snap-x ">
+        <div className=" overflow-x-scroll scroll-smooth flex p-4 space-x-1 snap-x   ">
           {DishData.map((dish) => (
             <MenuCardForMobile data={dish} key={dish.id} />
           ))}
