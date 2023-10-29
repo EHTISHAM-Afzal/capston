@@ -12,12 +12,12 @@ const MenuCardForMobile = ({ data }) => {
           alt={data.name}
         />
         {/* Footer */}
-        <div className=" absolute pl-4 text-white w-[95%] mx-2 bottom-2 rounded-2xl h-12 flex flex-row justify-between items-center px-3 py-2 bg-transparent backdrop-blur-md backdrop-brightness-50 ">
+        <div className=" absolute pl-4 w-[95%] mx-2 bottom-2 rounded-2xl h-12 flex flex-row justify-between items-center px-3 py-2 bg-background/95  supports-[backdrop-filter]:bg-background/75">
           <span className=" space-y-1">
             <p className="font-semibold leading-none tracking-tight">
               {data.name}
             </p>
-            <p className="text-sm ">{data.description.substring(0, 30)}</p>
+            <p className="text-sm ">{data.description.substring(0,30)}</p>
           </span>
           <Button
             variant="outline"
