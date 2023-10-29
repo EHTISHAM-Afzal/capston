@@ -5,7 +5,7 @@ import TestimonialsSection from "./TestimonialsSectionForDesktop";
 import { Separator } from "@/components/ui/separator"
 
 
-const Main = () => {
+const MainForDesktop = () => {
   return (
     <main className="col-span-full grids">
       <section className=" col-span-full h-[20rem] grids sm:h-[23rem]  bg-[#495E57] dark:bg-secondary">
@@ -35,4 +35,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainForDesktop;
