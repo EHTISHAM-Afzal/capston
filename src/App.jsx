@@ -15,7 +15,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const About = lazy(() => import("./pages/About"));
 const MenuPage = lazy(() => import("./pages/MenuPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
-const Main = lazy(() => import("./components/Main/MainDesktop"));
+const Main = lazy(() => import("./components/Main/Main"));
 const Error = lazy(() => import("./pages/Error"));
 const OrderOnline = lazy(() => import("./pages/OrderOnline"));
 

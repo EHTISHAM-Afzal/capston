@@ -1,5 +1,6 @@
 // import AboutSection from "./AboutSection";
 import AboutSectionForMobile from "./AboutSectionMobile";
+import DealsSectionForMobile from "./DealsSectionForMobile";
 import MainSectionForMobile from "./MainSectionForMobile";
 import SpecialsSectionForMobile from "./SpecialsSectionForMobile";
 import TestimonialsSectionForMobile from "./TestimonialsSectionForMobile";
@@ -7,10 +8,11 @@ import { Separator } from "@/components/ui/separator";
 
 const MainMobile = () => {
   return (
-    <main className=" w-screen">
+    <main className=" min-w-[302px] max-w-full">
       <MainSectionForMobile />
-
       <SpecialsSectionForMobile />
+      <Separator className=" w-full  px-6 " />
+      <DealsSectionForMobile />
 
       <Separator className=" w-full  px-6 " />
 

@@ -1,6 +1,6 @@
 const AboutSectionForMobile = () => {
   return (
-    <div className="flex flex-col items-center justify-between px-4 h-fit ">
+    <div className="flex flex-col items-center justify-between p-3 h-fit ">
       <h1 className=" text-primary text-6xl font-markazi-text ">
         Little Lemon
       </h1>
