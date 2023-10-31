@@ -11,7 +11,7 @@ const MainMobile = () => {
     <main className=" min-w-[302px] max-w-full">
       <MainSectionForMobile />
       <SpecialsSectionForMobile />
-      <Separator className=" w-full  px-6 " />
+      <Separator className=" w-full px-6 " />
       <DealsSectionForMobile />
 
       <Separator className=" w-full  px-6 " />

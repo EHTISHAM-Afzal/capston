@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { format } from "date-fns";
+import { format, setHours } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
@@ -27,6 +27,7 @@ import { toast } from "@/components/ui/use-toast";
 
 function onSubmit(data) {
   // trigger alert dialog
+  data.date = setHours(data.date,Number(data.time));
   toast({
     title: "You submitted the following values:",
     description: (
@@ -37,10 +38,10 @@ function onSubmit(data) {
   });
 }
 
-const AvilibleTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:000"];
+const AvilibleTimes = ["9", "10", "11", "12", "1", "2"];
 const formSchema = z.object({
   date: z.date(),
-  time: z.enum(AvilibleTimes),
+  time: z.enum(AvilibleTimes.toString()),
   guests: z
     .string()
     .min(1, { message: "The number of guests must be 1 to 10" })
@@ -52,7 +53,6 @@ const BookingForm = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
-
 
   return (
     <section className="grids-section-width flex flex-col justify-center items-center">
@@ -127,7 +127,7 @@ const BookingForm = () => {
                                 className="sr-only"
                               />
                             </FormControl>
-                            <span>{time}</span>
+                            <span>{time}:00</span>
                           </FormLabel>
                         </FormItem>
                       ))}
@@ -201,7 +201,7 @@ const BookingForm = () => {
                       </FormLabel>
                     </FormItem>
                     <FormDescription className="col-span-full">
-                      The disabled times are already booked
+                      Select Occasion
                     </FormDescription>
                   </RadioGroup>
                 </FormControl>
