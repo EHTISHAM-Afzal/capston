@@ -20,13 +20,14 @@ app.use("/api/dishes", DishRoutes);
 app.use("/api/catagory", catagoriesRouter);
 
 
+const apiroute = process.env.API_ROUTE
 
 const StartServer = async () => {
     try {
         // eslint-disable-next-line no-undef
         connectDB(process.env.MONGODB_URL);
-        app.listen("3002", () => {
-            console.log("app is runnig on local host 3002");
+        app.listen(apiroute, () => {
+            console.log(`app is runnig on ${apiroute} `);
         });
     } catch (error) {
         console.log(error);
