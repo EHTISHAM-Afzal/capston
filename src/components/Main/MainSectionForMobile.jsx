@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const MainSectionForMobile = () => {
   return (
@@ -16,9 +16,9 @@ const MainSectionForMobile = () => {
             has dishes from America and abroad, made with fresh ingredients.
           </p>
 
-          <Button className=" text-xl tracking-wide my-3 h-10 w-28 font-markazi-text   lg:h-16 ">
+          <Link to="booking-page" className=" text-xl tracking-wide my-3 h-10 w-28 font-markazi-text lg:h-16 bg-primary text-primary-foreground shadow hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
             Reserve Table
-          </Button>
+          </Link>
       </div>
     </div>
   );

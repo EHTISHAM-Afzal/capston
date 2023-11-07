@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
-const MainSection = () => {
+const MainSectionForDesktop = () => {
   return (
     <div className="grids-section-width pt-4 px-6 items-start lg:flex flex-row justify-start ">
       <div className=" col-span-full row-span-full w-full grid grid-flow-dense grid-cols-6 grid-rows-6">
@@ -17,9 +17,12 @@ const MainSection = () => {
             has dishes from America and abroad, made with fresh ingredients.
           </p>
 
-          <Button className=" text-xl lg:text-3xl tracking-wide my-3 h-10 w-28 font-markazi-text  md:h-12 md:w-36 lg:h-16 lg:w-48">
+          <Link
+            to="booking-page"
+            className=" text-xl lg:text-3xl tracking-wide my-3 h-10 w-28 font-markazi-text  md:h-12 md:w-36 lg:h-16 lg:w-48 bg-primary text-primary-foreground shadow hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+          >
             Reserve Table
-          </Button>
+          </Link>
         </div>
         <div className="w-full  col-start-5 lg:col-start-4 col-end-7 col-span-1 lg:col-span-3 row-start-2 lg:row-start-1 lg:row-span-full row-span-5 flex justify-end items-center">
           <img
@@ -33,4 +36,4 @@ const MainSection = () => {
   );
 };
 
-export default MainSection;
+export default MainSectionForDesktop;
