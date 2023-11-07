@@ -1,5 +1,5 @@
 import AboutSection from "./AboutSectionForDesktop";
-import MainSection from "./MainSection";
+import MainSectionForDesktop from "./MainSection";
 import SpecialsSection from "./SpecialsSection";
 import TestimonialsSection from "./TestimonialsSectionForDesktop";
 import { Separator } from "@/components/ui/separator"
@@ -9,7 +9,7 @@ const MainForDesktop = () => {
   return (
     <main className="col-span-full grids">
       <section className=" col-span-full h-[20rem] grids sm:h-[23rem]  bg-[#495E57] dark:bg-secondary">
-        <MainSection />
+        <MainSectionForDesktop />
       </section>
 
 

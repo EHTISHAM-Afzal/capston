@@ -13,7 +13,6 @@ const ReservedTablesData = () => {
       .catch((err) => console.log(err));
     return localStorage.removeItem("reservations");
   }, []);
-
   const reservations = JSON.parse(localStorage.getItem("reservations"));
   return (
     <div className="w-full min-h-[50vh]">

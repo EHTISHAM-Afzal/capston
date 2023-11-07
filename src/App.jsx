@@ -9,6 +9,7 @@ import { ThemeProvider } from "./components/Theme/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import Spinner from "./components/smallComp/Spinner";
 import Layout from "@/Layout";
+import Reservations from "./pages/Reservations";
 
 // Use React.lazy to load the components
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -45,6 +46,12 @@ const router = createBrowserRouter(
         fallbackElement={<Spinner />}
         errorElement={<Error />}
         element={<BookingPage />}
+      />
+      <Route
+        path="reservations"
+        fallbackElement={<Spinner />}
+        errorElement={<Error />}
+        element={<Reservations />}
       />
         <Route
           path="order-online"

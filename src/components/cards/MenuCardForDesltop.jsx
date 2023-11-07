@@ -8,16 +8,33 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CarIcon } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
+import DeleveryVanSVG from "../smallComp/DeleveryVan";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage, responsive } from "@cloudinary/react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const MenuCard = ({ dish }) => {
+const MenuCardForDesktop = ({ dish }) => {
   return (
     <Card className="w-[16rem] h-[24rem] border hover:shadow-lg mx-1 my-2 dark:hover:shadow-secondary overflow-hidden hover:border-primary">
-      <img
-        className=" w-full h-40 object-cover rounded-t-lg"
-        src={dish.img}
-        alt={dish.name}
-      />
+      {dish.image ? (
+        <AdvancedImage
+          className=" w-full h-40 object-cover rounded-t-lg"
+          alt={dish.image}
+          cldImg={new Cloudinary({
+            cloud: {
+              cloudName: "sham007",
+            },
+          })
+            .image(dish.image)
+            .quality("auto")}
+          responsive={true}
+          plugins={[responsive({ steps: 10 })]}
+        />
+      ) : (
+        <Skeleton className="w-full h-40 border-b" />
+      )}
       <CardHeader className="px-6 py-4">
         <CardTitle className=" font-markazi-text  flex flex-row justify-between items-center tracking-wider ">
           <p className=" text-[20pt]">{dish.name}</p>
@@ -29,17 +46,21 @@ const MenuCard = ({ dish }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="text-sm text-muted-foreground" >
-          <ScrollArea className="h-[6rem]" >{dish.description}</ScrollArea>
+        <div className="text-sm text-muted-foreground">
+          <ScrollArea className="h-[6rem]">{dish.description}</ScrollArea>
         </div>
       </CardContent>
-      <CardFooter>
-        <Button className="w-full self-center" variant="ghost">
-          Order a delivery <CarIcon className="ml-2" />
+      <CardFooter className="items-center">
+        <Button variant="ghost">
+          Order a delivery
+          <DeleveryVanSVG />
         </Button>
+        <Link className=" bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground h-9 w-10  inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ">
+          <ShoppingCart />
+        </Link>
       </CardFooter>
     </Card>
   );
 };
 
-export default MenuCard;
+export default MenuCardForDesktop;
