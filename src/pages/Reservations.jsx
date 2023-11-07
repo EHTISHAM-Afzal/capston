@@ -26,6 +26,7 @@ const Reservations = () => {
         })
           .image("LittleLemon/Hero")
           .resize(scale().width("500"))
+          .format("auto")
           .quality("auto")}
         responsive={true}
       />

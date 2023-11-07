@@ -21,7 +21,7 @@ const DealsSectionForMobile = () => {
     content = new Array(3)
       .fill(0)
       .map((_, index) => (
-        <Skeleton key={index} className="w-[16rem] h-[24rem] mx-1 my-2" />
+        <Skeleton key={index} className="w-[16rem] h-[24rem] mx-1 my-2 border" />
       ));
   } else if (isError) {
     content = <p>{error.message}</p>;
