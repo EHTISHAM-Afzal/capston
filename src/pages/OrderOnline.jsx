@@ -1,22 +1,19 @@
-import MenuCardForDesktop from "../components/cards/MenuCardForDesltop";
 import Spinner from "../components/smallComp/Spinner";
-import { useGetDishesQuery } from "../features/Dishes/dishesSlice";
+import { useGetTableByIdQuery } from "../features/BookingTables/BookingTableSlice";
+
 const OrderOnline = () => {
   const {
-    data: Dishes,
+    data: table,
     isLoading,
-    // isSuccess,
+    isSuccess,
     isError,
     error,
-  } = useGetDishesQuery();
-
+  } = useGetTableByIdQuery("654afde601fc148e0a47b050");
+  
   let content;
 
-  if (Dishes) {
-    const { ids, entities } = Dishes;
-    content = ids.map((id) => (
-      <MenuCardForDesktop key={id} dish={entities[id]} />
-    ));
+  if (isSuccess) {
+    content = JSON.stringify(table, null , 2);
   } else if (isLoading) {
     content = <Spinner />;
   } else if (isError) {

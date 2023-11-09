@@ -11,8 +11,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { format, setHours } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -24,38 +24,83 @@ import { RadioGroupItem } from "@/components/ui/radio-group";
 import { RadioGroup } from "@radix-ui/react-radio-group";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import {
+  useBookTableMutation,
+  useGetAvailableTimesOnDateQuery,
+} from "@/src/features/BookingTables/BookingTableSlice";
+import { ToastAction } from "@/components/ui/toast";
+import Spinner from "../smallComp/Spinner";
+import { useEffect } from "react";
 
-function onSubmit(data) {
-  // trigger alert dialog
-  data.date = setHours(data.date,Number(data.time));
-  toast({
-    title: "You submitted the following values:",
-    description: (
-      <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-        <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-      </pre>
-    ),
-  });
-}
-
-const AvilibleTimes = ["9", "10", "11", "12", "1", "2"];
 const formSchema = z.object({
   date: z.date(),
-  time: z.enum(AvilibleTimes.toString()),
+  time: z.string({
+    required_error:
+      "If there is no availible tablse please choose another date or see another time",
+  }),
   guests: z
     .string()
     .min(1, { message: "The number of guests must be 1 to 10" })
     .max(2),
-  occasion: z.enum(["birthday", "anniversary"]),
+  occasion: z.enum(["Birthday", "Anniversary"]),
 });
 
 const BookingForm = () => {
+  const [bookTable, { isLoading: isSubmitting }] = useBookTableMutation();
+
   const form = useForm({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      guests: "",
+    },
   });
 
+  const selectedDate = form.watch("date");
+  const isoDate = selectedDate?.toISOString();
+  const {
+    refetch,
+    data: AvailibleTimes,
+    isLoading: isTimesLoading,
+    error: timesError,
+  } = useGetAvailableTimesOnDateQuery(isoDate);
+
+  useEffect(() => {
+    if (isoDate) {
+      refetch(isoDate);
+    }
+  }, [isoDate]);
+
+  function onSubmit(data) {
+    bookTable(data)
+      .unwrap()
+      .then((res) => {
+        form.reset();
+        // trigger alert dialog
+        toast({
+          title: "Reservation completed",
+          description: `On ${format(new Date(res.date), "PPPP")} time ${
+            res.time
+          }:00 ${
+            Number(res.time) < 3 ? "PM" : "AM"
+          } with the number of guests ${res.guests} in occassion of ${
+            res.occasion
+          }`,
+        });
+      })
+      .catch((err) => {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: `Reservation cannot complete ${
+            err.status ? `due to ${err.status}` : ""
+          } please try again and make sure you'r providing correct information `,
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+      });
+  }
+
   return (
-    <section className="grids-section-width flex flex-col justify-center items-center">
+    <section className="grids-section-width flex flex-col justify-center items-center mb-16">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -117,8 +162,8 @@ const BookingForm = () => {
                     defaultValue={field.value}
                     className="grid grid-cols-3 grid-flow-dense gap-4 "
                   >
-                    {AvilibleTimes &&
-                      AvilibleTimes.map((time, idx) => (
+                    {AvailibleTimes && !timesError ? (
+                      AvailibleTimes.map((time, idx) => (
                         <FormItem key={idx} className="flex items-center">
                           <FormLabel className=" flex items-center justify-center rounded-md w-full h-16 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary ">
                             <FormControl>
@@ -127,13 +172,23 @@ const BookingForm = () => {
                                 className="sr-only"
                               />
                             </FormControl>
-                            <span>{time}:00</span>
+                            <span className="text-lg">
+                              {time}:00 {Number(time) < 3 ? "PM" : "AM"}
+                            </span>
                           </FormLabel>
                         </FormItem>
-                      ))}
-                    <FormDescription className="col-span-full">
-                      The disabled times are already booked
-                    </FormDescription>
+                      ))
+                    ) : (
+                      <span className="col-span-full rounded-md h-16 font-normal border-2 hover:bg-secondary flex items-center justify-center">
+                        {isTimesLoading ? (
+                          <Spinner />
+                        ) : timesError ? (
+                          <span>{timesError.data} </span>
+                        ) : (
+                          <span>No Availible Times</span>
+                        )}
+                      </span>
+                    )}
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />
@@ -150,7 +205,6 @@ const BookingForm = () => {
                   <Input
                     onChange={field.onChange}
                     value={field.value}
-                    className="w-full"
                     type="number"
                     min={1}
                     max={10}
@@ -179,25 +233,25 @@ const BookingForm = () => {
                     className="grid grid-cols-2 grid-flow-dense gap-4 w-full"
                   >
                     <FormItem className="flex items-center">
-                      <FormLabel className=" flex items-center justify-center rounded-md w-full h-20 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary ">
+                      <FormLabel className=" flex items-center justify-center rounded-md w-full h-20 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary">
                         <FormControl>
                           <RadioGroupItem
-                            value="birthday"
+                            value="Birthday"
                             className="sr-only"
                           />
                         </FormControl>
-                        <span>Birthday</span>
+                        <span className="text-lg">Birthday</span>
                       </FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center">
                       <FormLabel className=" flex items-center justify-center rounded-md w-full h-20 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary [&:has([data-state=disabled])]:bg-red-500 ">
                         <FormControl>
                           <RadioGroupItem
-                            value="anniversary"
+                            value="Anniversary"
                             className="sr-only "
                           />
                         </FormControl>
-                        <span>Anniversary</span>
+                        <span className="text-lg">Anniversary</span>
                       </FormLabel>
                     </FormItem>
                     <FormDescription className="col-span-full">
@@ -210,8 +264,12 @@ const BookingForm = () => {
             )}
           />
 
-          <Button className="w-full" type="submit">
-            Submit
+          <Button
+            disabled={isSubmitting}
+            className="w-full gap-2 "
+            type="submit"
+          >
+            Submit {isSubmitting && <Loader2 className="animate-spin" />}
           </Button>
         </form>
       </Form>
