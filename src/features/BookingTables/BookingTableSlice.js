@@ -9,7 +9,7 @@ const initialState = TablesAdapter.getInitialState();
 export const TablesApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getTables: builder.query({
-            query: () => ({ url: "http://localhost:3002/api/tables" }),
+            query: () => "/tables",
             transformResponse: (responseData) => {
                 return TablesAdapter.setAll(initialState, responseData);
             },
@@ -20,7 +20,7 @@ export const TablesApiSlice = apiSlice.injectEndpoints({
         }),
 
         getAvailableTimesOnDate: builder.query({
-            query: (date) => ({ url: `http://localhost:3002/api/tables?AvailibleTimesOnDate=${date}` }),
+            query: (date) => `/tables?AvailibleTimesOnDate=${date}`,
             transformResponse: (responseData) => {
                 return responseData; // Assuming the API returns the array directly
             },
@@ -28,7 +28,7 @@ export const TablesApiSlice = apiSlice.injectEndpoints({
         }),
 
         getTableById: builder.query({
-            query: (id) => ({ url: `http://localhost:3002/api/tables/${id}` }),
+            query: (id) => `/tables/${id}`,
             transformResponse: (responseData) => {
                 return TablesAdapter.setAll(initialState, [responseData]);
             },
@@ -38,8 +38,8 @@ export const TablesApiSlice = apiSlice.injectEndpoints({
         }),
 
         BookTable: builder.mutation({
-            query: (postData) => ({
-                url: "http://localhost:3002/api/tables",
+            query: (postData) =>   ({
+                url: "/tables",
                 method: "POST",
                 body: postData
             }),
