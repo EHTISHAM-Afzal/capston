@@ -39,7 +39,7 @@ export const TablesApiSlice = apiSlice.injectEndpoints({
 
         BookTable: builder.mutation({
             query: (postData) =>   ({
-                url: "http://localhost:3002/api/tables",
+                url: "/tables",
                 method: "POST",
                 body: postData
             }),
