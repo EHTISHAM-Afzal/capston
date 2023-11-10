@@ -18,9 +18,9 @@ const Footer = () => {
           src="../../Lemon.svg"
           alt="Logo"
         />}
-        <div className="  h-full flex flex-row space-x-6 justify-center px-4 lg:pr-12 items-start font-karla max-w-full text-lg">
+        <div className="  h-full flex flex-row space-x-6 justify-center px-4 lg:pr-12 items-start font-karla max-w-full text-lg space-y-1">
           <ul>
-            <li className=" flex flex-col md:text-xl text-xl">
+            <li className=" flex flex-col space-y-1  ">
               {Links.map((item) => (
                 <Link to={item.to} key={item.to}>
                   {item.name}

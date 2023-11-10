@@ -9,7 +9,7 @@ const AboutSectionForMobile = () => {
       </h1>
       <h2 className=" text-4xl font-markazi-text ">Chicago</h2>
       <AdvancedImage
-        className=" h-full object-cover rounded-md "
+        className=" h-full w-full object-cover rounded-md "
         alt="Mario And Andrian"
         cldImg={new Cloudinary({
           cloud: {

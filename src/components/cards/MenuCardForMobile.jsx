@@ -11,7 +11,7 @@ const MenuCardForMobile = ({ dish }) => {
       <div className="relative rounded-xl border bg-card text-card-foreground shadow w-80 h-56  overflow-hidden items-center ">
         {dish.image ? (
           <AdvancedImage
-            className="min-w-full h-full object-cover"
+            className="min-w-full w-full h-full object-cover"
             alt={dish.image}
             cldImg={new Cloudinary({
               cloud: {
