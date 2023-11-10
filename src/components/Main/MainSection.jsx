@@ -1,3 +1,5 @@
+import { AdvancedImage, responsive } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
 import { Link } from "react-router-dom";
 
 const MainSectionForDesktop = () => {
@@ -25,11 +27,22 @@ const MainSectionForDesktop = () => {
           </Link>
         </div>
         <div className="w-full  col-start-5 lg:col-start-4 col-end-7 col-span-1 lg:col-span-3 row-start-2 lg:row-start-1 lg:row-span-full row-span-5 flex justify-end items-center">
-          <img
-            className="w-full xl:w-96 rounded-lg max-h-[27rem] lg:rounded-2xl "
-            src="../../Hero.jpg"
-            alt="hero"
-          />
+          <div className="w-full xl:w-96 rounded-lg max-h-[27rem] lg:rounded-2xl overflow-hidden">
+           <AdvancedImage
+            className="w-full h-full "
+            alt="Hero Image"
+            cldImg={new Cloudinary({
+              cloud: {
+                cloudName: "sham007",
+              },
+            })
+              .image("LittleLemon/Hero")
+              .quality("auto")}
+            responsive={true}
+            plugins={[responsive({ steps: 10 })]}
+          /> 
+          </div>
+          
         </div>
       </div>
     </div>

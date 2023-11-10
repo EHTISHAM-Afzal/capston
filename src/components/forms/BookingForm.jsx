@@ -36,7 +36,7 @@ const formSchema = z.object({
   date: z.date(),
   time: z.string({
     required_error:
-      "If there is no availible tablse please choose another date or see another time",
+      "If there is no availible tablse please choose another date or see next time",
   }),
   guests: z
     .string()
@@ -96,6 +96,7 @@ const BookingForm = () => {
           } please try again and make sure you'r providing correct information `,
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
+        form.reset()
       });
   }
 

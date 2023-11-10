@@ -60,13 +60,17 @@ const Nav = () => {
     <nav className="h-16 w-full flex flex-row justify-between px-4 items-center gap-2">
       <Link
         to="/"
-        className="h-full rounded-full flex justify-center items-center overflow-hidden"
+        className="h-full flex justify-center items-center overflow-hidden"
       >
-        <img
-          className="  object-cover"
-          src="../../Logo .svg"
+        <div className="h-12 w-36 sm:h-full sm:w-48   py-1 flex items-center justify-between">
+          <img
+          className=" h-full w-6 sm:w-8   object-cover"
+          src="../../Lemon.svg"
           alt="Little Lemon logo"
         />
+        <p className="tracking-wider font-markazi-text text-xl sm:text-2xl text-[#495E57] font-bold dark:text-white">LITTLE LEMON</p>
+        </div>
+        
       </Link>
       <ul className=" hidden sm:inline-flex justify-between items-center font-karla text-[16px] md:text-[16.5px] lg:text-[18px] gap-2 md:gap-6  text-center">
         {navItems.map((item) => (
