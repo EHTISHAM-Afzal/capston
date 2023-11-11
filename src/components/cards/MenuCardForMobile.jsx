@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AdvancedImage, responsive } from "@cloudinary/react";
+import { AdvancedImage, lazyload, } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
+import { scale } from "@cloudinary/url-gen/actions/resize";
 
 const MenuCardForMobile = ({ dish }) => {
   return (
@@ -18,10 +19,10 @@ const MenuCardForMobile = ({ dish }) => {
                 cloudName: "sham007",
               },
             })
-              .image(dish.image)
+              .image(dish.image).resize(scale().width("260"))
               .quality("auto")}
             responsive={true}
-            plugins={[responsive({ steps: 10 })]}
+            plugins={[lazyload({threshold: 0.10})]}
           />
         ) : (
           <Skeleton className="min-w-full h-full" />
