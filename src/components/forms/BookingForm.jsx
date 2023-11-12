@@ -163,7 +163,7 @@ const BookingForm = () => {
                     defaultValue={field.value}
                     className="grid grid-cols-3 grid-flow-dense gap-4 "
                   >
-                    {AvailibleTimes && !timesError ? (
+                    {AvailibleTimes && !timesError && !isTimesLoading ? (
                       AvailibleTimes.map((time, idx) => (
                         <FormItem key={idx} className="flex items-center">
                           <FormLabel className=" flex items-center justify-center rounded-md w-full h-16 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary ">

@@ -36,9 +36,20 @@ export const TablesApiSlice = apiSlice.injectEndpoints({
                 ...result.ids.map((id) => ({ type: "Tables", id })),
             ],
         }),
+        updateTable: builder.mutation({
+            query: (postData) => ({
+                url: `/tables/${postData._id}`,
+                method: "PATCH",
+                body: postData,
+                transformResponse: (responseData) => {
+                    return TablesAdapter.setAll(initialState, [responseData]);
+                },
+            }),
+            invalidatesTags: [{ type: "Tables", id: "LIST" }],
+        }),
 
         BookTable: builder.mutation({
-            query: (postData) =>   ({
+            query: (postData) => ({
                 url: "/tables",
                 method: "POST",
                 body: postData
@@ -49,4 +60,4 @@ export const TablesApiSlice = apiSlice.injectEndpoints({
 });
 
 
-export const { useGetTablesQuery, useGetTableByIdQuery , useBookTableMutation , useGetAvailableTimesOnDateQuery } = TablesApiSlice;
+export const { useGetTablesQuery, useGetTableByIdQuery, useBookTableMutation, useGetAvailableTimesOnDateQuery } = TablesApiSlice;
