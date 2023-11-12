@@ -19,7 +19,17 @@ export const dishesApiSlice = apiSlice.injectEndpoints({
         ...result.ids.map((id) => ({ type: "Dishes", id })),
       ],
     }),
-  }),
+
+    getDishById: builder.query({
+      query: (id) => `/dishes/${id}`,
+      transformResponse: (responseData) => {
+        return dishesAdapter.setAll(initialState, [responseData]);
+      },
+      providesTags: (result) => [
+        ...result.ids.map((id) => ({ type: "Dishes", id })),
+      ],
+    }),
+  })
 });
 
-export const { useGetDishesQuery } = dishesApiSlice;
+export const { useGetDishesQuery , useGetDishByIdQuery} = dishesApiSlice;
