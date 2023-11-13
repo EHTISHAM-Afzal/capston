@@ -7,7 +7,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
-import { Home, Info, LayoutList, MapPin, Menu, ShoppingBasket, ShoppingCart, } from "lucide-react";
+import { Home, Info, LayoutList, LucideLogIn, MapPin, Menu, ShoppingBasket, ShoppingCart, } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 
 
@@ -20,6 +20,7 @@ const NaveSheet = () => {
     { to: 'booking-page', name: 'Booking', icon : <ShoppingCart/>  },
     { to: 'reservations', name: 'Reservations', icon : <ShoppingBasket/>  },
     { to: 'order-online', name: 'Order', icon : <MapPin/>  },
+    { to: 'login', name: 'Login', icon : <LucideLogIn/>  },
   ]; 
   return (
     <div className="sm:hidden">

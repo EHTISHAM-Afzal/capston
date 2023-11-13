@@ -54,6 +54,7 @@ const Nav = () => {
     { to: "booking-page", name: "Booking" },
     { to: "reservations", name: "Reservations" },
     { to: "order-online", name: "Order" },
+    { to: "login", name: "Login" },
   ];
 
   return (
