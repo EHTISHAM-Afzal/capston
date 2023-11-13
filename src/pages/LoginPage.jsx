@@ -1,20 +1,13 @@
-import LogIn from "../smallComp/LogIn"
+import { Button } from "@/components/ui/button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginPage = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <div className="grids-section-width flex flex-col justify-center items-center min-h-[63vh]">
-        <LogIn/>
-        <button onClick={()=> localStorage.theme = 'light'}>
-          light theme
-        </button>
-        <button onClick={()=> localStorage.theme = 'dark'}>
-          dark theme
-        </button>
-        <button onClick={()=>localStorage.removeItem('theme')}>
-          system defualt
-        </button>
+      <Button onClick={() => loginWithRedirect()}>Log In</Button>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
