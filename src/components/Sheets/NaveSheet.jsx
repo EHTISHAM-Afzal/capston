@@ -10,7 +10,6 @@ import {
   Home,
   Info,
   LayoutList,
-  LucideLogIn,
   MapPin,
   Menu,
   ShoppingBasket,
@@ -26,12 +25,11 @@ const NaveSheet = () => {
     { to: "booking-page", name: "Booking", icon: <ShoppingCart /> },
     { to: "reservations", name: "Reservations", icon: <ShoppingBasket /> },
     { to: "order-online", name: "Order", icon: <MapPin /> },
-    { to: "login", name: "Login", icon: <LucideLogIn /> },
   ];
   return (
     <div className="sm:hidden">
       <Sheet>
-        <SheetTrigger className="border-2 h-9 w-9 flex justify-center items-center rounded-md border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground ">
+        <SheetTrigger className="h-9 w-9 shadow-sm flex justify-center items-center hover:bg-accent rounded-md ">
           <Menu />
           <span className="sr-only">Menu</span>
         </SheetTrigger>

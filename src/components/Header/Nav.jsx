@@ -2,7 +2,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { ModeToggle } from "../Theme/ThemeToggle";
 import NaveSheet from "../Sheets/NaveSheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import User from "../smallComp/User";
 
 const NavItem = ({ to, children }) => {
   return (
@@ -23,28 +23,6 @@ const NavItem = ({ to, children }) => {
   );
 };
 
-const ProfileItem = () => {
-  return (
-    <NavLink
-      className={({ isActive, isPending }) =>
-        isPending
-          ? "text-red-400"
-          : isActive
-          ? " rounded-full border-primary flex items-center border-4"
-          : " flex items-center border-2 rounded-full"
-      }
-      to="/profile"
-    >
-      <Avatar>
-        <AvatarImage
-          alt="avatar Image"
-          src="https://avatars.githubusercontent.com/u/106005092?s=96&v=4"
-        />
-        <AvatarFallback>IA</AvatarFallback>
-      </Avatar>
-    </NavLink>
-  );
-};
 
 const Nav = () => {
   const navItems = [
@@ -54,7 +32,6 @@ const Nav = () => {
     { to: "booking-page", name: "Booking" },
     { to: "reservations", name: "Reservations" },
     { to: "order-online", name: "Order" },
-    { to: "login", name: "Login" },
   ];
 
   return (
@@ -88,7 +65,7 @@ const Nav = () => {
           <NaveSheet />
         </li>
         <li>
-          <ProfileItem />
+          <User />
         </li>
       </ul>
     </nav>

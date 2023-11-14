@@ -24,7 +24,7 @@ const OrderOnline = lazy(() => import("./pages/OrderOnline"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" errorElement={<Error />} element={<Layout />}>
+    <Route path="/"  errorElement={<Error />} element={<Layout />}>
       <Route
         index
         fallbackElement={<Spinner />}
@@ -39,7 +39,6 @@ const router = createBrowserRouter(
       />
       <Route
         path="menu"
-        fallbackElement={<Spinner />}
         errorElement={<Error />}
         element={<MenuPage />}
       />
