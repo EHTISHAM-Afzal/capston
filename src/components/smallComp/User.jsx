@@ -11,7 +11,7 @@ const ProfileItem = ({ user }) => {
         isPending
           ? "text-red-400"
           : isActive
-          ? " w-9 h-9 rounded-full border-primary flex items-center border-4 shadow-md"
+          ? " w-9 h-9 rounded-full border-primary flex items-center border-4 shadow-md scale-110"
           : " w-9 h-9 flex items-center rounded-full shadow-sm"
       }
       to="/profile"
