@@ -4,11 +4,11 @@ import Spinner from "../components/smallComp/Spinner";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const navigate = useNavigate() 
+  const navigate = useNavigate();
   const { user, isAuthenticated, isLoading } = useAuth0();
   const { logout } = useAuth0();
   if (!isAuthenticated) {
-    navigate("/login")  //redirect to login page if not authenticated.  
+    navigate("/login"); //redirect to login page if not authenticated.
   }
 
   return (
