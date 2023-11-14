@@ -10,6 +10,8 @@ import { Toaster } from "@/components/ui/toaster";
 import Spinner from "./components/smallComp/Spinner";
 import Layout from "@/Layout";
 import Reservations from "./pages/Reservations";
+import LoginPage from "./pages/LoginPage";
+import Profile from "./pages/Profile";
 
 // Use React.lazy to load the components
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -22,7 +24,7 @@ const OrderOnline = lazy(() => import("./pages/OrderOnline"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" errorElement={<Error />} element={<Layout />}>
+    <Route path="/"  errorElement={<Error />} element={<Layout />}>
       <Route
         index
         fallbackElement={<Spinner />}
@@ -37,7 +39,6 @@ const router = createBrowserRouter(
       />
       <Route
         path="menu"
-        fallbackElement={<Spinner />}
         errorElement={<Error />}
         element={<MenuPage />}
       />
@@ -53,12 +54,24 @@ const router = createBrowserRouter(
         errorElement={<Error />}
         element={<Reservations />}
       />
-        <Route
-          path="order-online"
-          fallbackElement={<Spinner />}
-          errorElement={<Error />}
-          element={<OrderOnline />}
-        />
+      <Route
+        path="order-online"
+        fallbackElement={<Spinner />}
+        errorElement={<Error />}
+        element={<OrderOnline />}
+      />
+      <Route
+        path="login"
+        fallbackElement={<Spinner />}
+        errorElement={<Error />}
+        element={<LoginPage />}
+      />
+      <Route
+        path="profile"
+        fallbackElement={<Spinner />}
+        errorElement={<Error />}
+        element={<Profile />}
+      />
       <Route
         path="*"
         fallbackElement={<Spinner />}

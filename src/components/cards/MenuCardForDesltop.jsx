@@ -12,8 +12,9 @@ import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import DeleveryVanSVG from "../smallComp/DeleveryVan";
 import { Cloudinary } from "@cloudinary/url-gen";
-import { AdvancedImage, responsive } from "@cloudinary/react";
+import { AdvancedImage, lazyload } from "@cloudinary/react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { scale } from "@cloudinary/url-gen/actions/resize";
 
 const MenuCardForDesktop = ({ dish }) => {
   return (
@@ -27,10 +28,10 @@ const MenuCardForDesktop = ({ dish }) => {
               cloudName: "sham007",
             },
           })
-            .image(dish.image)
+            .image(dish.image).resize(scale().width("260"))
             .quality("auto")}
           responsive={true}
-          plugins={[responsive({ steps: 10 })]}
+          plugins={[lazyload({threshold: 0.10})]}
         />
       ) : (
         <Skeleton className="w-full h-40 border-b" />
@@ -55,8 +56,9 @@ const MenuCardForDesktop = ({ dish }) => {
           Order a delivery
           <DeleveryVanSVG />
         </Button>
-        <Link className=" bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground h-9 w-10  inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ">
+        <Link to="#" className=" bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground h-9 w-10  inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ">
           <ShoppingCart />
+          <span className="sr-only">Cart</span>
         </Link>
       </CardFooter>
     </Card>

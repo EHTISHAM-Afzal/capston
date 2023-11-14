@@ -10,7 +10,7 @@ const initialState = dishesAdapter.getInitialState();
 export const dishesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getDishes: builder.query({
-      query: () => "/dishes",
+      query: () => "/products",
       transformResponse: (responseData) => {
         return dishesAdapter.setAll(initialState, responseData);
       },
@@ -19,7 +19,17 @@ export const dishesApiSlice = apiSlice.injectEndpoints({
         ...result.ids.map((id) => ({ type: "Dishes", id })),
       ],
     }),
-  }),
+
+    getDishById: builder.query({
+      query: (id) => `/products/${id}`,
+      transformResponse: (responseData) => {
+        return dishesAdapter.setAll(initialState, [responseData]);
+      },
+      providesTags: (result) => [
+        ...result.ids.map((id) => ({ type: "Dishes", id })),
+      ],
+    }),
+  })
 });
 
-export const { useGetDishesQuery } = dishesApiSlice;
+export const { useGetDishesQuery , useGetDishByIdQuery} = dishesApiSlice;

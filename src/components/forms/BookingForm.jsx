@@ -36,7 +36,7 @@ const formSchema = z.object({
   date: z.date(),
   time: z.string({
     required_error:
-      "If there is no availible tablse please choose another date or see another time",
+      "If there is no availible tablse please choose another date or see next time",
   }),
   guests: z
     .string()
@@ -96,6 +96,7 @@ const BookingForm = () => {
           } please try again and make sure you'r providing correct information `,
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
+        form.reset()
       });
   }
 
@@ -162,7 +163,7 @@ const BookingForm = () => {
                     defaultValue={field.value}
                     className="grid grid-cols-3 grid-flow-dense gap-4 "
                   >
-                    {AvailibleTimes && !timesError ? (
+                    {AvailibleTimes && !timesError && !isTimesLoading ? (
                       AvailibleTimes.map((time, idx) => (
                         <FormItem key={idx} className="flex items-center">
                           <FormLabel className=" flex items-center justify-center rounded-md w-full h-16 font-normal border-2 hover:bg-secondary p-2 [&:has([data-state=checked])]:border-primary ">

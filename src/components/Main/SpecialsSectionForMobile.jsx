@@ -1,7 +1,7 @@
 import MenuCardForMobile from "../cards/MenuCardForMobile";
 import { Link } from "react-router-dom";
 import { useGetDishesQuery } from "@/src/features/Dishes/dishesSlice";
-import { Skeleton } from "@/components/ui/skeleton";
+import MenuCardSkeletonForMobile from "../cards/MenuCardSkeletonForMobile";
 
 const SpecialsSectionForMobile = () => {
   const {
@@ -20,7 +20,9 @@ const SpecialsSectionForMobile = () => {
       <MenuCardForMobile key={id} dish={entities[id]} />
     ));
   } else if (isLoading) {
-    content = <Skeleton className="w-full border h-56" />;
+    content = new Array(3)
+      .fill(0)
+      .map((_, index) => <MenuCardSkeletonForMobile key={index} />);
   } else if (isError) {
     content = <p>{error.message}</p>;
   }

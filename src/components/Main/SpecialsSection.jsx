@@ -1,7 +1,7 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import MenuCardForDesktop from "../cards/MenuCardForDesltop";
 import { Link } from "react-router-dom";
 import { useGetDishesQuery } from "@/src/features/Dishes/dishesSlice";
+import MenuCardSkeletonForDektop from "../cards/MenuCardSkeletonForDektop";
 const SpecialsSectionForDesktop = () => {
   const {
     data: Dishes,
@@ -20,7 +20,7 @@ const SpecialsSectionForDesktop = () => {
     content = new Array(3)
       .fill(0)
       .map((_, index) => (
-        <Skeleton key={index} className="w-[16rem] h-[24rem] mx-1 my-2 border " />
+        <MenuCardSkeletonForDektop key={index} />
       ));
   } else if (isError) {
     content = <p>{error.message}</p>;
