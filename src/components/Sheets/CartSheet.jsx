@@ -12,11 +12,32 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) {
+    /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
 const CartSheet = () => {
   return (
     <div>
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger
+          onClick={() => {
+            if (window.innerWidth < 600) {
+              openFullscreen(document.documentElement);
+            }
+          }}
+        >
           <ShoppingCart />
           <span className="sr-only">Open Cart</span>
         </SheetTrigger>
@@ -59,7 +80,9 @@ const CartSheet = () => {
               </h2>
             </div>
             <Separator />
-            <Button size="lg" className="min-h-[2rem]">Proceed to Checkout</Button>
+            <Button size="lg" className="min-h-[2rem]">
+              Proceed to Checkout
+            </Button>
           </div>
         </SheetContent>
       </Sheet>
