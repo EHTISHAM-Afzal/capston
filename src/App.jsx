@@ -4,7 +4,7 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { ThemeProvider } from "./components/Theme/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import Spinner from "./components/smallComp/Spinner";
@@ -12,6 +12,23 @@ import Layout from "@/Layout";
 import Reservations from "./pages/Reservations";
 import LoginPage from "./pages/LoginPage";
 import Profile from "./pages/Profile";
+
+
+function openFullscreen() {
+  const elem = document.documentElement; // Fullscreen the whole page
+
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+
 
 // Use React.lazy to load the components
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -83,6 +100,9 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  useEffect(() => {
+    openFullscreen();
+  }, []);
   return (
     <Suspense fallback={<Spinner />}>
       <ThemeProvider defaultTheme="system" storageKey="littlelemon-theme">
