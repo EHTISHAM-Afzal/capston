@@ -1,16 +1,15 @@
 import {
   Sheet,
   SheetContent,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart } from "lucide-react";
 import { CartItemCard } from "../cards/CartItemCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import OpenCartButton from "../smallComp/OpenCartButton";
 
 function openFullscreen(elem) {
   if (elem.requestFullscreen) {
@@ -38,7 +37,7 @@ const CartSheet = () => {
             }
           }}
         >
-          <ShoppingCart />
+          <OpenCartButton quantity={7} />
           <span className="sr-only">Open Cart</span>
         </SheetTrigger>
         <SheetContent className="w-full sm:w-96">
@@ -47,15 +46,6 @@ const CartSheet = () => {
           </SheetHeader>
           <ScrollArea className="h-[65vh] overflow-hidden">
             <CartItemCard />
-            <Separator />
-            <CartItemCard />
-            <Separator />
-            <CartItemCard />
-            <Separator />
-            <CartItemCard />
-            <Separator />
-            <CartItemCard />
-            <Separator />
             <CartItemCard />
           </ScrollArea>
           <div className="w-full h-full space-y-2 flex flex-col ">

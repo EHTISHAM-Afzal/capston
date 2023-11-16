@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 
 export const CartItemCard = ({ dish }) => {
   return (
-    <Card className=" h-24 p-2 my-1 grid grid-cols-[5rem_1fr_5rem] border-none">
-      <div className="relative flex items-center justify-center">
+    <Card className=" h-[6.5rem ] items-center p-2 my-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-md hover:border-primary">
+      <div className="relative h-20">
         <AdvancedImage
-          className="  object-cover w-5/6 h-5/6 rounded-lg border"
+          className="  object-cover w-full h-full rounded-lg border"
           alt={dish}
           cldImg={new Cloudinary({
             cloud: {
@@ -26,7 +26,7 @@ export const CartItemCard = ({ dish }) => {
         />
         <Button
           variant="secondary"
-          className=" p-0 absolute right-0 top-0 w-6 h-6 rounded-full border"
+          className=" p-0 absolute right-0 -mr-2 -mt-2 top-0 w-6 h-6 rounded-full border"
         >
           <X />
         </Button>

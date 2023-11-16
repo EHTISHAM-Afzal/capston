@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -8,8 +9,6 @@ import { Button } from "@/components/ui/button";
 import { useGetDishByIdQuery } from "../features/Dishes/dishesSlice";
 import { Separator } from "@/components/ui/separator";
 import { CartItemCard } from "../components/cards/CartItemCard";
-
-
 
 const Reservations = () => {
   const cart = useSelector((state) => state.cart);
