@@ -26,9 +26,18 @@ const CartSheet = () => {
           </SheetHeader>
           <ScrollArea className="h-[65vh] overflow-hidden">
             <CartItemCard />
+            <Separator />
+            <CartItemCard />
+            <Separator />
+            <CartItemCard />
+            <Separator />
+            <CartItemCard />
+            <Separator />
+            <CartItemCard />
+            <Separator />
             <CartItemCard />
           </ScrollArea>
-          <SheetFooter className="w-full h-[20vh] space-y-2 flex flex-col ">
+          <div className="w-full h-full space-y-2 flex flex-col ">
             <div className="flex justify-between">
               <h2>Taxes</h2>
               <h2>
@@ -50,8 +59,8 @@ const CartSheet = () => {
               </h2>
             </div>
             <Separator />
-            <Button size="lg" className="min-h-min">Proceed to Checkout</Button>
-          </SheetFooter>
+            <Button size="lg" className="min-h-[2rem]">Proceed to Checkout</Button>
+          </div>
         </SheetContent>
       </Sheet>
     </div>
