@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export const CartItemCard = ({ dish }) => {
   return (
-    <Card className=" h-[6.5rem ] items-center p-2 my-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-md hover:border-primary">
+    <Card className=" h-28 items-center p-2 my-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-md hover:border-primary">
       <div className="relative h-20">
         <AdvancedImage
           className="  object-cover w-full h-full rounded-lg border"
