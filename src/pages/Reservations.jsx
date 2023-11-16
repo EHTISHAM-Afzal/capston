@@ -6,17 +6,12 @@ import {
   removeAllFromCart,
 } from "../features/Cart/CartSlice";
 import { Button } from "@/components/ui/button";
-import { useGetDishByIdQuery } from "../features/Dishes/dishesSlice";
 import { Separator } from "@/components/ui/separator";
 import { CartItemCard } from "../components/cards/CartItemCard";
 
 const Reservations = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const item = useGetDishByIdQuery("6544f5c164aca44518cb9966");
-  const returnData = async () =>
-    await item.data.entities["6544f5c164aca44518cb9966"];
-  const dish = returnData();
   return (
     <section className="flex-col justify-center items-center my-6 w-full ">
       <h1 className="text-4xl font-bold text-center mb-8">Reservations</h1>
@@ -37,7 +32,6 @@ const Reservations = () => {
       </Button>
       <span className="w-16 h-auto">{JSON.stringify(cart, undefined, 2)}</span>
       <Separator className="my-10" />
-
       <CartItemCard />
     </section>
   );

@@ -31,7 +31,7 @@ export const CartItemCard = ({ dish }) => {
           <X />
         </Button>
       </div>
-      <div className="px-2">
+      <div className="h-full pl-3">
         <h2 className="text-lg">Name</h2>
         <p className="">Description</p>
       </div>

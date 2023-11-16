@@ -10,6 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import OpenCartButton from "../smallComp/OpenCartButton";
+import {useSelector } from "react-redux";
 
 function openFullscreen(elem) {
   if (elem.requestFullscreen) {
@@ -27,6 +28,9 @@ function openFullscreen(elem) {
 }
 
 const CartSheet = () => {
+  const totalIntemsInCart = useSelector((state) =>
+    state.cart.reduce((acc, item) => acc + item.quantity, 0)
+  );
   return (
     <div>
       <Sheet>
@@ -37,7 +41,7 @@ const CartSheet = () => {
             }
           }}
         >
-          <OpenCartButton quantity={7} />
+          <OpenCartButton quantity={totalIntemsInCart} />
           <span className="sr-only">Open Cart</span>
         </SheetTrigger>
         <SheetContent className="w-full sm:w-96">

@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+// Load cart from localStorage or set to an empty array if not found
+const persistedCart = JSON.parse(localStorage.getItem('cart')) || [];
+
 const cartSlice = createSlice({
   name: 'cart',
-  initialState: [{ "id": "6544f5c164aca44518cb9966", "quantity": 1 }],
+  initialState: persistedCart,
   reducers: {
     addToCart: (state, action) => {
       let inCart = state.find(item => item.id === action.payload.id)
@@ -13,6 +16,8 @@ const cartSlice = createSlice({
         action.payload.quantity = 1
         state.push(action.payload)
       }
+      // Save to localStorage
+      localStorage.setItem('cart', JSON.stringify(state));
     },
     removeFromCart: (state, action) => {
       let inCart = state.find(item => item.id === action.payload.id)
@@ -22,19 +27,26 @@ const cartSlice = createSlice({
       else {
         state.splice(state.indexOf(inCart), 1)
       }
+      // Save to localStorage
+      localStorage.setItem('cart', JSON.stringify(state));
       return state;
     },
     removeOneFromCart: (state, action) => {
       let inCart = state.find(item => item.id === action.payload.id)
       state.splice(state.indexOf(inCart), 1)
+      // Save to localStorage
+      localStorage.setItem('cart', JSON.stringify(state));
       return state;
     },
+
     removeAllFromCart: () => {
+      // Clear localStorage
+      localStorage.removeItem('cart');
       return [];
     }
   }
 })
 
-export const { addToCart, removeFromCart, clearCart , removeAllFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, clearCart, removeAllFromCart } = cartSlice.actions
 
 export default cartSlice.reducer
