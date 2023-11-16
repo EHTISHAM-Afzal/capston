@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import { NavLink, Link } from "react-router-dom";
 import { ModeToggle } from "../Theme/ThemeToggle";
-import NaveSheet from "../Sheets/NaveSheet";
 import User from "../smallComp/User";
+import { lazy } from "react";
+
+const NaveSheet = lazy(() => import("../Sheets/NaveSheet"));
+const CartSheet = lazy(() => import("../Sheets/CartSheet"));
 
 const NavItem = ({ to, children }) => {
   return (
@@ -46,7 +49,7 @@ const Nav = () => {
           src="../../Lemon.svg"
           alt="Little Lemon logo"
         />
-        <p className="tracking-wider font-markazi-text text-xl sm:text-2xl text-[#495E57] font-bold dark:text-white">LITTLE LEMON</p>
+        <p className="tracking-wider font-markazi-text text-xl sm:text-2xl text-[#495E57] font-bold dark:text-white whitespace-nowrap">LITTLE LEMON</p>
         </div>
         
       </Link>
@@ -58,6 +61,9 @@ const Nav = () => {
         ))}
       </ul>
       <ul className="flex items-center space-x-2 h-full">
+        <li>
+          <CartSheet />
+        </li>
         <li>
           <ModeToggle />
         </li>

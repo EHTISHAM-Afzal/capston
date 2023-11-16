@@ -7,12 +7,12 @@ import { scale } from "@cloudinary/url-gen/actions/resize";
 
 const MenuCardForMobile = ({ dish }) => {
   return (
-    <div className=" min-w-fit w-fit h-fit min-h-fit snap-start">
+    <div className="w-full max-w-full h-56 snap-start ">
       {/* // main component */}
-      <div className="relative rounded-xl border bg-card text-card-foreground shadow w-80 h-56  overflow-hidden items-center ">
+      <div className="relative rounded-xl border bg-card text-card-foreground shadow w-full h-full  overflow-hidden items-center ">
         {dish.image ? (
           <AdvancedImage
-            className="min-w-full w-full h-full object-cover"
+            className="w-full h-full object-cover"
             alt={dish.image}
             cldImg={new Cloudinary({
               cloud: {
@@ -33,7 +33,7 @@ const MenuCardForMobile = ({ dish }) => {
             <p className="font-semibold leading-none tracking-tight">
               {dish.name}
             </p>
-            <p className="text-sm ">{dish.description.substring(0, 30)}</p>
+            <p className="text-sm whitespace-nowrap">{dish.description.substring(0, 30)}</p>
           </span>
           <Button
           variant="outline"
