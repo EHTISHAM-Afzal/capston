@@ -51,24 +51,21 @@
 
 @layer components {
   /* This will affect the scrollbar globally */
-  ::-webkit-scrollbar {
-    @apply w-2 h-1 rounded ; /* width of the entire scrollbar */
+  html::-webkit-scrollbar {
+    @apply w-2 h-1 rounded; /* width of the entire scrollbar */
   }
 
-  ::-webkit-scrollbar-track {
+  html::-webkit-scrollbar-track {
     @apply bg-none; /* color of the tracking area */
   }
 
-  ::-webkit-scrollbar-thumb {
+  html::-webkit-scrollbar-thumb {
     @apply bg-primary/70 rounded-lg; /* color of the scroll thumb */
   }
 
-  ::-webkit-scrollbar-thumb:hover {
+  html::-webkit-scrollbar-thumb:hover {
     @apply bg-primary; /* color of the scroll thumb when hovering */
   }
-
-
-
 
   .grids {
     @apply grid grid-cols-4 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-12 gap-x-1.5;
