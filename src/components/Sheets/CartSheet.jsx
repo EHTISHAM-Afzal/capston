@@ -35,7 +35,7 @@ const CartSheet = () => {
           </SheetHeader>
           <Separator />
           {/* Contents */}
-          <div className="w-full h-[95%] grid grid-flow-row grid-rows-[1fr,_10rem]">
+          <div className="w-full h-[95%] grid grid-flow-row grid-rows-[1fr,_12rem]">
             <ScrollArea className="h-full w-full">
               {cartState.map((item) => (
                 <CartItemCard key={item._id} dish={item} />
