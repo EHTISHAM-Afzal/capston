@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
 
 @layer base {
   :root {
@@ -26,7 +25,7 @@
     --ring: 20 14.3% 4.1%;
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 20 14.3% 4.1%;
     --foreground: 60 9.1% 97.8%;
@@ -51,17 +50,37 @@
 }
 
 @layer components {
+  /* This will affect the scrollbar globally */
+  ::-webkit-scrollbar {
+    @apply w-2 h-1 rounded ; /* width of the entire scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-none; /* color of the tracking area */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/70 rounded-lg; /* color of the scroll thumb */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary; /* color of the scroll thumb when hovering */
+  }
+
+
+
+
   .grids {
-      @apply grid grid-cols-4 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-12 gap-x-1.5;
+    @apply grid grid-cols-4 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-12 gap-x-1.5;
   }
   .grids-section-width {
-      @apply col-span-full sm:col-start-2 sm:col-end-8 md:col-start-3 md:col-end-11
+    @apply col-span-full sm:col-start-2 sm:col-end-8 md:col-start-3 md:col-end-11;
   }
   .grids-separator-width {
-      @apply col-span-full sm:col-start-2 sm:col-end-8 md:col-start-2 md:col-end-12
+    @apply col-span-full sm:col-start-2 sm:col-end-8 md:col-start-2 md:col-end-12;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;

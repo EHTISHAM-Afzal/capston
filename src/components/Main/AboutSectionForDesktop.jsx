@@ -32,7 +32,7 @@ const AboutSection = () => {
             cldImg={cld
               .image("FromMobile/Mario-and-Adrian-A_2_m97yaa")
               .quality("auto")}
-            responsive={true}
+            
             plugins={[responsive({ steps: 100 })]}
           />
 {/* if screenWidth is larger than 1024px then render this image component */}
@@ -43,7 +43,7 @@ const AboutSection = () => {
             cldImg={cld
               .image("FromMobile/restaurant_chef_B_2_opt2fk")
               .quality("auto")}
-            responsive={true}
+            
             plugins={[responsive({ steps: 200 })]}
           />}
         </div>

@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { addToCart } from "@/src/features/Cart/CartSlice";
 import { AdvancedImage, lazyload, } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { scale } from "@cloudinary/url-gen/actions/resize";
-
+import { useDispatch } from "react-redux";
 const MenuCardForMobile = ({ dish }) => {
+  const dispatch = useDispatch()
   return (
     <div className="w-full max-w-full h-56 snap-start ">
       {/* // main component */}
@@ -21,7 +23,7 @@ const MenuCardForMobile = ({ dish }) => {
             })
               .image(dish.image).resize(scale().width("260"))
               .quality("auto")}
-            responsive={true}
+            
             plugins={[lazyload({threshold: 0.10})]}
           />
         ) : (
@@ -36,6 +38,7 @@ const MenuCardForMobile = ({ dish }) => {
             <p className="text-sm whitespace-nowrap">{dish.description.substring(0, 30)}</p>
           </span>
           <Button
+          onClick={() => dispatch(addToCart(dish))}
           variant="outline"
             className="rounded-xl text-2xl font-karla backdrop:blur-lg border-black dark:border-white "
           >

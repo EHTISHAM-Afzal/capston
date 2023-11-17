@@ -5,20 +5,19 @@ import { ShoppingCartIcon } from "lucide-react";
 
 const OpenCartButton = ({ className, quantity }) => {
   return (
-    <Button
-      variant="ghost"
-      className={clsx("relative h-9 w-9 p-0 shadow-sm rounded-lg flex items-center justify-center",className)}
+    <div
+      // variant="ghost"
+      className={clsx("relative h-9 w-9 p-0 shadow-sm rounded-md flex items-center justify-center hover:bg-accent hover:text-accent-foreground",className)}
     >
-      <ShoppingCartIcon />
+      <ShoppingCartIcon className="hover:scale-90" />
       {quantity > 0 && (
-        <Button
-          variant="secondary"
-          className=" text-xs p-0 absolute right-0 -mr-2 -mt-2 top-0 w-4 h-4 rounded border"
+        <span
+          className=" p-0 absolute right-0 -mr-2 -mt-2 top-0 w-4 h-4 border flex items-center justify-center bg-secondary text-secondary-foreground shadow-sm rounded text-sm font-medium transition-colors hover:bg-transparent "
         >
           {quantity}
-        </Button>
+        </span>
       )}
-    </Button>
+    </div>
   );
 };
 

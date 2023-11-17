@@ -28,9 +28,13 @@ function openFullscreen(elem) {
 }
 
 const CartSheet = () => {
-  const totalIntemsInCart = useSelector((state) =>
+  const totalIntemsQuantitiesInCart = useSelector((state) =>
     state.cart.reduce((acc, item) => acc + item.quantity, 0)
   );
+  const cartState = useSelector((state) => state.cart);
+  const total = useSelector((state) => state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0));
+  const taxes = total * 0.1;
+  const totalPrice = total + taxes;
   return (
     <div>
       <Sheet>
@@ -41,22 +45,23 @@ const CartSheet = () => {
             }
           }}
         >
-          <OpenCartButton quantity={totalIntemsInCart} />
-          <span className="sr-only">Open Cart</span>
+          <OpenCartButton quantity={totalIntemsQuantitiesInCart} />
+          <span className="sr-only ">Open Cart</span>
         </SheetTrigger>
         <SheetContent className="w-full sm:w-96">
           <SheetHeader className="mb-4">
             <SheetTitle>My Cart</SheetTitle>
           </SheetHeader>
           <ScrollArea className="h-[65vh] overflow-hidden">
-            <CartItemCard />
-            <CartItemCard />
+            {cartState.map((item) => (
+              <CartItemCard key={item._id} dish={item} />
+            ))}
           </ScrollArea>
           <div className="w-full h-full space-y-2 flex flex-col ">
             <div className="flex justify-between">
               <h2>Taxes</h2>
               <h2>
-                <span>$ </span>100
+                <span>$ </span>{taxes <= 9 ? 0 : null}{taxes}
               </h2>
             </div>
             <Separator />
@@ -70,7 +75,7 @@ const CartSheet = () => {
             <div className="flex justify-between">
               <h2>Total</h2>
               <h2>
-                <span>$ </span>300
+                <span>$ </span>{totalPrice <= 9 ? 0 : null}{totalPrice}
               </h2>
             </div>
             <Separator />

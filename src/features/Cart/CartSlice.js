@@ -8,19 +8,19 @@ const cartSlice = createSlice({
   initialState: persistedCart,
   reducers: {
     addToCart: (state, action) => {
-      let inCart = state.find(item => item.id === action.payload.id)
+      let inCart = state.find(item => item._id === action.payload._id)
       if (inCart) {
         inCart.quantity++
       }
       else {
-        action.payload.quantity = 1
-        state.push(action.payload)
+        const newItem = {...action.payload , quantity : 1}
+        state.push(newItem)
       }
       // Save to localStorage
       localStorage.setItem('cart', JSON.stringify(state));
     },
     removeFromCart: (state, action) => {
-      let inCart = state.find(item => item.id === action.payload.id)
+      let inCart = state.find(item => item._id === action.payload._id)
       if (inCart.quantity > 1) {
         inCart.quantity--
       }
@@ -32,7 +32,7 @@ const cartSlice = createSlice({
       return state;
     },
     removeOneFromCart: (state, action) => {
-      let inCart = state.find(item => item.id === action.payload.id)
+      let inCart = state.find(item => item._id === action.payload._id)
       state.splice(state.indexOf(inCart), 1)
       // Save to localStorage
       localStorage.setItem('cart', JSON.stringify(state));
@@ -47,6 +47,6 @@ const cartSlice = createSlice({
   }
 })
 
-export const { addToCart, removeFromCart, clearCart, removeAllFromCart } = cartSlice.actions
+export const { addToCart, removeFromCart, clearCart, removeAllFromCart , removeOneFromCart } = cartSlice.actions
 
 export default cartSlice.reducer

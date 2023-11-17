@@ -7,7 +7,6 @@ import {
 } from "../features/Cart/CartSlice";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { CartItemCard } from "../components/cards/CartItemCard";
 
 const Reservations = () => {
   const cart = useSelector((state) => state.cart);
@@ -32,7 +31,6 @@ const Reservations = () => {
       </Button>
       <span className="w-16 h-auto">{JSON.stringify(cart, undefined, 2)}</span>
       <Separator className="my-10" />
-      <CartItemCard />
     </section>
   );
 };
