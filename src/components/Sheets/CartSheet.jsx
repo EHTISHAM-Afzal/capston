@@ -35,14 +35,14 @@ const CartSheet = () => {
           </SheetHeader>
           <Separator />
           {/* Contents */}
-          <div className="w-full h-[95%] grid grid-flow-row grid-rows-[1fr,_13rem]">
+          <div className="w-full h-[95%] grid grid-flow-row grid-rows-[1fr,_10rem]">
             <ScrollArea className="h-full w-full">
               { cartState.length > 0 ? cartState.map((item) => (
                 <CartItemCard key={item._id} dish={item} />
               )) : <h1 className="w-full text-center pt-8 text-xl">No items in cart</h1>}
             </ScrollArea>
             {/* Footer */}
-            <div className=" w-full h-full space-y-2 flex flex-col right-1 ">
+            <div className=" w-full h-full space-y-2 flex flex-col right-1">
               <div className="flex justify-between">
                 <h2>Taxes</h2>
                 <h2>
