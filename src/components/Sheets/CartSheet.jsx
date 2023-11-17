@@ -29,18 +29,19 @@ const CartSheet = () => {
           <OpenCartButton quantity={totalIntemsQuantitiesInCart} />
           <span className="sr-only ">Open Cart</span>
         </SheetTrigger>
-        <SheetContent className="w-full sm:w-96 max-h-screen h-screen">
+        <SheetContent className="w-full sm:w-96 max-h-screen h-full">
           <SheetHeader className="mb-4">
             <SheetTitle>My Cart</SheetTitle>
           </SheetHeader>
           <Separator />
           {/* Contents */}
-          <div className="w-full h-[95%] grid grid-flow-row grid-rows-[1fr,_12rem]">
+          <div className="w-full h-[95%] grid grid-flow-row grid-rows-[1fr,_13rem]">
             <ScrollArea className="h-full w-full">
-              {cartState.map((item) => (
+              { cartState.length > 0 ? cartState.map((item) => (
                 <CartItemCard key={item._id} dish={item} />
-              ))}
+              )) : <h1 className="w-full text-center pt-8 text-xl">No items in cart</h1>}
             </ScrollArea>
+            {/* Footer */}
             <div className=" w-full h-full space-y-2 flex flex-col right-1 ">
               <div className="flex justify-between">
                 <h2>Taxes</h2>
