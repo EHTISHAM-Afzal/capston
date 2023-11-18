@@ -2,8 +2,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { ModeToggle } from "../Theme/ThemeToggle";
 import User from "../smallComp/User";
-import { lazy, useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
+import { lazy} from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -30,26 +29,6 @@ const NavItem = ({ to, children }) => {
 };
 
 const Nav = () => {
-
-  const [showNav, setShowNav] = useState(true);
-  const [scrollPos, setScrollPos] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      const visible = scrollPos > currentScrollPos;
-
-      setScrollPos(currentScrollPos);
-      setShowNav(visible);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [scrollPos]);
-
   const navItems = [
     { to: "/", name: "Home" },
     { to: "about", name: "About" },
@@ -60,7 +39,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="h-16 w-full z-50 flex flex-row justify-between px-4 items-center gap-2 fixed bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" style={{ top: showNav ? '0' : '-65px', transition: 'top 0.3s' }}>
+    <nav className="h-16 w-full z-50 flex flex-row justify-between px-4 items-center gap-2 fixed bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <Link
         to="/"
         className="h-full flex justify-center items-center overflow-hidden"
