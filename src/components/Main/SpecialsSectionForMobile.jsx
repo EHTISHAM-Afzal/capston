@@ -28,8 +28,8 @@ const SpecialsSectionForMobile = () => {
   }
 
   return (
-    <div className="w-full px-3">
-      <div className="w-full flex items-center justify-between px-4">
+    <div className="w-full">
+      <div className="w-full flex items-center justify-between px-6">
         <h2 className=" text-center text-3xl font-karla font-semibold">
           Specials
         </h2>

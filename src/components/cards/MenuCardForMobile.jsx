@@ -2,31 +2,33 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { addToCart } from "@/src/features/Cart/CartSlice";
-import { AdvancedImage, lazyload, } from "@cloudinary/react";
+import { AdvancedImage, lazyload } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { scale } from "@cloudinary/url-gen/actions/resize";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 const MenuCardForMobile = ({ dish }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <div className="w-full max-w-full h-56 snap-start ">
       {/* // main component */}
       <div className="relative rounded-xl border bg-card text-card-foreground shadow w-full h-full  overflow-hidden items-center ">
         {dish.image ? (
-          <AdvancedImage
-            className="w-full h-full object-cover"
-            alt={dish.image}
-            cldImg={new Cloudinary({
-              cloud: {
-                cloudName: "sham007",
-              },
-            })
-              .image(dish.image).resize(scale().width("260"))
-              .quality("auto")}
-            
-            plugins={[lazyload({threshold: 0.10})]}
-          />
+          <Link to={`/menu/${dish._id}`}>
+            <AdvancedImage
+              className="w-full h-full object-cover"
+              alt={dish.image}
+              cldImg={new Cloudinary({
+                cloud: {
+                  cloudName: "sham007",
+                },
+              })
+                .image(dish.image)
+                .resize(scale().width("260"))
+                .quality("auto")}
+              plugins={[lazyload({ threshold: 0.1 })]}
+            />
+          </Link>
         ) : (
           <Skeleton className="min-w-full h-full" />
         )}
@@ -36,14 +38,17 @@ const MenuCardForMobile = ({ dish }) => {
             <p className="font-semibold leading-none tracking-tight">
               {dish.name}
             </p>
-            <p className="text-sm whitespace-nowrap">{dish.description.substring(0, 30)}</p>
+            <p className="text-sm whitespace-nowrap">
+              {dish.description.substring(0, 25)}...
+            </p>
           </Link>
           <Button
-          onClick={() => dispatch(addToCart(dish))}
-          variant="outline"
-            className="rounded-xl text-2xl font-karla backdrop:blur-lg border-black dark:border-white "
+            onClick={() => dispatch(addToCart(dish))}
+            variant="outline"
+            className="rounded-xl text-2xl font-karla backdrop:blur-lg border-black dark:border-white"
           >
-            $ {dish.price}
+            $ {dish.price <= 9 ? 0 : null}
+            {dish.price}
           </Button>
         </div>
       </div>

@@ -35,20 +35,21 @@ const MenuCardForAboutPRoduct = ({ dish }) => {
           <Skeleton className="min-w-full h-full" />
         )}
         {/* Footer */}
-        <div className=" absolute w-34 bottom-2 right-5 rounded-full h-12 inline-flex justify-between items-center px-2 py-2 border text-black  dark:bg-black/70 dark:text-white  supports-[backdrop-filter]:bg-background/75">
+        <div className=" absolute w-fit bottom-2 right-5 rounded-full h-12 inline-flex justify-between items-center px-2 py-2 border text-black  dark:bg-black/70 dark:text-white  supports-[backdrop-filter]:bg-background/75">
           <p className="font-semibold px-2 text-lg tracking-tight">
             {dish.name}
           </p>
           <Button
             variant="outline"
             onClick={() => dispatch(addToCart(dish))}
-            className="w-32 p-1 pl-1 rounded-full inline-flex justify-between items-center gap-2 border text-black dark:text-white"
+            className="w-fit h-fit p-1 pl-1 rounded-full inline-flex justify-between items-center gap-2 border text-black dark:text-white"
           >
             <span className="flex justify-between w-14 items-center text-base">
               Add <ShoppingCart />
             </span>
-            <span className="rounded-full text-2xl font-karla bg-primary w-12 text-black ">
-              $ {dish.price}
+            <span className="rounded-full px-1 text-2xl font-karla bg-primary w-fit  text-black ">
+              $ {dish.price <= 9 ? 0 : null}
+              {dish.price}.00
             </span>
           </Button>
         </div>
