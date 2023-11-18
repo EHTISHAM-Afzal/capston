@@ -5,8 +5,8 @@ import {
 } from "../features/Dishes/dishesSlice";
 import Spinner from "../components/smallComp/Spinner";
 import AbouteProductCard from "../components/cards/AbouteProductCard";
-import MenuCardForAboutPRoduct from "../components/cards/MenuCardForAboutPRoduct";
 import { ArrowRight } from "lucide-react";
+import MenuCardForAboutPRoduct from "../components/cards/MenuCardForAboutProduct";
 
 const AboutProduct = () => {
   let { productId } = useParams();
