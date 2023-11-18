@@ -6,6 +6,7 @@ import { AdvancedImage, lazyload, } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { scale } from "@cloudinary/url-gen/actions/resize";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 const MenuCardForMobile = ({ dish }) => {
   const dispatch = useDispatch()
   return (
@@ -31,12 +32,12 @@ const MenuCardForMobile = ({ dish }) => {
         )}
         {/* Footer */}
         <div className=" absolute pl-4 w-[95%] mx-2 bottom-2 rounded-xl h-12 flex flex-row justify-between items-center px-3 py-2 border text-black  dark:border-neutral-800 dark:bg-black/70 dark:text-white  supports-[backdrop-filter]:bg-background/75">
-          <span className=" space-y-1">
+          <Link to={`/menu/${dish._id}`} className=" space-y-1">
             <p className="font-semibold leading-none tracking-tight">
               {dish.name}
             </p>
             <p className="text-sm whitespace-nowrap">{dish.description.substring(0, 30)}</p>
-          </span>
+          </Link>
           <Button
           onClick={() => dispatch(addToCart(dish))}
           variant="outline"

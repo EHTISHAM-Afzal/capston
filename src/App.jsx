@@ -9,9 +9,6 @@ import { ThemeProvider } from "./components/Theme/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import Spinner from "./components/smallComp/Spinner";
 import Layout from "@/Layout";
-import Reservations from "./pages/Reservations";
-import LoginPage from "./pages/LoginPage";
-import Profile from "./pages/Profile";
 
 // Use React.lazy to load the components
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -21,6 +18,10 @@ const BookingPage = lazy(() => import("./pages/BookingPage"));
 const Main = lazy(() => import("./components/Main/Main"));
 const Error = lazy(() => import("./pages/Error"));
 const OrderOnline = lazy(() => import("./pages/OrderOnline"));
+const AboutProduct = lazy(() => import("./pages/AboutProduct"));
+const Profile = lazy(() => import("./pages/Profile"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const Reservations = lazy(() => import("./pages/Reservations"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,7 +38,19 @@ const router = createBrowserRouter(
         errorElement={<Error />}
         element={<About />}
       />
-      <Route path="menu" errorElement={<Error />} element={<MenuPage />} />
+      <Route path="menu" errorElement={<Error />}>
+        <Route
+          index
+          fallbackElement={<Spinner />}
+          errorElement={<Error />}
+          element={<MenuPage />}
+        />
+        <Route
+          path=":productId"
+          errorElement={<Error />}
+          element={<AboutProduct />}
+        />
+      </Route>
       <Route
         path="booking-page"
         fallbackElement={<Spinner />}
