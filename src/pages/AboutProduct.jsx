@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import {
   useGetDishByIdQuery,
   useGetDishesByCatagoryIdQuery,
-  useGetDishesQuery,
 } from "../features/Dishes/dishesSlice";
 import Spinner from "../components/smallComp/Spinner";
 import AbouteProductCard from "../components/cards/AbouteProductCard";
@@ -21,8 +20,8 @@ const AboutProduct = () => {
       isSuccess: carosualIsSucces,
       isError: carosualIsError,
       error: carosualError,
+      /// get similer products by catagory
     } = useGetDishesByCatagoryIdQuery(data?.entities[data.ids[0]]?.catagory);
-    console.log(carosualData)
   
 
   let content;
