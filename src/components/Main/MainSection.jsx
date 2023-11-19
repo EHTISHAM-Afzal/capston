@@ -38,7 +38,7 @@ const MainSectionForDesktop = () => {
             })
               .image("LittleLemon/Hero")
               .quality("auto")}
-            responsive={true}
+            
             plugins={[responsive({ steps: 10 })]}
           /> 
           </div>

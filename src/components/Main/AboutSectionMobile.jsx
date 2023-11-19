@@ -18,7 +18,7 @@ const AboutSectionForMobile = () => {
         })
           .image("FromMobile/Mario-and-Adrian-A_2_m97yaa")
           .quality("auto")}
-        responsive={true}
+        
         plugins={[responsive({ steps: 100 })]}
       />
     </div>

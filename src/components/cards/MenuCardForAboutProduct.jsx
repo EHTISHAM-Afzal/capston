@@ -5,9 +5,11 @@ import { addToCart } from "@/src/features/Cart/CartSlice";
 import { AdvancedImage, lazyload } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { scale } from "@cloudinary/url-gen/actions/resize";
+import { ShoppingCart } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-const MenuCardForMobile = ({ dish }) => {
+
+const MenuCardForAboutPRoduct = ({ dish }) => {
   const dispatch = useDispatch();
   return (
     <div className="w-full max-w-full h-56 snap-start ">
@@ -33,22 +35,22 @@ const MenuCardForMobile = ({ dish }) => {
           <Skeleton className="min-w-full h-full" />
         )}
         {/* Footer */}
-        <div className=" absolute pl-4 w-[95%] mx-2 bottom-2 rounded-xl h-12 flex flex-row justify-between items-center px-3 py-2 border text-black  dark:border-neutral-800 dark:bg-black/70 dark:text-white  supports-[backdrop-filter]:bg-background/75">
-          <Link to={`/menu/${dish._id}`} className=" space-y-1">
-            <p className="font-semibold leading-none tracking-tight">
-              {dish.name}
-            </p>
-            <p className="text-sm whitespace-nowrap">
-              {dish.description.substring(0, 25)}...
-            </p>
-          </Link>
+        <div className=" absolute w-fit bottom-2 right-5 rounded-full h-12 inline-flex justify-between items-center px-2 py-2 border text-black  dark:bg-black/70 dark:text-white  supports-[backdrop-filter]:bg-background/75">
+          <p className="font-semibold px-2 text-lg tracking-tight">
+            {dish.name}
+          </p>
           <Button
-            onClick={() => dispatch(addToCart(dish))}
             variant="outline"
-            className="rounded-xl text-2xl font-karla backdrop:blur-lg border-black dark:border-white"
+            onClick={() => dispatch(addToCart(dish))}
+            className="w-fit h-fit p-1 pl-1 rounded-full inline-flex justify-between items-center gap-2 border text-black dark:text-white"
           >
-            $ {dish.price <= 9 ? 0 : null}
-            {dish.price}
+            <span className="flex justify-between w-14 items-center text-base">
+              Add <ShoppingCart />
+            </span>
+            <span className="rounded-full px-1 text-2xl font-karla bg-primary w-fit  text-black ">
+              $ {dish.price <= 9 ? 0 : null}
+              {dish.price}.00
+            </span>
           </Button>
         </div>
       </div>
@@ -56,4 +58,4 @@ const MenuCardForMobile = ({ dish }) => {
   );
 };
 
-export default MenuCardForMobile;
+export default MenuCardForAboutPRoduct;

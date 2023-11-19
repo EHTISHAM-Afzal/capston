@@ -1,7 +1,8 @@
 import MenuCardForMobile from "../cards/MenuCardForMobile";
 import { Link } from "react-router-dom";
-import { useGetDishesQuery } from "@/src/features/Dishes/dishesSlice";
+import { useGetDishesByCatagoryIdQuery } from "@/src/features/Dishes/dishesSlice";
 import MenuCardSkeletonForMobile from "../cards/MenuCardSkeletonForMobile";
+useGetDishesByCatagoryIdQuery;
 
 const SpecialsSectionForMobile = () => {
   const {
@@ -10,7 +11,8 @@ const SpecialsSectionForMobile = () => {
     isSuccess,
     isError,
     error,
-  } = useGetDishesQuery();
+    /// catagory id for specials is 655971b9c4e306d3cdba8e13
+  } = useGetDishesByCatagoryIdQuery("655971b9c4e306d3cdba8e13");
 
   let content;
 
@@ -28,8 +30,8 @@ const SpecialsSectionForMobile = () => {
   }
 
   return (
-    <div className="w-full px-3">
-      <div className="w-full flex items-center justify-between px-4">
+    <div className="w-full">
+      <div className="w-full flex items-center justify-between px-6">
         <h2 className=" text-center text-3xl font-karla font-semibold">
           Specials
         </h2>
@@ -41,7 +43,7 @@ const SpecialsSectionForMobile = () => {
         </Link>
       </div>
 
-      <div className=" overflow-x-scroll scroll-smooth flex p-4 space-x-1 snap-x ">
+      <div className="my-custom-scrollbar overflow-x-scroll overflow-hidden grid grid-flow-col auto-cols-[minmax(90vw,_100vw)] sm:auto-cols-[minmax(20rem,_21rem)]  scroll-smooth p-4 space-x-1 snap-x h-64  ">
         {content}
       </div>
     </div>
