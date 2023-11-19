@@ -11,8 +11,8 @@ const SpecialsSectionForMobile = () => {
     isSuccess,
     isError,
     error,
-    /// category id for specials is 655971b9c4e306d3cdba8e13
-  } = useGetDishesBycategoryIdQuery("655971b9c4e306d3cdba8e13");
+    /// category id for specials is 6559fb8dc6fae5d2e4d7deaf
+  } = useGetDishesBycategoryIdQuery("6559fb8dc6fae5d2e4d7deaf");
 
   let content;
 

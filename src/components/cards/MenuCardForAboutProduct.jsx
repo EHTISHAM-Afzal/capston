@@ -35,7 +35,7 @@ const MenuCardForAboutPRoduct = ({ dish }) => {
         ) : dish.img ? (
           <Link to={`/menu/${dish._id}`}>
             <img
-              className="w-full h-40 object-cover"
+              className="w-full h-full object-cover"
               src={dish.img}
               loading="lazy"
               alt={dish.name}

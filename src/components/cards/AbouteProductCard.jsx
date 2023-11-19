@@ -29,7 +29,7 @@ const AbouteProductCard = ({ dish }) => {
           />
         ) : dish.img ? (
           <img
-            className="w-full h-40 object-cover"
+            className="w-full h-full object-cover"
             src={dish.img}
             loading="lazy"
             alt={dish.name}

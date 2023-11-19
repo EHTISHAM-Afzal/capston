@@ -58,7 +58,7 @@ const AboutProduct = () => {
         <h2 className="text-2xl font-karla font-bold my-4 ">Similar Dishes</h2>
         <ArrowRight className=" md:hidden w-6 h-6 text-gray-500 dark:hover:text-gray-400 hover:text-gray-800 cursor-pointer duration-300 my-4 mr-2 hover:mr-0 " />
       </div>
-      <div className=" overflow-auto grids-section-width md:px-6 md:customScrollForAboutMenus grid grid-flow-col auto-cols-[minmax(90vw,_100vw)] sm:auto-cols-[minmax(20rem,_21rem)]  scroll-smooth p-4 space-x-1 snap-x h-fit w-full ">
+      <div className=" overflow-auto grids-section-width md:px-6 md:gap-1 md:customScrollForAboutMenus grid grid-flow-col auto-cols-[minmax(90vw,_100vw)] sm:auto-cols-[minmax(20rem,_21rem)]  scroll-smooth p-4 space-x-1 snap-x h-fit w-full ">
         {carosualContents}
       </div>
     </section>

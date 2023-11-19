@@ -1,5 +1,5 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useGetDishesQuery } from "@/src/features/Dishes/dishesSlice";
+import { useGetDishesBycategoryIdQuery } from "@/src/features/Dishes/dishesSlice";
 import MenuCardForDesktop from "../cards/MenuCardForDesltop";
 import MenuCardSkeletonForDektop from "../cards/MenuCardSkeletonForDektop";
 import { ArrowRight } from "lucide-react";
@@ -12,7 +12,8 @@ const DealsSectionForMobile = () => {
     isSuccess,
     isError,
     error,
-  } = useGetDishesQuery();
+    /// category id for deals is 6559fbaac6fae5d2e4d7deb1
+  } = useGetDishesBycategoryIdQuery("6559fbaac6fae5d2e4d7deb1");
 
   let content;
 
