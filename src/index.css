@@ -67,6 +67,10 @@
     @apply bg-primary; /* color of the scroll thumb when hovering */
   }
 
+  .customScrollForAboutMenus::-webkit-scrollbar {
+    @apply w-0 h-0; 
+  }
+
   .grids {
     @apply grid grid-cols-4 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-12 gap-x-1.5;
   }

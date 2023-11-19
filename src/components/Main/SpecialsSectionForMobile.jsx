@@ -1,7 +1,8 @@
 import MenuCardForMobile from "../cards/MenuCardForMobile";
 import { Link } from "react-router-dom";
-import { useGetDishesQuery } from "@/src/features/Dishes/dishesSlice";
+import { useGetDishesByCatagoryIdQuery } from "@/src/features/Dishes/dishesSlice";
 import MenuCardSkeletonForMobile from "../cards/MenuCardSkeletonForMobile";
+useGetDishesByCatagoryIdQuery;
 
 const SpecialsSectionForMobile = () => {
   const {
@@ -10,7 +11,8 @@ const SpecialsSectionForMobile = () => {
     isSuccess,
     isError,
     error,
-  } = useGetDishesQuery();
+    /// catagory id for specials is 655971b9c4e306d3cdba8e13
+  } = useGetDishesByCatagoryIdQuery("655971b9c4e306d3cdba8e13");
 
   let content;
 

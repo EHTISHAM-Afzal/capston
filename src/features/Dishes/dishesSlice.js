@@ -20,6 +20,17 @@ export const dishesApiSlice = apiSlice.injectEndpoints({
       ],
     }),
 
+    getDishesByCatagoryId: builder.query({
+      query: (catagoryId) => `/products?catagory=${catagoryId}`,
+      transformResponse: (responseData) => {
+        return dishesAdapter.upsertMany(initialState,responseData);
+      },
+      providesTags: (result) => [
+        { type: "Dishes", id: "LIST" },
+        ...result.ids.map((id) => ({ type: "Dishes", id })),
+      ],
+    }),
+
     getDishById: builder.query({
       query: (id) => `/products/${id}`,
       transformResponse: (responseData) => {
@@ -32,4 +43,4 @@ export const dishesApiSlice = apiSlice.injectEndpoints({
   })
 });
 
-export const { useGetDishesQuery , useGetDishByIdQuery} = dishesApiSlice;
+export const { useGetDishesQuery , useGetDishByIdQuery , useGetDishesByCatagoryIdQuery} = dishesApiSlice;
