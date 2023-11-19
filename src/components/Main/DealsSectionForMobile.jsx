@@ -3,6 +3,7 @@ import { useGetDishesQuery } from "@/src/features/Dishes/dishesSlice";
 import MenuCardForDesktop from "../cards/MenuCardForDesltop";
 import MenuCardSkeletonForDektop from "../cards/MenuCardSkeletonForDektop";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const DealsSectionForMobile = () => {
   const {
@@ -38,6 +39,9 @@ const DealsSectionForMobile = () => {
         <div className="flex w-max p-4 space-x-1">{content}</div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
+      <div className="w-full flex justify-center items-center md:text-xl hover:underline hover:text-primary">
+        <Link to="menu">See all menu{"'"}s &rarr;</Link>
+      </div>
     </div>
   );
 };

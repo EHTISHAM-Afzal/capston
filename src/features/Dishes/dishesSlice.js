@@ -20,8 +20,8 @@ export const dishesApiSlice = apiSlice.injectEndpoints({
       ],
     }),
 
-    getDishesByCatagoryId: builder.query({
-      query: (catagoryId) => `/products?catagory=${catagoryId}`,
+    getDishesBycategoryId: builder.query({
+      query: (categoryId) => `/products?category=${categoryId}`,
       transformResponse: (responseData) => {
         return dishesAdapter.upsertMany(initialState,responseData);
       },
@@ -43,4 +43,4 @@ export const dishesApiSlice = apiSlice.injectEndpoints({
   })
 });
 
-export const { useGetDishesQuery , useGetDishByIdQuery , useGetDishesByCatagoryIdQuery} = dishesApiSlice;
+export const { useGetDishesQuery , useGetDishByIdQuery , useGetDishesBycategoryIdQuery} = dishesApiSlice;

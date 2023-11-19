@@ -17,16 +17,17 @@ import { scale } from "@cloudinary/url-gen/actions/resize";
 import { addToCart } from "@/src/features/Cart/CartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { badgeVariants } from "@/components/ui/badge";
 
 const MenuCardForDesktop = ({ dish }) => {
   const dispatch = useDispatch();
   return (
-    <Card className="w-[16rem] h-[24rem] border hover:shadow-lg mx-1 my-2 dark:hover:shadow-secondary overflow-hidden hover:border-primary">
+    <Card className="w-[16rem] h-[24rem] border hover:shadow-lg mx-1 my-2 dark:hover:shadow-secondary overflow-hidden hover:border-primary relative">
       {dish.image ? (
-        <Link to={`/menu/${dish._id}`}>
+        // <Link to={`/menu/${dish._id}`}>
           <AdvancedImage
             className=" w-full h-40 object-cover rounded-t-lg"
-            alt={dish.image}
+            alt={dish.name}
             cldImg={new Cloudinary({
               cloud: {
                 cloudName: "sham007",
@@ -37,14 +38,29 @@ const MenuCardForDesktop = ({ dish }) => {
               .quality("auto")}
             plugins={[lazyload({ threshold: 0.1 })]}
           />
+        // </Link>
+      ) : dish.img ? (
+        <Link to={`/menu/${dish._id}`}>
+          <img
+            className="w-full h-40 object-cover"
+            src={dish.img}
+            loading="lazy"
+            alt={dish.name}
+          />
         </Link>
       ) : (
         <Skeleton className="w-full h-40 border-b" />
+      )}
+      {dish.category && (
+        <Link to={`/menu/${dish._id}`} className={`${badgeVariants({ variant: "secondary" })} absolute top-2 right-2`}>
+          {dish.category.name}
+        </Link>
       )}
       <CardHeader className="px-6 py-4">
         <Link to={`/menu/${dish._id}`}>
           <CardTitle className=" font-markazi-text  flex flex-row justify-between items-center tracking-wider ">
             <p className=" text-[20pt]">{dish.name}</p>
+
             {
               <span className=" font-karla text-[16pt]  text-red-500 font-bold">
                 $ {dish.price <= 9 ? 0 : null}

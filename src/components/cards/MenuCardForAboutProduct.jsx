@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { badgeVariants } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { addToCart } from "@/src/features/Cart/CartSlice";
@@ -12,7 +13,7 @@ import { Link } from "react-router-dom";
 const MenuCardForAboutPRoduct = ({ dish }) => {
   const dispatch = useDispatch();
   return (
-    <div className="w-full max-w-full h-56 snap-start ">
+    <div className="w-full max-w-full h-56 snap-start relative ">
       {/* // main component */}
       <div className="relative rounded-xl border bg-card text-card-foreground shadow w-full h-full  overflow-hidden items-center ">
         {dish.image ? (
@@ -31,9 +32,30 @@ const MenuCardForAboutPRoduct = ({ dish }) => {
               plugins={[lazyload({ threshold: 0.1 })]}
             />
           </Link>
+        ) : dish.img ? (
+          <Link to={`/menu/${dish._id}`}>
+            <img
+              className="w-full h-40 object-cover"
+              src={dish.img}
+              loading="lazy"
+              alt={dish.name}
+            />
+          </Link>
         ) : (
           <Skeleton className="min-w-full h-full" />
         )}
+        {/* Badg */}
+        {dish.category && (
+          <Link
+            to={`/menu/${dish._id}`}
+            className={`${badgeVariants({
+              variant: "secondary",
+            })} absolute top-2 right-2`}
+          >
+            {dish.category.name}
+          </Link>
+        )}
+
         {/* Footer */}
         <div className=" absolute w-fit bottom-2 right-5 rounded-full h-12 inline-flex justify-between items-center px-2 py-2 border text-black  dark:bg-black/70 dark:text-white  supports-[backdrop-filter]:bg-background/75">
           <p className="font-semibold px-2 text-lg tracking-tight">

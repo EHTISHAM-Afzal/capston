@@ -6,6 +6,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { ShoppingCart } from "lucide-react";
 import DeleveryVanSVG from "../smallComp/DeleveryVan";
 import { addToCart } from "@/src/features/Cart/CartSlice";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AbouteProductCard = ({ dish }) => {
   const dispatch = useDispatch();
@@ -13,24 +14,37 @@ const AbouteProductCard = ({ dish }) => {
     <div className=" w-full h-fit md:h-64 grid grid-flow-row md:grid-flow-col grid-rows-[15rem,_1fr] grid-cols-1 md:grid-rows-1 md:grid-cols-2  space-y-6 mt-6 overflow-hidden border rounded-lg">
       {/* Product card */}
       <div className="border-none w-full h-full overflow-hidden">
-        <AdvancedImage
-          className="w-full h-full object-cover bg-primary/10"
-          alt={dish.name}
-          cldImg={new Cloudinary({
-            cloud: {
-              cloudName: "sham007",
-            },
-          })
-            .image(dish.image)
-            .quality("auto")}
-          plugins={[responsive({ steps: 100 })]}
-        />
+        {dish.image ? (
+          <AdvancedImage
+            className="w-full h-full object-cover bg-primary/10"
+            alt={dish.name}
+            cldImg={new Cloudinary({
+              cloud: {
+                cloudName: "sham007",
+              },
+            })
+              .image(dish.image)
+              .quality("auto")}
+            plugins={[responsive({ steps: 100 })]}
+          />
+        ) : dish.img ? (
+          <img
+            className="w-full h-40 object-cover"
+            src={dish.img}
+            loading="lazy"
+            alt={dish.name}
+          />
+        ) : (
+          <Skeleton className="min-w-full h-full" />
+        )}
       </div>
       <div className="h-full w-full space-y-4 px-6">
         {/* Header */}
         <div className="text-2xl font-semibold flex justify-between ">
-          <span className="font-markazi-text text-3xl tracking-wider">{dish.name}</span>
-          <span className="font-karla text-primary tracking-wide">
+          <span className="font-markazi-text text-3xl tracking-wider">
+            {dish.name}
+          </span>
+          <span className="font-karla text-red-500 tracking-wide">
             $ {dish.price <= 9 ? 0 : null}
             {dish.price}.00
           </span>

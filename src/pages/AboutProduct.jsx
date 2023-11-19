@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import {
   useGetDishByIdQuery,
-  useGetDishesByCatagoryIdQuery,
+  useGetDishesBycategoryIdQuery,
 } from "../features/Dishes/dishesSlice";
 import Spinner from "../components/smallComp/Spinner";
 import AbouteProductCard from "../components/cards/AbouteProductCard";
@@ -13,15 +13,15 @@ const AboutProduct = () => {
   const { data, isLoading, isSuccess, isError, error } =
     useGetDishByIdQuery(productId);
 
-    /// get similer products by catagory
+    /// get similer products by category
     const {
       data: carosualData,
       isLoading: carosualIsloading,
       isSuccess: carosualIsSucces,
       isError: carosualIsError,
       error: carosualError,
-      /// get similer products by catagory
-    } = useGetDishesByCatagoryIdQuery(data?.entities[data.ids[0]]?.catagory);
+      /// get similer products by category
+    } = useGetDishesBycategoryIdQuery(data?.entities[data.ids[0]]?.category);
   
 
   let content;

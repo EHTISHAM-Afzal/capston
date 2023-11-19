@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { badgeVariants } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { addToCart } from "@/src/features/Cart/CartSlice";
@@ -32,6 +33,18 @@ const MenuCardForMobile = ({ dish }) => {
         ) : (
           <Skeleton className="min-w-full h-full" />
         )}
+        {/* Badg */}
+        {dish.category && (
+          <Link
+            to={`/menu/${dish._id}`}
+            className={`${badgeVariants({
+              variant: "secondary",
+            })} absolute top-2 right-2`}
+          >
+            {dish.category.name}
+          </Link>
+        )}
+
         {/* Footer */}
         <div className=" absolute pl-4 w-[95%] mx-2 bottom-2 rounded-xl h-12 flex flex-row justify-between items-center px-3 py-2 border text-black  dark:border-neutral-800 dark:bg-black/70 dark:text-white  supports-[backdrop-filter]:bg-background/75">
           <Link to={`/menu/${dish._id}`} className=" space-y-1">
