@@ -43,7 +43,7 @@ const SpecialsSectionForMobile = () => {
         </Link>
       </div>
 
-      <div className="my-custom-scrollbar overflow-x-scroll overflow-hidden grid grid-flow-col auto-cols-[minmax(90vw,_100vw)] sm:auto-cols-[minmax(20rem,_21rem)]  scroll-smooth p-4 space-x-1 snap-x h-64  ">
+      <div className="my-custom-scrollbar px-1 overflow-x-scroll overflow-hidden grid grid-flow-col auto-cols-[minmax(90vw,_100vw)] sm:auto-cols-[minmax(20rem,_21rem)]  scroll-smooth p-4 space-x-1 snap-x h-64  ">
         {content}
       </div>
     </div>
