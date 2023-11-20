@@ -1,8 +1,9 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { useGetDishesQuery } from "@/src/features/Dishes/dishesSlice";
+import { useGetDishesBycategoryIdQuery } from "@/src/features/Dishes/dishesSlice";
 import MenuCardForDesktop from "../cards/MenuCardForDesltop";
 import MenuCardSkeletonForDektop from "../cards/MenuCardSkeletonForDektop";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const DealsSectionForMobile = () => {
   const {
@@ -11,7 +12,8 @@ const DealsSectionForMobile = () => {
     isSuccess,
     isError,
     error,
-  } = useGetDishesQuery();
+    /// category id for deals is 6559fbaac6fae5d2e4d7deb1
+  } = useGetDishesBycategoryIdQuery("6559fbaac6fae5d2e4d7deb1");
 
   let content;
 
@@ -38,6 +40,9 @@ const DealsSectionForMobile = () => {
         <div className="flex w-max p-4 space-x-1">{content}</div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
+      <div className="w-full flex justify-center items-center md:text-xl hover:underline hover:text-primary">
+        <Link to="menu">See all menu{"'"}s &rarr;</Link>
+      </div>
     </div>
   );
 };

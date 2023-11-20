@@ -11,7 +11,7 @@ const Footer = () => {
   ];
   return (
     <div className="grids col-span-full  py-4 h-60 ">
-      <footer className=" grids-section-width row-satart-3   py-4 px-4  flex items-start justify-between flex-row ">
+      <footer className=" grids-section-width row-satart-3 h-full  py-4 px-4  flex items-start justify-between flex-row ">
         {window.screen.width > 768 &&
           <img
           className=" h-40 w-28 border-2 p-3  hidden md:block mx-2 object-cover"

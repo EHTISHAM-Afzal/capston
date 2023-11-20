@@ -68,7 +68,18 @@
   }
 
   .customScrollForAboutMenus::-webkit-scrollbar {
-    @apply w-0 h-0; 
+    @apply  h-1; 
+  }
+  .customScrollForAboutMenus::-webkit-scrollbar-track {
+    @apply bg-none; /* color of the tracking area */
+  }
+
+  .customScrollForAboutMenus::-webkit-scrollbar-thumb {
+    @apply bg-primary/70 rounded-lg; /* color of the scroll thumb */
+  }
+
+  .customScrollForAboutMenus::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary; /* color of the scroll thumb when hovering */
   }
 
   .grids {

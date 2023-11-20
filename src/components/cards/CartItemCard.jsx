@@ -11,12 +11,15 @@ import {
   removeFromCart,
   removeOneFromCart,
 } from "@/src/features/Cart/CartSlice";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const CartItemCard = ({ dish }) => {
   const dispatch = useDispatch();
   return (
     <Card className=" h-28 items-center p-2 my-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-md hover:border-primary">
       <div className="relative h-20">
+      {dish.image ? (
+        // <Link to={`/menu/${dish._id}`}>
         <AdvancedImage
           className="  object-cover w-full h-full rounded-lg border"
           alt={dish.name}
@@ -31,6 +34,17 @@ export const CartItemCard = ({ dish }) => {
           
           plugins={[lazyload({ threshold: 0.1 })]}
         />
+      ) : dish.img ? (
+        <img
+          className="w-full h-full rounded-lg object-cover"
+          src={dish.img}
+          loading="lazy"
+          alt={dish.name}
+        />
+      ) : (
+        <Skeleton className="w-full h-full rounded-lg" />
+      )}
+        
         <Button
           variant="secondary"
           onClick={() => dispatch(removeOneFromCart(dish))}

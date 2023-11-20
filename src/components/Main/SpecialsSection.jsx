@@ -1,6 +1,6 @@
 import MenuCardForDesktop from "../cards/MenuCardForDesltop";
 import { Link } from "react-router-dom";
-import { useGetDishesByCatagoryIdQuery} from "@/src/features/Dishes/dishesSlice";
+import { useGetDishesBycategoryIdQuery} from "@/src/features/Dishes/dishesSlice";
 import MenuCardSkeletonForDektop from "../cards/MenuCardSkeletonForDektop";
 const SpecialsSectionForDesktop = () => {
   const {
@@ -9,8 +9,8 @@ const SpecialsSectionForDesktop = () => {
     isSuccess,
     isError,
     error,
-    /// catagory id for specials is 655971b9c4e306d3cdba8e13
-  } = useGetDishesByCatagoryIdQuery("655971b9c4e306d3cdba8e13");
+    /// category id for specials is 6559fb8dc6fae5d2e4d7deaf
+  } = useGetDishesBycategoryIdQuery("6559fb8dc6fae5d2e4d7deaf");
 
   let content;
 

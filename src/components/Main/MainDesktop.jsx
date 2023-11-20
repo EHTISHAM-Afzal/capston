@@ -1,4 +1,5 @@
 import AboutSection from "./AboutSectionForDesktop";
+import DealsSectionForDesktop from "./DealsSectionForDesktop";
 import MainSectionForDesktop from "./MainSection";
 import SpecialsSection from "./SpecialsSection";
 import TestimonialsSection from "./TestimonialsSectionForDesktop";
@@ -15,6 +16,12 @@ const MainForDesktop = () => {
 
       <section className="col-span-full grids">
         <SpecialsSection />
+      </section>
+
+     <Separator className=" grids-separator-width px-2 "/>
+
+      <section className="col-span-full grids">
+        <DealsSectionForDesktop />
       </section>
 
      <Separator className=" grids-separator-width px-2 "/>

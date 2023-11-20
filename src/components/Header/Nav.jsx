@@ -3,8 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import { ModeToggle } from "../Theme/ThemeToggle";
 import User from "../smallComp/User";
 import { lazy} from "react";
-import { Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const NaveSheet = lazy(() => import("../Sheets/NaveSheet"));
 const CartSheet = lazy(() => import("../Sheets/CartSheet"));
@@ -50,7 +48,7 @@ const Nav = () => {
             src="../../Lemon.svg"
             alt="Little Lemon logo"
           />
-          <p className="hidden sm:block tracking-wider font-markazi-text text-xl sm:text-2xl text-[#495E57] font-bold dark:text-white whitespace-nowrap">
+          <p className=" h-8 tracking-wider font-markazi-text text-xl sm:text-2xl text-[#495E57] font-bold dark:text-white whitespace-nowrap">
             LITTLE LEMON
           </p>
         </div>
@@ -63,11 +61,6 @@ const Nav = () => {
         ))}
       </ul>
       <ul className="flex items-center space-x-2 h-full">
-        <li>
-          <Button variant="ghost" className="shadow-sm">
-            <Search className="hover:scale-95" />
-          </Button>
-        </li>
         <li>
           <CartSheet />
         </li>
