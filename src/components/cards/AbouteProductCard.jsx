@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const AbouteProductCard = ({ dish }) => {
   const dispatch = useDispatch();
   return (
-    <div className=" w-full h-fit md:h-64 grid grid-flow-row md:grid-flow-col grid-rows-[15rem,_1fr] grid-cols-1 md:grid-rows-1 md:grid-cols-2  space-y-6 mt-6 overflow-hidden border rounded-lg">
+    <div className=" w-full h-fit md:max-h-64 md:h-64 grid grid-flow-row md:grid-flow-col grid-rows-[15rem,_1fr] grid-cols-1 md:grid-rows-1 md:grid-cols-2  space-y-6 mt-6 overflow-hidden border rounded-lg">
       {/* Product card */}
       <div className="border-none w-full h-full overflow-hidden">
         {dish.image ? (
@@ -50,7 +50,7 @@ const AbouteProductCard = ({ dish }) => {
           </span>
         </div>
         {/* description */}
-        <p className="text-sm">{dish.description}</p>
+        <p className="text-sm lg:h-[40%]">{dish.description}</p>
         {/* Footer */}
         <div className=" flex justify-between space-x-2 w-full pb-2">
           <Button variant="outline" className="w-3/6">

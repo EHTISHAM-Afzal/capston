@@ -27,7 +27,7 @@ export const dishesApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: (result) => [
         { type: "Dishes", id: "LIST" },
-        ...result.ids.map((id) => ({ type: "Dishes", id })),
+        ...(result?.ids ? result.ids.map((id) => ({ type: "Dishes", id })) : []),
       ],
     }),
 

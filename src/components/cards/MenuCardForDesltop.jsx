@@ -25,34 +25,36 @@ const MenuCardForDesktop = ({ dish }) => {
     <Card className="w-[16rem] h-[24rem] border hover:shadow-lg mx-1 my-2 dark:hover:shadow-secondary overflow-hidden hover:border-primary relative">
       {dish.image ? (
         // <Link to={`/menu/${dish._id}`}>
-          <AdvancedImage
-            className=" w-full h-40 object-cover rounded-t-lg"
-            alt={dish.name}
-            cldImg={new Cloudinary({
-              cloud: {
-                cloudName: "sham007",
-              },
-            })
-              .image(dish.image)
-              .resize(scale().width("260"))
-              .quality("auto")}
-            plugins={[lazyload({ threshold: 0.1 })]}
-          />
-        // </Link>
+        <AdvancedImage
+          className=" w-full h-40 object-cover rounded-t-lg"
+          alt={dish.name}
+          cldImg={new Cloudinary({
+            cloud: {
+              cloudName: "sham007",
+            },
+          })
+            .image(dish.image)
+            .resize(scale().width("260"))
+            .quality("auto")}
+          plugins={[lazyload({ threshold: 0.1 })]}
+        />
       ) : dish.img ? (
-        <Link to={`/menu/${dish._id}`}>
-          <img
-            className="w-full h-40 object-cover"
-            src={dish.img}
-            loading="lazy"
-            alt={dish.name}
-          />
-        </Link>
+        <img
+          className="w-full h-40 object-cover"
+          src={dish.img}
+          loading="lazy"
+          alt={dish.name}
+        />
       ) : (
         <Skeleton className="w-full h-40 border-b" />
       )}
       {dish.category && (
-        <Link to={`/menu/${dish._id}`} className={`${badgeVariants({ variant: "secondary" })} absolute top-2 right-2`}>
+        <Link
+          to={`/menu/${dish._id}`}
+          className={`${badgeVariants({
+            variant: "secondary",
+          })} absolute top-2 right-2`}
+        >
           {dish.category.name}
         </Link>
       )}
