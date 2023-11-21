@@ -9,11 +9,21 @@ import { ArrowRight } from "lucide-react";
 import MenuCardForAboutPRoduct from "../components/cards/MenuCardForAboutProduct";
 import AllProductsSection from "./AllProductsSection";
 import { Separator } from "@/components/ui/separator";
+import { useEffect } from "react";
 
 const AboutProduct = () => {
   let { productId } = useParams();
   const { data, isLoading, isSuccess, isError, error } =
     useGetDishByIdQuery(productId);
+
+  // id productId change scroll to top smoothly
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [productId]);
 
   /// get similer products by category
   const {
