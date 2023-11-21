@@ -12,39 +12,54 @@ import {
   removeOneFromCart,
 } from "@/src/features/Cart/CartSlice";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useNavigate } from "react-router-dom";
+import { SheetClose } from "@/components/ui/sheet";
 
 export const CartItemCard = ({ dish }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
-    <Card className=" h-28 items-center p-2 my-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-md hover:border-primary">
-      <div className="relative h-20">
-      {dish.image ? (
-        // <Link to={`/menu/${dish._id}`}>
-        <AdvancedImage
-          className="  object-cover w-full h-full rounded-lg border"
-          alt={dish.name}
-          cldImg={new Cloudinary({
-            cloud: {
-              cloudName: "sham007",
-            },
-          })
-            .image(dish.image)
-            .resize(scale().width("80"))
-            .quality("auto")}
-          
-          plugins={[lazyload({ threshold: 0.1 })]}
-        />
-      ) : dish.img ? (
-        <img
-          className="w-full h-full rounded-lg object-cover"
-          src={dish.img}
-          loading="lazy"
-          alt={dish.name}
-        />
-      ) : (
-        <Skeleton className="w-full h-full rounded-lg" />
-      )}
-        
+    <Card className=" h-28 items-center gap-2 p-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-none border-none hover:border-primary">
+      <span className=" relative h-20">
+        {dish.image ? (
+          <SheetClose
+            className="w-full h-full"
+            onClick={() => {
+              navigate(`menu/${dish._id}`);
+            }}
+          >
+            <AdvancedImage
+              className="  object-cover w-full h-full rounded-lg border hover:opacity-90"
+              alt={dish.name}
+              cldImg={new Cloudinary({
+                cloud: {
+                  cloudName: "sham007",
+                },
+              })
+                .image(dish.image)
+                .resize(scale().width("80"))
+                .quality("auto")}
+              plugins={[lazyload({ threshold: 0.1 })]}
+            />
+          </SheetClose>
+        ) : dish.img ? (
+          <SheetClose
+            className="w-full h-full"
+            onClick={() => {
+              navigate(`menu/${dish._id}`);
+            }}
+          >
+            <img
+              className="w-full h-full rounded-lg object-cover hover:opacity-90"
+              src={dish.img}
+              loading="lazy"
+              alt={dish.name}
+            />
+          </SheetClose>
+        ) : (
+          <Skeleton className="w-full h-full rounded-lg" />
+        )}
+
         <Button
           variant="secondary"
           onClick={() => dispatch(removeOneFromCart(dish))}
@@ -53,32 +68,36 @@ export const CartItemCard = ({ dish }) => {
           <span className="sr-only">Remove Item From Cart</span>
           <X />
         </Button>
-      </div>
-      <div className="h-full pl-3">
-        <h2 className="text-lg w-full h-8">{dish.name}</h2>
-        <p className="w-full h-12 overflow-hidden">
-          {dish.description.substring(0, 70)}
+      </span>
+      <SheetClose
+        type="link"
+        className=" h-full pl-3 text-left grid grid-rows-[1rem,_1fr] gap-2 overflow-hidden"
+        onClick={() => navigate(`menu/${dish._id}`)}
+      >
+        <h2 className=" w-full h-full text-base">{dish.name}</h2>
+        <p className="w-full h-full overflow-hidden text-sm">
+          {dish.description.substring(0, 45)}
         </p>
-      </div>
+      </SheetClose>
       {/* Button and price */}
       <div className=" w-full h-full flex flex-col items-center justify-center">
-        <p className=" text-lg h-8 font-karla tracking-tight whitespace-nowrap">
+        <h2 className=" text-base h-8 font-karla tracking-tight whitespace-nowrap">
           $ {dish.price * dish.quantity <= 9 ? 0 : null}
-          {dish.price * dish.quantity}.00 US
-        </p>
+          {dish.price * dish.quantity}.00 USD
+        </h2>
         <div className="border w-full py-1 rounded-full flex items-center justify-between m-1">
           <Button
             variant="ghost"
             onClick={() => dispatch(removeFromCart(dish))}
-            className="h-6 py-0 p-1"
+            className="h-4  p-1"
           >
             <Minus />
           </Button>
-          <span className="text-center text-xl w-8">{dish.quantity}</span>
+          <span className="text-center text-lg w-fit">{dish.quantity}</span>
           <Button
             variant="ghost"
             onClick={() => dispatch(addToCart(dish))}
-            className="h-6 p-1"
+            className="h-4 p-1"
           >
             <Plus />
           </Button>
