@@ -19,7 +19,7 @@ export const CartItemCard = ({ dish }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <Card className=" h-28 items-center gap-2 p-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-none border-none hover:border-primary">
+    <Card className=" h-28 items-center gap-2 px-1 py-2 grid grid-cols-[5rem_1fr_5rem] dark:shadow-secondary shadow-none border-none hover:border-primary">
       <span className=" relative h-20">
         {dish.image ? (
           <SheetClose
@@ -71,7 +71,7 @@ export const CartItemCard = ({ dish }) => {
       </span>
       <SheetClose
         type="link"
-        className=" h-full pl-3 text-left grid grid-rows-[1rem,_1fr] gap-2 overflow-hidden"
+        className=" h-full pl-2 text-left grid grid-rows-[1rem,_1fr] gap-2 overflow-hidden"
         onClick={() => navigate(`menu/${dish._id}`)}
       >
         <h2 className=" w-full h-full text-base">{dish.name}</h2>

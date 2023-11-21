@@ -22,6 +22,7 @@ const AboutProduct = lazy(() => import("./pages/AboutProduct"));
 const Profile = lazy(() => import("./pages/Profile"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const Reservations = lazy(() => import("./pages/Reservations"));
+const UnderConstruction = lazy(() => import("./pages/UnderConstruction"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -80,6 +81,12 @@ const router = createBrowserRouter(
         fallbackElement={<Spinner />}
         errorElement={<Error />}
         element={<Profile />}
+      />
+      <Route
+        path="underconstruction"
+        fallbackElement={<Spinner />}
+        errorElement={<Error />}
+        element={<UnderConstruction />}
       />
       <Route
         path="*"

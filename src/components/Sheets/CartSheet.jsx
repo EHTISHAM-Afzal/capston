@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -8,11 +10,12 @@ import {
 import { CartItemCard } from "../cards/CartItemCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
 import OpenCartButton from "../smallComp/OpenCartButton";
 import { useSelector } from "react-redux";
 
 const CartSheet = () => {
+  const navigate = useNavigate();
+
   const totalIntemsQuantitiesInCart = useSelector((state) =>
     state.cart.reduce((acc, item) => acc + item.quantity, 0)
   );
@@ -58,7 +61,7 @@ const CartSheet = () => {
               <div className="flex justify-between">
                 <h2>Shipping</h2>
                 <h2>
-                  Calculated in checkout
+                  Calculated at checkout
                 </h2>
               </div>
               <Separator />
@@ -71,9 +74,9 @@ const CartSheet = () => {
                 </h2>
               </div>
               <Separator />
-              <Button size="lg" className="min-h-[2rem]">
-                Proceed at Checkout
-              </Button>
+              <SheetClose className=" min-h-[2rem] bg-primary text-primary-foreground shadow hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" onClick={()=>navigate(`underconstruction?page=Checkout`)}>
+                Proceed to Checkout
+              </SheetClose>
             </div>
           </div>
         </SheetContent>
