@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -8,11 +10,12 @@ import {
 import { CartItemCard } from "../cards/CartItemCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
 import OpenCartButton from "../smallComp/OpenCartButton";
 import { useSelector } from "react-redux";
 
 const CartSheet = () => {
+  const navigate = useNavigate();
+
   const totalIntemsQuantitiesInCart = useSelector((state) =>
     state.cart.reduce((acc, item) => acc + item.quantity, 0)
   );
@@ -29,7 +32,7 @@ const CartSheet = () => {
           <OpenCartButton quantity={totalIntemsQuantitiesInCart} />
           <span className="sr-only ">Open Cart</span>
         </SheetTrigger>
-        <SheetContent className="w-full sm:w-96 max-h-screen h-full">
+        <SheetContent className="w-full sm:w-[30rem] max-h-screen h-full">
           <SheetHeader className="mb-4">
             <SheetTitle>My Cart</SheetTitle>
           </SheetHeader>
@@ -38,7 +41,10 @@ const CartSheet = () => {
           <div className="w-full h-[95%] grid grid-flow-row grid-rows-[1fr,_10rem]">
             <ScrollArea className="h-full w-full">
               { cartState.length > 0 ? cartState.map((item) => (
-                <CartItemCard key={item._id} dish={item} />
+                <div key={item._id} >
+                <CartItemCard  dish={item} />
+                <Separator/>
+                </div>
               )) : <h1 className="w-full text-center pt-8 text-xl">No items in cart</h1>}
             </ScrollArea>
             {/* Footer */}
@@ -55,7 +61,7 @@ const CartSheet = () => {
               <div className="flex justify-between">
                 <h2>Shipping</h2>
                 <h2>
-                  <span>$ </span>Free
+                  Calculated at checkout
                 </h2>
               </div>
               <Separator />
@@ -68,9 +74,9 @@ const CartSheet = () => {
                 </h2>
               </div>
               <Separator />
-              <Button size="lg" className="min-h-[2rem]">
+              <SheetClose className=" min-h-[2rem] bg-primary text-primary-foreground shadow hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" onClick={()=>navigate(`underconstruction?page=Checkout`)}>
                 Proceed to Checkout
-              </Button>
+              </SheetClose>
             </div>
           </div>
         </SheetContent>

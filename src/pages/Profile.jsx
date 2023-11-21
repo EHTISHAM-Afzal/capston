@@ -14,8 +14,6 @@ const Profile = () => {
     navigate("/login"); //redirect to login page if not authenticated.
   }
 
-  // console.log(user)
-
   return (
     <div className="grids-section-width flex flex-col justify-center items-center min-h-[63vh]">
       {isLoading ? (
