@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 
 const MainMobile = () => {
   return (
-    <main className=" min-w-[302px] max-w-full">
+    <main className=" min-w-[302px] max-w-full min-h-screen">
       <MainSectionForMobile />
       <SpecialsSectionForMobile />
       <Separator className=" w-full px-6 " />
