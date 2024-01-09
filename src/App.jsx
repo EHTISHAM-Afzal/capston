@@ -7,7 +7,7 @@ import {
 import { Suspense, lazy } from "react";
 import { ThemeProvider } from "./components/Theme/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
-import Spinner from "./components/smallComp/Spinner";
+import FullScreenSpinner from "./components/smallComp/FullScreenSpinner";
 import Layout from "@/Layout";
 
 // Use React.lazy to load the components
@@ -29,20 +29,20 @@ const router = createBrowserRouter(
     <Route path="/" errorElement={<Error />} element={<Layout />}>
       <Route
         index
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<Main />}
       />
       <Route
         path="about"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<About />}
       />
       <Route path="menu" errorElement={<Error />}>
         <Route
           index
-          fallbackElement={<Spinner />}
+          fallbackElement={<FullScreenSpinner />}
           errorElement={<Error />}
           element={<MenuPage />}
         />
@@ -54,43 +54,43 @@ const router = createBrowserRouter(
       </Route>
       <Route
         path="booking-page"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<BookingPage />}
       />
       <Route
         path="reservations"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<Reservations />}
       />
       <Route
         path="order-online"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<OrderOnline />}
       />
       <Route
         path="login"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<LoginPage />}
       />
       <Route
         path="profile"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<Profile />}
       />
       <Route
         path="underconstruction"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<UnderConstruction />}
       />
       <Route
         path="*"
-        fallbackElement={<Spinner />}
+        fallbackElement={<FullScreenSpinner />}
         errorElement={<Error />}
         element={<NotFound />}
       />
@@ -100,7 +100,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<FullScreenSpinner />}>
       <ThemeProvider defaultTheme="system" storageKey="littlelemon-theme">
         <RouterProvider router={router} />
         <Toaster />
