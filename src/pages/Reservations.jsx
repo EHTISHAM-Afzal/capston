@@ -14,7 +14,7 @@ const Reservations = () => {
       <h1 className="text-4xl font-bold text-center mb-8">
         Reservations is under-construction
       </h1>
-      <Spinner />
+      <Spinner/>
     </section>
   );
 };

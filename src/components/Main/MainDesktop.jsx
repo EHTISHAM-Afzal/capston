@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator"
 
 const MainForDesktop = () => {
   return (
-    <main className="col-span-full grids">
+    <main className="col-span-full grids min-h-screen">
       <section className=" col-span-full h-[20rem] grids sm:h-[23rem]  bg-[#495E57] dark:bg-secondary">
         <MainSectionForDesktop />
       </section>
